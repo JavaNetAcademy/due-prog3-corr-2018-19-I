@@ -11,6 +11,9 @@
         <module>base</module>
     <module>web</module>
         <module>species</module>
+        <module>pets</module>
+        <module>armor</module>
+        <module>specfajkepessegek</module>
     </modules>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
