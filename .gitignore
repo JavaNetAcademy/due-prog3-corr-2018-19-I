@@ -1,2 +1,14 @@
 /armor/armor-service-object/target/
+/hero/hero-dao-model/target/
+/hero/hero-dao-jdbc/target/
+/hero/hero-service-object/target/
+/base/base-util/target/
+/hero/hero-web/target/
+/user/user-dao-model/target/
+/user/user-servece-object/target/
+/user/user-dao-jdbc/target/
+/web/target/
+/user/user-web/target/
+/armor/armor-dao-model/target/
+/armor/armor-service-object/target/
 /armor/armor-web/target/
