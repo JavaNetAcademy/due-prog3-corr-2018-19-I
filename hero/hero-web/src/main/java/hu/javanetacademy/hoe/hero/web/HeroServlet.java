@@ -3,10 +3,8 @@ package hu.javanetacademy.hoe.hero.web;
 
 import hu.javanetacademy.hoe.hero.dao.model.Hero;
 import hu.javanetacademy.hoe.hero.service.object.HeroService;
+import hu.javanetacademy.hoe.user.dao.model.User;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Enumeration;
-import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -36,9 +34,10 @@ public class HeroServlet extends HttpServlet {
             throws ServletException, IOException {
  response.setContentType("text/html;charset=UTF-8");   
         HeroService hs = new HeroService();
-        request.setAttribute("heroes",hs.getHeroByUser(100));
+        User user= (User)request.getSession().getAttribute("user");
+        request.setAttribute("heroes",hs.getHeroByUser(user.getId()));
  
-        getServletContext().getRequestDispatcher("/hero.jsp").include(request, response);
+        getServletContext().getRequestDispatcher("/hero/list.jsp").include(request, response);
     }
 
     /**
@@ -52,13 +51,14 @@ public class HeroServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {  
-        
+        User user= (User)request.getSession().getAttribute("user");
         Hero newHero = new Hero();
         newHero.setName(request.getParameter("pname"));
         newHero.setDescription(request.getParameter("pdesc"));
-        newHero.setUserid(100);
+        newHero.setUserid(user.getId());
         HeroService hs = new HeroService();
         hs.create(newHero);
+        doGet(request, response);
     }
 
     /**

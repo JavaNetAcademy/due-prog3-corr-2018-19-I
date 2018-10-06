@@ -5,13 +5,13 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     </head>
     <body>
-<form method="post" action="hero">
+<form method="post" action="${pageContext.request.contextPath}/hero/hero">
     <div>
         <span>Neve</span>
         <input type="text" name="pname">
     </div>
     <div>
-        <span>Le√≠r√°s</span>
+        <span>LeÌr·s</span>
         <textarea name="pdesc"></textarea>
     </div>
         <div>

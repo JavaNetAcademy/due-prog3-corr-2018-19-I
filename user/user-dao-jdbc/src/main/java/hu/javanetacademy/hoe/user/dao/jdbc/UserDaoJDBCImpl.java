@@ -39,15 +39,14 @@ public class UserDaoJDBCImpl implements UserDao {
                 user.setPassword(rs.getString(3));
                 return user;
             }
-        } catch (SQLException e) {
-        }
+        } catch (SQLException e) {e.printStackTrace();}
         return null;
     }
 
     @Override
     public User registration(String pName, String pPassword) {
         try {
-            PreparedStatement ps = con.prepareStatement("INSERT INTO user(name,password) VALUES(?,?)", Statement.RETURN_GENERATED_KEYS);
+            PreparedStatement ps = con.prepareStatement("INSERT INTO user(name,password,role) VALUES(?,?,'user')", Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, pName);
             ps.setString(2, pPassword);
             ps.executeUpdate();
@@ -59,8 +58,7 @@ public class UserDaoJDBCImpl implements UserDao {
                 user.setPassword(pPassword);
                 return user;
             }
-        } catch (SQLException e) {
-        }
+        } catch (SQLException e) {e.printStackTrace();}
         return null;
     }
 
@@ -77,7 +75,7 @@ public class UserDaoJDBCImpl implements UserDao {
                 user.setPassword(rs.getString(3));
                 return user;
             }
-        } catch (SQLException e) {}
+        } catch (SQLException e) {e.printStackTrace();}
         return null;
     }
 
