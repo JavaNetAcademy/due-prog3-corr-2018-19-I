@@ -10,7 +10,8 @@
         <module>user</module>
         <module>base</module>
     <module>web</module>
-  </modules>
+        <module>species</module>
+    </modules>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
