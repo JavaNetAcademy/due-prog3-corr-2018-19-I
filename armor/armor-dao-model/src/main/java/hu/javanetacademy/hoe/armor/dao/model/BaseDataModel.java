@@ -1,20 +1,24 @@
-package hu.javanetacademy.hoe.hero.dao.model;
+package hu.javanetacademy.hoe.armor.dao.model;
 
 /**
  *
- * @author krisztian
+ * @author Gonda Gergely
+ *
  */
 public class BaseDataModel {
-	protected String name, description;
-	protected long id;
+
+	private long id;
+	private String name;
+	private String description;
 
 	public BaseDataModel() {
+		//
 	}
 
-	public BaseDataModel(String name, String description, long id) {
+	public BaseDataModel(long id, String name, String description) {
+		this.id = id;
 		this.name = name;
 		this.description = description;
-		this.id = id;
 	}
 
 	public long getId() {

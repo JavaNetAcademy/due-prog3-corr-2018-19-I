@@ -6,8 +6,21 @@
         <artifactId>armor</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
+    <groupId>hu.javanetacademy.hoe.armor</groupId>
     <artifactId>armor-service-object</artifactId>
     <packaging>jar</packaging>
+        <dependencies>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>armor-dao-jdbc</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>hu.javanetacademy.hoe</groupId>
+            <artifactId>base-util</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+    </dependencies>
     <properties>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
