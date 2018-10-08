@@ -14,7 +14,7 @@
         <module>pets</module>
         <module>armor</module>
         <!-- <module>specfajkepessegek</module> -->
-        <module>specialspeciesproperty</module>
+        <module>speciesspecialproperty</module>
     </modules>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

@@ -28,3 +28,5 @@
 /pets/pet-service-object/target/
 /pets/pets-service-object/target/
 /armor/armor-dao-jdbc/target/
+/speciesspecialproperty/ssp-dao-model/target/
+/speciesspecialproperty/ssp-web/target/
