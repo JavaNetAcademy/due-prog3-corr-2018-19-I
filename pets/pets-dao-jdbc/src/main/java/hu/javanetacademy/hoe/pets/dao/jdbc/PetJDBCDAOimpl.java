@@ -116,4 +116,22 @@ public class PetJDBCDAOimpl implements PetDAOInterface {
         }
         return resAll;
     }
+
+    @Override
+    public boolean existsByName(String pPetName, long pHeroId) {
+        try {
+            PreparedStatement ps = con.prepareStatement("SELECT name=? WHERE name=? AND heroid=?", Statement.RETURN_GENERATED_KEYS);
+            ps.setString(1, pPetName);
+            ps.setString(2, pPetName);
+            ps.setLong(3, pHeroId);
+            ResultSet rs = ps.executeQuery();
+            
+            if (rs != null) {
+                return true;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(PetJDBCDAOimpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+    }
 }

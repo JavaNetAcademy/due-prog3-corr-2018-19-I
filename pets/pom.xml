@@ -12,6 +12,6 @@
     <modules>
         <module>pets-dao-model</module>
         <module>pets-dao-jdbc</module>
-        <module>pet-service-object</module>
+        <module>pets-service-object</module>
     </modules>
 </project>

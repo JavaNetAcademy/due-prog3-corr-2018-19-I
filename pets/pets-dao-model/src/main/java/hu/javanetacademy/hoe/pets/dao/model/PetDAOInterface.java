@@ -16,4 +16,6 @@ public interface PetDAOInterface {
     public Pet get(long pPetId);
 
     public List<Pet> getForHero(long pHeroId);
+    
+    public boolean existsByName(String pPetName, long pHeroId);
 }
