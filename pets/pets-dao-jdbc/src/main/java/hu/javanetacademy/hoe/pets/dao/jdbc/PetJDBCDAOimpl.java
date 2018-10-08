@@ -49,13 +49,32 @@ public class PetJDBCDAOimpl implements PetDAOInterface {
     }
 
     @Override
-    public Pet modify(long pOldPetId, Pet pNewPet) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Pet modify(long pPetId, Pet pPet) {
+        try {
+            PreparedStatement ps = con.prepareStatement("UPDATE pet SET name=?,description=?,heroid=? WHERE id=?", Statement.RETURN_GENERATED_KEYS);
+            ps.setString(1, pPet.getName());
+            ps.setString(2, pPet.getDescription());
+            ps.setLong(3, pPet.getHeroid());
+            ps.setLong(4, pPetId);
+            ps.executeUpdate();
+            return pPet;
+        } catch (SQLException ex) {
+            Logger.getLogger(PetJDBCDAOimpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
     }
 
     @Override
     public Pet delete(long pPetId) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            PreparedStatement ps = con.prepareStatement("DELETE FROM pet WHERE id=?", Statement.RETURN_GENERATED_KEYS);
+            ps.setLong(1, pPetId);
+            ps.executeUpdate();
+            return null;
+        } catch (SQLException ex) {
+            Logger.getLogger(PetJDBCDAOimpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
     }
 
     @Override
@@ -97,25 +116,4 @@ public class PetJDBCDAOimpl implements PetDAOInterface {
         }
         return resAll;
     }
-    
-//    @Override
-//    public Pet getByNameFromUser(String pPetName, long pHeroId) {
-//        try {
-//            PreparedStatement ps = con.prepareStatement("SELECT id,name,description,heroid FROM hero WHERE name=? AND heroid=?");
-//            ps.setString(1, pPetName);
-//            ps.setLong(2, pHeroId);
-//            ResultSet rs = ps.executeQuery();
-//            if (rs.next()) {
-//                Pet res = new Pet();
-//                res.setId(rs.getLong(1));
-//                res.setName(rs.getString(2));
-//                res.setDescription(rs.getString(3));
-//                res.setUserid(rs.getLong(4));
-//                return res;
-//            }
-//        } catch (SQLException ex) {
-//            Logger.getLogger(PetJDBCDAOimpl.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-//        return null;
-//    }
 }

@@ -16,6 +16,4 @@ public interface PetDAOInterface {
     public Pet get(long pPetId);
 
     public List<Pet> getForHero(long pHeroId);
-
-    // public Pet getByNameFromUser(String pPetName, long pUserId);
 }

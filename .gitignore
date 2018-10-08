@@ -23,3 +23,6 @@
 /armor/armor-service-object/target/
 /armor/armor-web/target/
 /.project
+/pets/pets-dao-model/target/
+/pets/pets-dao-jdbc/target/
+/pets/pet-service-object/target/
