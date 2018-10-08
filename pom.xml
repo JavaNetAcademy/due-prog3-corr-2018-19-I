@@ -14,7 +14,7 @@
         <module>pets</module>
         <module>armor</module>
         <!-- <module>specfajkepessegek</module> -->
-        <module>mavenproject1/specfajkepesseg</module>
+        <module>specfk</module>
     </modules>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
