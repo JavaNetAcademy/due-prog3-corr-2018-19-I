@@ -2,7 +2,9 @@ package hu.javanetacademy.hoe.armor.dao.file;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.util.List;
 
+import hu.javanetacademy.hoe.armor.dao.model.Armor;
 import hu.javanetacademy.hoe.armor.dao.model.ArmorDAO;
 
 /**
@@ -21,6 +23,30 @@ public class ArmorDAOImpl implements ArmorDAO {
 		} catch (Exception e) {
 			System.exit(100);
 		}
+	}
+
+	@Override
+	public void create(Armor armor) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public List<Armor> getAll() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Armor getById(Long id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void update(Armor armor) {
+		// TODO Auto-generated method stub
+
 	}
 
 }

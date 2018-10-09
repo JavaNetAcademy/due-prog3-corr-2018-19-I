@@ -1,17 +1,69 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <modelVersion>4.0.0</modelVersion>
-    <parent>
-        <groupId>hu.javanetacademy.hoe</groupId>
-        <artifactId>hoe</artifactId>
-        <version>1.0-SNAPSHOT</version>
-    </parent>
-    <artifactId>armor</artifactId>
-    <packaging>pom</packaging>
-    <modules>
-        <module>armor-dao-model</module>
-        <module>armor-service-object</module>
-        <module>armor-web</module>
-        <module>armor-dao-jdbc</module>
-    </modules>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>hu.javanetacademy.hoe</groupId>
+		<artifactId>hoe</artifactId>
+		<version>1.0-SNAPSHOT</version>
+	</parent>
+	<artifactId>armor</artifactId>
+	<packaging>pom</packaging>
+
+	<properties>
+		<maven.compiler.source>1.8</maven.compiler.source>
+		<maven.compiler.target>1.8</maven.compiler.target>
+		<mysql.version>5.1.47</mysql.version>
+		<hu.javanetacademy.hoe.base-util.version>1.0-SNAPSHOT</hu.javanetacademy.hoe.base-util.version>
+		<javaee-web-api.version>7.0</javaee-web-api.version>
+		<jstl.version>1.2</jstl.version>
+	</properties>
+
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>${project.groupId}</groupId>
+				<artifactId>armor-dao-model</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>${project.groupId}</groupId>
+				<artifactId>armor-dao-jdbc</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>mysql</groupId>
+				<artifactId>mysql-connector-java</artifactId>
+				<version>${mysql.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>hu.javanetacademy.hoe</groupId>
+				<artifactId>base-util</artifactId>
+				<version>${hu.javanetacademy.hoe.base-util.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>javax</groupId>
+				<artifactId>javaee-web-api</artifactId>
+				<version>${javaee-web-api.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>${project.groupId}</groupId>
+				<artifactId>armor-service-object</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>jstl</groupId>
+				<artifactId>jstl</artifactId>
+				<version>${jstl.version}</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
+	<modules>
+		<module>armor-dao-model</module>
+		<module>armor-service-object</module>
+		<module>armor-web</module>
+		<module>armor-dao-jdbc</module>
+	</modules>
 </project>
