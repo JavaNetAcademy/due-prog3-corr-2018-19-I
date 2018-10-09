@@ -31,3 +31,7 @@
 /speciesspecialproperty/ssp-dao-model/target/
 /speciesspecialproperty/ssp-web/target/
 /pets/pets-web/target/
+/empires/empires-dao-model/target/
+/empires/empires-dao-jdbc/target/
+/empires/empires-service-object/target/
+/empires/empires-web/target/

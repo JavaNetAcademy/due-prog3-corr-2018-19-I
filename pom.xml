@@ -15,7 +15,8 @@
         <module>armor</module>
         <!-- <module>specfajkepessegek</module> -->
         <module>speciesspecialproperty</module>
-  </modules>
+        <module>empires</module>
+    </modules>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
