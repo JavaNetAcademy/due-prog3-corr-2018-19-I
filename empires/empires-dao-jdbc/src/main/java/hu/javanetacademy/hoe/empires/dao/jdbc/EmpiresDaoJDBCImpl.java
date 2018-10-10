@@ -53,12 +53,37 @@ public class EmpiresDaoJDBCImpl implements EmpiresDaoInterface{
 
     @Override
     public Empires modify(long pOldEmpiresId, Empires pNewEmpires) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            PreparedStatement ps = con.prepareStatement("UPDATE empires SET (id,name,description,userid,level,property) VALUES(?,?,?,?,?,?) where id=?", Statement.RETURN_GENERATED_KEYS);
+              ps.setLong(1, pOldEmpiresId);
+            
+            ps.setString(2, pNewEmpires.getName());
+            ps.setString(3, pNewEmpires.getDescription());
+                                 
+           
+            ps.setLong(3, pNewEmpires.getUserid());
+            ps.setLong(4, pNewEmpires.getLevel());
+            ps.setLong(5, pNewEmpires.getProperty());
+            ps.executeUpdate();
+           
+        } catch (SQLException ex) {
+            Logger.getLogger(EmpiresDaoJDBCImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    
     }
 
     @Override
     public Empires delete(long pEmpiresId) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+         try {
+            PreparedStatement ps = con.prepareStatement("DELETE FROM empires WHERE id=?", Statement.RETURN_GENERATED_KEYS);
+            ps.setLong(1, pEmpiresId);
+            ps.executeUpdate();
+            return null;
+        } catch (SQLException ex) {
+            Logger.getLogger(EmpiresDaoJDBCImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;   
     }
 
     @Override
