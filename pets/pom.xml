@@ -13,6 +13,6 @@
         <module>pets-dao-model</module>
         <module>pets-dao-jdbc</module>
         <module>pets-service-object</module>
-        <module>pets-web</module>
-    </modules>
+    <module>pets-web</module>
+  </modules>
 </project>

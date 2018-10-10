@@ -55,8 +55,8 @@ public class PetsServlet extends HttpServlet {
         newPet.setName(request.getParameter("pname"));
         newPet.setDescription(request.getParameter("pdesc"));
         // newPet.setHeroid(user.getId());
-        PetsService hs = new PetsService();
-        hs.create(newPet);
+        PetsService petsService = new PetsService();
+        petsService.create(newPet);
         doGet(request, response);
     }
 
