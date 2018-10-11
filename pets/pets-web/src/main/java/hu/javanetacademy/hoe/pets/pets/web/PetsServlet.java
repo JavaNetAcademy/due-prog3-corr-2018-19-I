@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * @author Heyzel (Horvath Gergely)
  */
-@WebServlet(name = "PetsServlet", urlPatterns = {"/pets/pets"})
+@WebServlet(name = "PetsServlet", urlPatterns = {"/pets"})
 public class PetsServlet extends HttpServlet {
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -34,8 +34,11 @@ public class PetsServlet extends HttpServlet {
         // PetsService petsService = new PetsService();
         // User user = (User)request.getSession().getAttribute("user");
         // request.setAttribute("heroes", petsService.getForHero(user.getId()));
+        
+        PetsService petsService = new PetsService();
+        request.setAttribute("petList", petsService.getForHero(1)); // TODO make heroid selectable
 
-        getServletContext().getRequestDispatcher("/pets/list.jsp").include(request, response);
+        getServletContext().getRequestDispatcher("/pets/index.jsp").include(request, response);
     }
 
     /**

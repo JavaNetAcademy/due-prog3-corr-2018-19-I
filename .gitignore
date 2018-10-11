@@ -35,3 +35,5 @@
 /empires/empires-dao-jdbc/target/
 /empires/empires-service-object/target/
 /empires/empires-web/target/
+/.idea
+*.iml
