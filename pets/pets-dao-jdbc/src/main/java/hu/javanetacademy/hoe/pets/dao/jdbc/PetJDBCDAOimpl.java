@@ -32,7 +32,7 @@ public class PetJDBCDAOimpl implements PetDAOInterface {
     @Override
     public Pet create(Pet pPet) {
         try {
-            PreparedStatement ps = con.prepareStatement("INSERT INTO pet (name,description,heroid) VALUES(?,?,?)", Statement.RETURN_GENERATED_KEYS);
+            PreparedStatement ps = con.prepareStatement("INSERT INTO pet (name,description,heroid,level,damage,defense) VALUES(?,?,?,1,1,1)", Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, pPet.getName());
             ps.setString(2, pPet.getDescription());
             ps.setLong(3, pPet.getHeroid());

@@ -1,9 +1,12 @@
 package hu.javanetacademy.hoe.pets.pets.web;
 
+import hu.javanetacademy.hoe.hero.dao.model.Hero;
+import hu.javanetacademy.hoe.hero.service.object.HeroService;
 import hu.javanetacademy.hoe.pets.dao.model.Pet;
 import hu.javanetacademy.hoe.pets.pets.service.object.PetsService;
-// import hu.javanetacademy.hoe.user.dao.model.User;
+import hu.javanetacademy.hoe.user.dao.model.User;
 import java.io.IOException;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -29,16 +32,24 @@ public class PetsServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        // TODO get pets for the hero instead of the user
-
-        // PetsService petsService = new PetsService();
-        // User user = (User)request.getSession().getAttribute("user");
-        // request.setAttribute("heroes", petsService.getForHero(user.getId()));
         
         PetsService petsService = new PetsService();
-        request.setAttribute("petList", petsService.getForHero(1)); // TODO make heroid selectable
-
-        getServletContext().getRequestDispatcher("/pets/index.jsp").include(request, response);
+        HeroService heroService = new HeroService();
+        
+        User user = (User)request.getSession().getAttribute("user");
+        
+        if (user != null) {
+            request.setAttribute("heroList", heroService.getHeroByUser(user.getId()));
+        }
+        
+        ArrayList<Hero> heroes = (ArrayList<Hero>)request.getAttribute("heroList");
+        if (heroes == null || heroes.size() == 0) {
+            getServletContext().getRequestDispatcher("/pets/noheroes.jsp").include(request, response);
+        }
+        else {
+            request.setAttribute("petList", petsService.getForHero(1)); // TODO make heroid selectable
+            getServletContext().getRequestDispatcher("/pets/index.jsp").include(request, response);
+        }
     }
 
     /**
@@ -52,12 +63,11 @@ public class PetsServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        // TODO set heroid instead of userid
-        // User user = (User)request.getSession().getAttribute("user");
         Pet newPet = new Pet();
         newPet.setName(request.getParameter("pname"));
         newPet.setDescription(request.getParameter("pdesc"));
-        // newPet.setHeroid(user.getId());
+        newPet.setHeroid(Long.parseLong(request.getParameter("hero")));
+
         PetsService petsService = new PetsService();
         petsService.create(newPet);
         doGet(request, response);
