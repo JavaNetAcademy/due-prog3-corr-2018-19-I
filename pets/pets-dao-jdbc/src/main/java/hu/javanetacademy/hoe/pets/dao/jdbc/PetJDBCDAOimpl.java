@@ -80,7 +80,7 @@ public class PetJDBCDAOimpl implements PetDAOInterface {
     @Override
     public Pet get(long pPetId) {
         try {
-            PreparedStatement ps = con.prepareStatement("SELECT id,name,description,heroid FROM pet WHERE id=?");
+            PreparedStatement ps = con.prepareStatement("SELECT id,name,description,heroid,level,damage,defense FROM pet WHERE id=?");
             ps.setLong(1, pPetId);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
@@ -89,6 +89,9 @@ public class PetJDBCDAOimpl implements PetDAOInterface {
                 res.setName(rs.getString(2));
                 res.setDescription(rs.getString(3));
                 res.setHeroid(rs.getLong(4));
+                res.setLevel(rs.getInt(5));
+                res.setDamage(rs.getInt(6));
+                res.setDefense(rs.getInt(7));
                 return res;
             }
         } catch (SQLException ex) {
@@ -120,13 +123,13 @@ public class PetJDBCDAOimpl implements PetDAOInterface {
     @Override
     public boolean existsByName(String pPetName, long pHeroId) {
         try {
-            PreparedStatement ps = con.prepareStatement("SELECT name=? WHERE name=? AND heroid=?", Statement.RETURN_GENERATED_KEYS);
+            PreparedStatement ps = con.prepareStatement("SELECT name=? FROM pet WHERE name=? AND heroid=?", Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, pPetName);
             ps.setString(2, pPetName);
             ps.setLong(3, pHeroId);
             ResultSet rs = ps.executeQuery();
             
-            if (rs != null) {
+            if (rs.next()) {
                 return true;
             }
         } catch (SQLException ex) {

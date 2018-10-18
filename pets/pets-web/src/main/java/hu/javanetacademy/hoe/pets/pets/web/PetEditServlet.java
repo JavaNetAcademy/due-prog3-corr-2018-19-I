@@ -16,8 +16,8 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * @author Heyzel (Horvath Gergely)
  */
-@WebServlet(name = "PetsServlet", urlPatterns = {"/pets"})
-public class PetsServlet extends HttpServlet {
+@WebServlet(name = "PetEditServlet", urlPatterns = {"/petedit"})
+public class PetEditServlet extends HttpServlet {
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -36,20 +36,20 @@ public class PetsServlet extends HttpServlet {
         PetsService petsService = new PetsService();
         HeroService heroService = new HeroService();
         
-        // belépett User hero-inak kiszedése
         User user = (User)request.getSession().getAttribute("user");
+        Pet pet = petsService.get(Long.parseLong(request.getParameter("petid")));
+        
         if (user != null) {
             request.setAttribute("heroList", heroService.getHeroByUser(user.getId()));
         }
         
-        // heroList feltöltése <select> listához
         ArrayList<Hero> heroes = (ArrayList<Hero>)request.getAttribute("heroList");
         if (heroes == null || heroes.size() == 0) {
             getServletContext().getRequestDispatcher("/pets/noheroes.jsp").include(request, response);
         }
         else {
-            request.setAttribute("petList", petsService.getForHero(1)); // TODO make heroid selectable
-            getServletContext().getRequestDispatcher("/pets/index.jsp").include(request, response);
+            request.setAttribute("pet", pet);
+            getServletContext().getRequestDispatcher("/pets/edit.jsp").include(request, response);
         }
     }
 
@@ -64,16 +64,17 @@ public class PetsServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        Pet newPet = new Pet();
-        newPet.setName(request.getParameter("pname"));
-        newPet.setDescription(request.getParameter("pdesc"));
-        newPet.setHeroid(Long.parseLong(request.getParameter("hero")));
-
-        // a létrehozott új Pet-el meghívni a create függvényt, amiben még van egy ellenőrzés, hogy létezik-e már Pet ilyen névvel
+        long petid = Long.parseLong(request.getParameter("petid"));
         PetsService petsService = new PetsService();
-        petsService.create(newPet);
+        Pet pet = petsService.get(petid);
         
-        doGet(request, response);
+        pet.setName(request.getParameter("pname"));
+        pet.setDescription(request.getParameter("pdesc"));
+        pet.setHeroid(Long.parseLong(request.getParameter("hero")));
+        
+        petsService.modify(petid, pet);
+
+        response.sendRedirect("/pets");
     }
 
     /**
