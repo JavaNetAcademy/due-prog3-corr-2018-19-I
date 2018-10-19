@@ -6,9 +6,7 @@
 
 * Windows
 
-```
 [Letöltés](https://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html)
-```
 
 * Debian alapú Linux
 
@@ -27,15 +25,12 @@ Linux-on még arra figyeljetek, hogy ne 'sudo'-val telepítsétek, mert gondokat
 
 * Windows
 
-```
 [Letöltés](https://dev.mysql.com/downloads/installer/)
-```
 
 * Debian alapú Linux
 
 ```
 sudo apt-get install mysql-server
-
 ```
 
 Ezen felül a Workbench hozzá megtalálható az App Store-ban és az működik. Annyi extra van még ezen felül, hogy fel kell venni kézzel a user-eteket (és a 'hoe' user-t) a MySQL user táblájába. Erről találtok számtalan leírást a neten.
