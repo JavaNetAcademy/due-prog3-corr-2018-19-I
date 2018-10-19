@@ -30,6 +30,10 @@ public class PetsService {
             throw new CustomException();
         }
     }
+    
+    public Pet delete(long petId) {
+        return dao.delete(petId);
+    }
 
     public Pet get(long petId) {
         return dao.get(petId);

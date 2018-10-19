@@ -6,9 +6,9 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     </head>
     <body>
-        <form action="petedit" method="post" style="float:left;">
+        <form action="petdelete" method="post" style="float:left;">
             <fieldset>
-                <legend>Pet - ${pet.name} - Szerkesztés</legend>
+                <legend>Pet - ${pet.name} - Törlés</legend>
 
                 <table>
                     <thead>
@@ -20,21 +20,15 @@
                     <tbody>
                         <tr>
                             <td><label>Név</label></td>
-                            <td><input type="text" value="${pet.name}" name="pname" /></td>
+                            <td><span>${pet.name}</span></td>
                         </tr>
                         <tr>
                             <td><label>Leírás</label></td>
-                            <td><input type="text" value="${pet.description}" name="pdesc" /></td>
+                            <td><span>${pet.description}</span></td>
                         </tr>
                         <tr>
                             <td><label>Hös</label></td>
-                            <td>
-                                <select name="hero">
-                                    <c:forEach items="${heroList}" var="x">
-                                        <option value="${x.id}"><c:out value="${x.name}" /></option>
-                                    </c:forEach>
-                                </select>
-                            </td>
+                            <td><span>${heroName}</span></td>
                         </tr>
                         <tr>
                             <td><label>Szint</label></td>
@@ -52,8 +46,9 @@
                 </table>
                 <input type="hidden" value="${pet.id}" name="petid" />
 
-                <div>
-                    <input type="submit" value="Mentés">
+                <h4>Biztos törölni akarod a pet-et?</h4>
+                <div style="display:block;">
+                    <input type="submit" value="Törlés">
                     <a href="/pets">Vissza</a>
                 </div>  
             </fieldset>

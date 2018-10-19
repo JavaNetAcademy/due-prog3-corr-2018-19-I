@@ -25,4 +25,7 @@ public class HeroService {
        return dao.getByUser(pUserId);
    }
    
+   public Hero get(long heroid) {
+       return dao.get(heroid);
+   }
 }

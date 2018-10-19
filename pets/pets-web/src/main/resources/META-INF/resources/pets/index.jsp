@@ -26,6 +26,10 @@
                                            <c:param name="petid" value="${item.id}"/>
                                        </c:url>"
                                     >Szerkesztés</a>
+                                     <a href="<c:url value="/petdelete">
+                                           <c:param name="petid" value="${item.id}"/>
+                                       </c:url>"
+                                    >Törlés</a>
                                 </td>
                             </tr>
                         </c:forEach>
