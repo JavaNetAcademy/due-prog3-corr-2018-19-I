@@ -65,6 +65,7 @@ public class PetEditServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         long petid = Long.parseLong(request.getParameter("petid"));
+        String origName = request.getParameter("originalName");
         PetsService petsService = new PetsService();
         Pet pet = petsService.get(petid);
         
@@ -72,7 +73,7 @@ public class PetEditServlet extends HttpServlet {
         pet.setDescription(request.getParameter("pdesc"));
         pet.setHeroid(Long.parseLong(request.getParameter("hero")));
         
-        petsService.modify(petid, pet);
+        petsService.modify(petid, origName, pet);
 
         response.sendRedirect("/pets");
     }

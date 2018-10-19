@@ -22,8 +22,15 @@ public class PetsService {
         }
     }
 
-    public Pet modify(long petId, Pet pet) {
-        boolean exists = dao.existsByName(pet.getName(), pet.getHeroid());
+    public Pet modify(long petId, String originalName, Pet pet) {
+        boolean exists = false;
+        String petName = pet.getName(); // ha if-en belül pet.getName()-et hívtam nem működik jól
+        
+        // ha csak description-t frissítünk nem kell vizsgálni, hogy létezik-e már a név
+        if (!petName.equals(originalName)) {
+            exists = dao.existsByName(pet.getName(), pet.getHeroid());
+        }
+        
         if (exists == false) {
             return dao.modify(petId, pet);
         } else {

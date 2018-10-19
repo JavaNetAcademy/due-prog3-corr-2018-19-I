@@ -51,6 +51,7 @@
                     </tbody>
                 </table>
                 <input type="hidden" value="${pet.id}" name="petid" />
+                <input type="hidden" value="${pet.name}" name="originalName" />
 
                 <div>
                     <input type="submit" value="Mentés">
