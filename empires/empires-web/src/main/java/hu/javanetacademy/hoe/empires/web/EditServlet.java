@@ -55,7 +55,8 @@ public class EditServlet extends HttpServlet {
         
        empires.setName(request.getParameter("pname"));
        empires.setDescription(request.getParameter("pdesc"));
-       empires.setUserid(Long.parseLong(request.getParameter("user")));      
+       empires.setUserid(Long.parseLong(request.getParameter("user")));
+       
         empiresService.modify(empiresid, empires);
 
         response.sendRedirect("/empires");

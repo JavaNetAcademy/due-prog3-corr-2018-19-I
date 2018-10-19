@@ -56,16 +56,16 @@ public class DelServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        User user = (User) request.getSession().getAttribute("user");
-        Empires newEmpires = new Empires();
-        newEmpires.setName(request.getParameter("pname"));
-        newEmpires.setDescription(request.getParameter("pdescription"));
-        newEmpires.setUserid(user.getId());
-        newEmpires.setLevel(1);
-        newEmpires.setProperty(1);
-        EmpiresService hs = new EmpiresService();
-        hs.create(newEmpires);
-        doGet(request, response);
+         long empiresid = Long.parseLong(request.getParameter("empiresid"));
+        EmpiresService empiresService = new EmpiresService();
+        Empires empires = empiresService.get(empiresid);
+        
+       empires.setName(request.getParameter("pname"));
+       empires.setDescription(request.getParameter("pdesc"));
+       empires.setUserid(Long.parseLong(request.getParameter("user")));      
+        empiresService.modify(empiresid, empires);
+
+        response.sendRedirect("/empires");
     }
 
     /**
