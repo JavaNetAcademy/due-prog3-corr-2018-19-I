@@ -1,0 +1,28 @@
+user tábla létrehozása:
+
+create table user
+(id bigint(20) PRIMARY KEY not null AUTO_INCREMENT,
+name varchar(20) not null,
+password varchar(20)not null,
+role varchar(20)not null);
+
+empires tábla létrehozása:
+
+create table empires
+(id bigint(20) PRIMARY KEY not null AUTO_INCREMENT,
+name varchar(20) not null,
+description varchar(20) not null,
+userid bigint(20),
+level bigint(20) not null,
+property bigint(20) not null,
+foreign key (userid) references user(id) on update cascade on delete cascade);
+
+
+hero tábla létrehozása:
+
+create table hero
+(id bigint(20) PRIMARY KEY not null AUTO_INCREMENT,
+name varchar(20) not null,
+description varchar(20) not null,
+userid bigint(20),
+foreign key (userid) references user(id) on update cascade on delete cascade);
