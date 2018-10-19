@@ -7,6 +7,7 @@ package hu.javanetacademy.hoe.empires.web;
 
 import hu.javanetacademy.hoe.empires.dao.model.Empires;
 import hu.javanetacademy.hoe.empires.service.object.EmpiresService;
+import hu.javanetacademy.hoe.user.dao.model.User;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -19,9 +20,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Laptop
  */
-@WebServlet(name = "EmpiresServlet", urlPatterns = {"/EmpiresServlet"})
-public class EmpiresServlet extends HttpServlet {
-
+@WebServlet(name = "DelServlet", urlPatterns = {"/empires/del"})
+public class DelServlet extends HttpServlet {
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -35,9 +35,14 @@ public class EmpiresServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-         response.setContentType("text/html;charset=UTF-8");   
+        response.setContentType("text/html;charset=UTF-8");
         EmpiresService hs = new EmpiresService();
-        request.setAttribute("birodalmak",hs.getHeroByUser(100));
+        User user = (User) request.getSession().getAttribute("user");
+        request.setAttribute("empires", hs.getByUser(user.getId()));
+        getServletContext().getRequestDispatcher("/empires/del.jsp").include(request, response);
+
+       // getServletContext().getRequestDispatcher("/empires/list.jsp").include(request, response);
+
     }
 
     /**
@@ -51,14 +56,16 @@ public class EmpiresServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-         Empires newEmpires = new  Empires();
+        User user = (User) request.getSession().getAttribute("user");
+        Empires newEmpires = new Empires();
         newEmpires.setName(request.getParameter("pname"));
-        newEmpires.setDescription(request.getParameter("pdesc"));
-        newEmpires.setUserid(100);
-        newEmpires.setLevel(10);
-        newEmpires.setProperty(100);
-         EmpiresService hs = new  EmpiresService();
+        newEmpires.setDescription(request.getParameter("pdescription"));
+        newEmpires.setUserid(user.getId());
+        newEmpires.setLevel(1);
+        newEmpires.setProperty(1);
+        EmpiresService hs = new EmpiresService();
         hs.create(newEmpires);
+        doGet(request, response);
     }
 
     /**

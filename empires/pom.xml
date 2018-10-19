@@ -10,8 +10,8 @@
     <packaging>pom</packaging>
     <modules>
         <module>empires-dao-model</module>
-        <module>empires-service-object</module>
         <module>empires-dao-jdbc</module>
+        <module>empires-service-object</module>
     <module>empires-web</module>
   </modules>
 </project>

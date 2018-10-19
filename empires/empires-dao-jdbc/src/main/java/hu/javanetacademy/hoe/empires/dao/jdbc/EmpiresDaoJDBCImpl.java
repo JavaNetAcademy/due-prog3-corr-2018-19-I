@@ -1,4 +1,3 @@
-
 package hu.javanetacademy.hoe.empires.dao.jdbc;
 
 import hu.javanetacademy.hoe.empires.dao.model.Empires;
@@ -15,11 +14,11 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- *
  * @author Laptop
  */
-public class EmpiresDaoJDBCImpl implements EmpiresDaoInterface{
-     private Connection con;
+public class EmpiresDaoJDBCImpl implements EmpiresDaoInterface {
+
+    private Connection con;
 
     public EmpiresDaoJDBCImpl() {
         try {
@@ -32,7 +31,7 @@ public class EmpiresDaoJDBCImpl implements EmpiresDaoInterface{
 
     @Override
     public Empires create(Empires pEmpires) {
-         try {
+        try {
             PreparedStatement ps = con.prepareStatement("INSERT INTO empires(name,description,userid,level,property) VALUES(?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, pEmpires.getName());
             ps.setString(2, pEmpires.getDescription());
@@ -44,6 +43,7 @@ public class EmpiresDaoJDBCImpl implements EmpiresDaoInterface{
             if (rs.next()) {
                 pEmpires.setId(rs.getLong(1));
                 return pEmpires;
+
             }
         } catch (SQLException ex) {
             Logger.getLogger(EmpiresDaoJDBCImpl.class.getName()).log(Level.SEVERE, null, ex);
@@ -54,25 +54,23 @@ public class EmpiresDaoJDBCImpl implements EmpiresDaoInterface{
     @Override
     public Empires modify(long pOldEmpiresId, Empires pNewEmpires) {
         try {
-            PreparedStatement ps = con.prepareStatement("UPDATE empires SET (id,name,description,userid,level,property) VALUES(?,?,?,?,?,?) where id=?", Statement.RETURN_GENERATED_KEYS);
-              ps.setLong(1, pOldEmpiresId);       
-            ps.setString(2, pNewEmpires.getName());
-            ps.setString(3, pNewEmpires.getDescription());        
-            ps.setLong(4, pNewEmpires.getUserid());
-            ps.setLong(5, pNewEmpires.getLevel());
-            ps.setLong(6, pNewEmpires.getProperty());
+            PreparedStatement ps = con.prepareStatement("UPDATE empires SET (name,description,userid,level,property) VALUES(?,?,?,?,?) where id=?", Statement.RETURN_GENERATED_KEYS);
+            ps.setString(1, pNewEmpires.getName());
+            ps.setString(2, pNewEmpires.getDescription());
+            ps.setLong(3, pNewEmpires.getUserid());
+            ps.setLong(4, pNewEmpires.getLevel());
+            ps.setLong(5, pNewEmpires.getProperty());
             ps.executeUpdate();
-           
+            return pNewEmpires;
         } catch (SQLException ex) {
             Logger.getLogger(EmpiresDaoJDBCImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
-    
     }
 
     @Override
     public Empires delete(long pEmpiresId) {
-         try {
+        try {
             PreparedStatement ps = con.prepareStatement("DELETE FROM empires WHERE id=?", Statement.RETURN_GENERATED_KEYS);
             ps.setLong(1, pEmpiresId);
             ps.executeUpdate();
@@ -80,17 +78,17 @@ public class EmpiresDaoJDBCImpl implements EmpiresDaoInterface{
         } catch (SQLException ex) {
             Logger.getLogger(EmpiresDaoJDBCImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return null;   
+        return null;
     }
 
     @Override
     public Empires get(long pEmpiresId) {
-       try {
+        try {
             PreparedStatement ps = con.prepareStatement("SELECT id,name,description,userid,level,property FROM empires WHERE id=?");
             ps.setLong(1, pEmpiresId);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
-               Empires res = new Empires();
+                Empires res = new Empires();
                 res.setId(rs.getLong(1));
                 res.setName(rs.getString(2));
                 res.setDescription(rs.getString(3));
@@ -107,7 +105,7 @@ public class EmpiresDaoJDBCImpl implements EmpiresDaoInterface{
 
     @Override
     public List<Empires> getByUser(long pUserId) {
-       List<Empires> resAll = new ArrayList<>();
+        List<Empires> resAll = new ArrayList<>();
         try {
             PreparedStatement ps = con.prepareStatement("SELECT id,name,description,userid,level,property FROM empires WHERE userid=? ORDER BY name");
             ps.setLong(1, pUserId);
@@ -128,27 +126,20 @@ public class EmpiresDaoJDBCImpl implements EmpiresDaoInterface{
     }
 
     @Override
-    public Empires getByNameFromUser(String pEmpiresName, long pUserId) {
+    public boolean existsByName(String pEmpiresName, long pUserId) {
+                     
         try {
-            PreparedStatement ps = con.prepareStatement("SELECT id,name,description,userid,level,property FROM empires WHERE name=? AND userid=?");
+            PreparedStatement ps = con.prepareStatement("SELECT name=? FROM empires WHERE name=? AND userid=?");
             ps.setString(1, pEmpiresName);
-            ps.setLong(2, pUserId);
+            ps.setString(2, pEmpiresName);
+            ps.setLong(3, pUserId);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
-                Empires res = new Empires();
-                res.setId(rs.getLong(1));
-                res.setName(rs.getString(2));
-                res.setDescription(rs.getString(3));
-                res.setUserid(rs.getLong(4));
-                res.setLevel(rs.getLong(5));
-                res.setProperty(rs.getLong(6));
-                return res;
+                return true;
             }
         } catch (SQLException ex) {
             Logger.getLogger(EmpiresDaoJDBCImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return null;
+        return false;
     }
 }
-    
-
