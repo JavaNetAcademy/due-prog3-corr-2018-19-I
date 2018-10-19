@@ -35,6 +35,14 @@ sudo apt-get install mysql-server
 
 Ezen felül a Workbench hozzá megtalálható az App Store-ban és az működik. Annyi extra van még ezen felül, hogy fel kell venni kézzel a user-eteket (és a 'hoe' user-t) a MySQL user táblájába. Erről találtok számtalan leírást a neten.
 
+**Ha készen vagytok a táblátokkal, akkor a következő paranccsal egyszerűen kiexportálhatjátok a scriptjét:**
+
+```
+SHOW CREATE TABLE tablename
+```
+
+**Ezután a result részen jobb klikk a scriptre és 'Copy field (unquoted)', azután pedig mentsétek az 'SQLScripts' mappába táblanév.sql-ként és Commit-nál ezt is hozzá fogja dobni.**
+
 ## Github
 
 * Clone gomb a projektnél jobb felül, HTTPS link másolása.
