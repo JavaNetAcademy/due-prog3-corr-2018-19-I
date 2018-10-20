@@ -52,16 +52,15 @@ public class EmpiresDaoJDBCImpl implements EmpiresDaoInterface {
     }
 
     @Override
-    public Empires modify(long pOldEmpiresId, Empires pNewEmpires) {
+    public Empires modify(long pempiresId, Empires pEmpires) {
         try {
-            PreparedStatement ps = con.prepareStatement("UPDATE empires SET (name,description,userid,level,property) VALUES(?,?,?,?,?) where id=?", Statement.RETURN_GENERATED_KEYS);
-            ps.setString(1, pNewEmpires.getName());
-            ps.setString(2, pNewEmpires.getDescription());
-            ps.setLong(3, pNewEmpires.getUserid());
-            ps.setLong(4, pNewEmpires.getLevel());
-            ps.setLong(5, pNewEmpires.getProperty());
+            PreparedStatement ps = con.prepareStatement("UPDATE empires SET name=?,description=?,userid=? where id=?", Statement.RETURN_GENERATED_KEYS);
+            ps.setString(1, pEmpires.getName());
+            ps.setString(2, pEmpires.getDescription());
+            ps.setLong(3, pEmpires.getUserid());
+             ps.setLong(4, pempiresId);
             ps.executeUpdate();
-            return pNewEmpires;
+            return pEmpires;
         } catch (SQLException ex) {
             Logger.getLogger(EmpiresDaoJDBCImpl.class.getName()).log(Level.SEVERE, null, ex);
         }

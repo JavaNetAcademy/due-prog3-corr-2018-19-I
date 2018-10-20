@@ -20,7 +20,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Laptop
  */
-@WebServlet(name = "DelServlet", urlPatterns = {"/empires/del"})
+@WebServlet(name = "DelServlet", urlPatterns = {"/del"})
 public class DelServlet extends HttpServlet {
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -36,13 +36,12 @@ public class DelServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        EmpiresService hs = new EmpiresService();
-        User user = (User) request.getSession().getAttribute("user");
-        request.setAttribute("empires", hs.getByUser(user.getId()));
+        
+        EmpiresService empiresService = new EmpiresService();     
+     
+       Empires empires = empiresService.get(Long.parseLong(request.getParameter("empiresid")));
+       request.setAttribute("empires", empires);
         getServletContext().getRequestDispatcher("/empires/del.jsp").include(request, response);
-
-       // getServletContext().getRequestDispatcher("/empires/list.jsp").include(request, response);
-
     }
 
     /**
@@ -58,13 +57,9 @@ public class DelServlet extends HttpServlet {
             throws ServletException, IOException {
          long empiresid = Long.parseLong(request.getParameter("empiresid"));
         EmpiresService empiresService = new EmpiresService();
-        Empires empires = empiresService.get(empiresid);
-        
-       empires.setName(request.getParameter("pname"));
-       empires.setDescription(request.getParameter("pdesc"));
-       empires.setUserid(Long.parseLong(request.getParameter("user")));      
-        empiresService.modify(empiresid, empires);
-
+       
+         empiresService.delete(empiresid);
+     
         response.sendRedirect("/empires");
     }
 

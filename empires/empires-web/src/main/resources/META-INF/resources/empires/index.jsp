@@ -5,7 +5,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     </head>
     <body>
-        <form action="create" method="get" style="float:left;">      
+        <form action="empires" method="get" style="float:left;">      
             <fieldset>
                 <legend>Birodalom lista:</legend>
 
@@ -17,18 +17,18 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <c:forEach var="oneempires" items="${empires}">
+                        <c:forEach var="oneempires" items="${empiresList}">
                             <tr>
                                 <td><span>${oneempires.name} (${oneempires.description})</span></td>
                                 <td>
                                     <a href="<c:url value="/edit">
-                                           <c:param name="empiresid" value="${item.id}"/>
+                                           <c:param name="empiresid" value="${oneempires.id}"/>
                                  </c:url>"
                                     >Szerkesztés</a>
                                 </td>
                                 <td>
                                     <a href="<c:url value="/del">
-                                           <c:param name="empiresid" value="${item.id}"/>
+                                           <c:param name="empiresid" value="${oneempires.id}"/>
                                  </c:url>"
                                     >Törlés</a>
                                 </td>
@@ -38,7 +38,7 @@
                 </table>
             </fieldset>
         </form>
-         <form action="create" method="post" style="float:left;">
+         <form action="empires" method="post" style="float:left;">
             <fieldset>
 
                 <legend>Birodalom létrehozása</legend>

@@ -20,8 +20,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Laptop
  */
-@WebServlet(name = "CreateServlet", urlPatterns = {"/empires/create"})
-public class CreateServlet extends HttpServlet {
+@WebServlet(name = "EmpiresServlet", urlPatterns = {"/empires"})
+public class EmpiresServlet extends HttpServlet {
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -38,7 +38,7 @@ public class CreateServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         EmpiresService hs = new EmpiresService();
         User user = (User) request.getSession().getAttribute("user");
-        request.setAttribute("empires", hs.getByUser(user.getId()));
+        request.setAttribute("empiresList", hs.getByUser(user.getId()));
         getServletContext().getRequestDispatcher("/empires/index.jsp").include(request, response);
 
        // getServletContext().getRequestDispatcher("/empires/list.jsp").include(request, response);
