@@ -22,13 +22,16 @@ public class EmpiresService {
         }
     }
 
-    public Empires modify(long empiresId, Empires empires) {
-        boolean exists = dao.existsByName(empires.getName(), empires.getUserid());
+    public Empires modify(long pempiresId, Empires pempires) {
+        boolean exists = dao.existsByName(pempires.getName(), pempires.getUserid());
         if (exists == false) {
-            return dao.modify(empiresId, empires);
+            return dao.modify(pempiresId, pempires);
         } else {
             throw new CustomException();
         }
+    }
+     public Empires delete(long empiresId) {
+        return dao.delete(empiresId);
     }
 
     public Empires get(long empiresId) {

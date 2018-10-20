@@ -13,9 +13,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * @author Heyzel (Horvath Gergely)
+ * @author Laptop
  */
-@WebServlet(name = "EditServlet", urlPatterns = {"/empires/edit"})
+@WebServlet(name = "EditServlet", urlPatterns = {"/edit"})
 public class EditServlet extends HttpServlet {
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -32,10 +32,15 @@ public class EditServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         
-       EmpiresService hs = new EmpiresService();
-        User user = (User) request.getSession().getAttribute("user");
-        request.setAttribute("empires", hs.getByUser(user.getId()));
+       EmpiresService empiresService = new EmpiresService();
+                 
+      Empires empires = empiresService.get(Long.parseLong(request.getParameter("empiresid")));          
+       request.setAttribute("empires", empires);
+        
         getServletContext().getRequestDispatcher("/empires/edit.jsp").include(request, response);
+
+
+
     }
 
     /**
@@ -54,8 +59,7 @@ public class EditServlet extends HttpServlet {
         Empires empires = empiresService.get(empiresid);
         
        empires.setName(request.getParameter("pname"));
-       empires.setDescription(request.getParameter("pdesc"));
-       empires.setUserid(Long.parseLong(request.getParameter("user")));
+       empires.setDescription(request.getParameter("pdescription"));      
        
         empiresService.modify(empiresid, empires);
 

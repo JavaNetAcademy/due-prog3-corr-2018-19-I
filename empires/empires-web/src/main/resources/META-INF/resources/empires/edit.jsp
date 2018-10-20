@@ -2,14 +2,13 @@
 
 <html>
     <head>
-        <title>empires</title>
+        <title>Empires_Edit</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     </head>
     <body>
         <form action="edit" method="post" style="float:left;">
             <fieldset>
-                <legend>empires - ${empires.name} - Szerkesztés</legend>
-
+                <legend>Birodalom ${empires.name} Szerkesztés</legend>
                 <table>
                     <thead>
                         <tr>
@@ -24,9 +23,13 @@
                         </tr>
                         <tr>
                             <td><label>Leírás</label></td>
-                            <td><input type="text" value="${empires.description}" name="pdesc" /></td>
-                        </tr>                       
-                         <tr>
+                            <td><input type="text" value="${empires.description}" name="pdescription" /></td>
+                        </tr>  
+                        <tr>
+                            <td><label>User</label></td>
+                            <td><span>${empires.userid}</span></td>
+                        </tr>
+                        <tr>
                             <td><label>Szint</label></td>
                             <td><span>${empires.level}</span></td>
                         </tr>
@@ -38,7 +41,12 @@
                 </table>
                 <input type="hidden" value="${empires.id}" name="empiresid" />
 
-                <div><input type="submit" value="Mentés"></div>  
+                <div>
+                    <input type="submit" value="Mentés">
+                    <a href="/empires">Vissza</a>
+
+                </div>  
+
             </fieldset>
         </form>         
     </body>
