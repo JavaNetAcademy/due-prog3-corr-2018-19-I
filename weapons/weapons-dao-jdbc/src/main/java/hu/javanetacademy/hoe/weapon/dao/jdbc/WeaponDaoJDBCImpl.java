@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package hu.javanetacademy.hoe.weapon.dao.jdbc;
+package hu.javanetacademy.hoe.weapons.dao.jdbc;
 
-import hu.javanetacademy.hoe.weapon.dao.model.Weapon;
-import hu.javanetacademy.hoe.weapon.dao.model.WeaponDAOInterface;
+import hu.javanetacademy.hoe.weapons.dao.model.Weapon;
+import hu.javanetacademy.hoe.weapons.dao.model.WeaponDAOInterface;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;

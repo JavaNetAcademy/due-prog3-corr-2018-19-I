@@ -1,4 +1,4 @@
-package hu.javanetacademy.hoe.weapon.dao.model;
+package hu.javanetacademy.hoe.weapons.dao.model;
 
 /**
  *

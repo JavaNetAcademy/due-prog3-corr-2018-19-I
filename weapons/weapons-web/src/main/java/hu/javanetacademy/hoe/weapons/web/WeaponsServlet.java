@@ -1,9 +1,9 @@
-package hu.javanetacademy.hoe.weapon.web;
+package hu.javanetacademy.hoe.weapons.web;
 
 import hu.javanetacademy.hoe.hero.dao.model.Hero;
 import hu.javanetacademy.hoe.hero.service.object.HeroService;
 import hu.javanetacademy.hoe.user.dao.model.User;
-import hu.javanetacademy.hoe.weapon.service.object.WeaponService;
+import hu.javanetacademy.hoe.weapons.service.object.WeaponsService;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -34,7 +34,7 @@ public class WeaponsServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         
-        WeaponService weaponService = new WeaponService();
+        WeaponsService weaponService = new WeaponsService();
         HeroService heroService = new HeroService();
         
         User user = (User)request.getSession().getAttribute("user");
