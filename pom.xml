@@ -9,13 +9,14 @@
         <module>hero</module>
         <module>user</module>
         <module>base</module>
-    <module>web</module>
+        <module>web</module>
         <module>species</module>
         <module>pets</module>
         <module>armor</module>
         <!-- <module>specfajkepessegek</module> -->
         <module>speciesspecialproperty</module>
         <module>empires</module>
+        <module>weapons</module>
     </modules>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
