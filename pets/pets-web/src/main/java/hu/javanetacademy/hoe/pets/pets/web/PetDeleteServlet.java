@@ -48,7 +48,13 @@ public class PetDeleteServlet extends HttpServlet {
             getServletContext().getRequestDispatcher("/pets/noheroes.jsp").include(request, response);
         }
         else {
-            Hero hero = heroService.get(pet.getHeroid());
+            Hero hero = new Hero();
+            try {
+                hero = heroService.get(pet.getHeroid());
+            }
+            catch (Exception e) {
+                hero = null;
+            }
             
             // Ha nem létezik már a hős, de a pet mégis, akkor se szálljon el
             if (hero != null) {
