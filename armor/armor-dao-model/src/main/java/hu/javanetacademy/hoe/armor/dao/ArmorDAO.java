@@ -1,6 +1,8 @@
-package hu.javanetacademy.hoe.armor.dao.model;
+package hu.javanetacademy.hoe.armor.dao;
 
 import java.util.List;
+
+import hu.javanetacademy.hoe.armor.dao.entity.Armor;
 
 /**
  *

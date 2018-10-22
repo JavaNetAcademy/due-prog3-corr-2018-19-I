@@ -10,8 +10,8 @@
 	</parent>
 	<groupId>hu.javanetacademy.hoe.armor</groupId>
 	<artifactId>armor-dao-jdbc</artifactId>
-	<packaging>jar</packaging> 
-	
+	<packaging>jar</packaging>
+
 	<dependencies>
 		<dependency>
 			<groupId>${project.groupId}</groupId>
@@ -20,6 +20,10 @@
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
 		</dependency>
 	</dependencies>
 	<name>armor-dao-jdbc</name>

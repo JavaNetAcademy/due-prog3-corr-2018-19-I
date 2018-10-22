@@ -1,4 +1,4 @@
-/*id,név,(tulajdonságok), ár*/
+/*Tulajdonságok kódtár(properties_codebook) tábla*/
 CREATE TABLE `properties_codebook`( 
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `code` varchar(20) NOT NULL,
@@ -13,14 +13,14 @@ CREATE TABLE `properties_codebook`(
 
 /*Páncél(Armor) tábla*/
 CREATE TABLE `armor` ( 
-	`id` bigint(20) NOT NULL AUTO_INCREMENT,
-	`code` varchar(20) NOT NULL,
+	`id` bigint(20) NOT NULL AUTO_INCREMENT, 
 	`name` varchar(20) NOT NULL,
 	`description` varchar(20) NOT NULL,
     `price` bigint(20) NOT NULL DEFAULT 1,
 	PRIMARY KEY (`id`)
 )ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+/*Páncél(Armor) és Hős(hero) kapcsoló tábla*/
 CREATE TABLE `armor_hero_xref` ( 
 	`id` bigint(20) NOT NULL AUTO_INCREMENT,
     `armor_id` bigint(20) NOT NULL,
@@ -32,6 +32,7 @@ CREATE TABLE `armor_hero_xref` (
     CONSTRAINT `AHX_HERO_CONSTRAINT` FOREIGN KEY (`hero_id`) REFERENCES `hero` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 )ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+/*Páncél(Armor) és Tulajdonságok kódtár(properties_codebook) kapcsoló tábla*/
 CREATE TABLE `armor_properties_codebook_xref` ( 
 	`id` bigint(20) NOT NULL AUTO_INCREMENT,
     `armor_id` bigint(20) NOT NULL,

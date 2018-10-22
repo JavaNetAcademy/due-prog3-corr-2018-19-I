@@ -2,7 +2,7 @@ package hu.javanetacademy.hoe.armor.service;
 
 import java.util.List;
 
-import hu.javanetacademy.hoe.armor.dao.model.Armor;
+import hu.javanetacademy.hoe.armor.dao.entity.Armor;
 
 /**
  *

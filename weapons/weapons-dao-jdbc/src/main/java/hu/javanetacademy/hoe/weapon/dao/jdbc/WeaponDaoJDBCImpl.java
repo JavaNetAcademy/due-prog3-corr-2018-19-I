@@ -3,10 +3,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package hu.javanetacademy.hoe.weapons.dao.jdbc;
+package hu.javanetacademy.hoe.weapon.dao.jdbc;
 
-import hu.javanetacademy.hoe.weapons.dao.model.Weapon;
-import hu.javanetacademy.hoe.weapons.dao.model.WeaponDAOInterface;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -15,46 +13,50 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import hu.javanetacademy.hoe.weapons.dao.model.Weapon;
+import hu.javanetacademy.hoe.weapons.dao.model.WeaponDAOInterface;
+
 /**
  *
  * @author Richard
  */
 public class WeaponDaoJDBCImpl implements WeaponDAOInterface {
-    private Connection con;
+	private Connection con;
 
-    public WeaponDaoJDBCImpl() {
-        try{
-            Class.forName("com.mysql.jdbc.Driver");
-            con=DriverManager.getConnection("jdbc:mysql://localhost/hoe?useSSL=false", "hoe", "hoe");
-        }
-        catch(Exception e){
-            System.exit(100);
-        }
-    }
-    
-    @Override
-    public Weapon buy(long id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+	public WeaponDaoJDBCImpl() {
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			con = DriverManager.getConnection("jdbc:mysql://localhost/hoe?useSSL=false", "hoe", "hoe");
+		} catch (Exception e) {
+			System.exit(100);
+		}
+	}
 
-    @Override
-    public List<Weapon> getForHero(long pHeroId) {
-        List<Weapon> weapons = new ArrayList<>();
-        try {
-            PreparedStatement ps = con.prepareStatement("SELECT id,name,description,heroid FROM weapon WHERE heroid=? ORDER BY name");
-            ps.setLong(1, pHeroId);
-            ResultSet rs = ps.executeQuery();
-            while (rs.next()) {
-                Weapon res = new Weapon();
-                res.setId(rs.getLong(1));
-                res.setName(rs.getString(2));
-                res.setDescription(rs.getString(3));
-                res.setHeroid(rs.getLong(4));
-                weapons.add(res);
-            }
-        } catch (SQLException e) {
-        }
-        
-        return weapons;
-    }
+	@Override
+	public Weapon buy(long id) {
+		throw new UnsupportedOperationException("Not supported yet."); // To change body of generated methods, choose
+																		// Tools | Templates.
+	}
+
+	@Override
+	public List<Weapon> getForHero(long pHeroId) {
+		List<Weapon> weapons = new ArrayList<>();
+		try {
+			PreparedStatement ps = con
+					.prepareStatement("SELECT id,name,description,heroid FROM weapon WHERE heroid=? ORDER BY name");
+			ps.setLong(1, pHeroId);
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				Weapon res = new Weapon();
+				res.setId(rs.getLong(1));
+				res.setName(rs.getString(2));
+				res.setDescription(rs.getString(3));
+				res.setHeroid(rs.getLong(4));
+				weapons.add(res);
+			}
+		} catch (SQLException e) {
+		}
+
+		return weapons;
+	}
 }
