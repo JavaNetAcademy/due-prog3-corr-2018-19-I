@@ -44,6 +44,11 @@
 				<version>${hu.javanetacademy.hoe.base-util.version}</version>
 			</dependency>
 			<dependency>
+				<groupId>hu.javanetacademy.hoe.hero</groupId>
+				<artifactId>hero-dao-model</artifactId>
+				<version>${hu.javanetacademy.hoe.base-util.version}</version>
+			</dependency>
+			<dependency>
 				<groupId>javax</groupId>
 				<artifactId>javaee-web-api</artifactId>
 				<version>${javaee-web-api.version}</version>

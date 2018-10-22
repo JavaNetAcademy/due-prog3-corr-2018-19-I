@@ -7,9 +7,34 @@ package hu.javanetacademy.hoe.armor.dao.entity;
  */
 public class Armor extends BaseEntity {
 
+	private static final long serialVersionUID = 1L;
+
 	private String name;
-//`code` varchar(20) NOT NULL,
-//`name` varchar(20) NOT NULL,
-//`description` varchar(20) NOT NULL,
-//`price` bigint(20) NOT NULL DEFAULT 1,
+	private String description;
+	private String price;
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public String getPrice() {
+		return price;
+	}
+
+	public void setPrice(String price) {
+		this.price = price;
+	}
+
 }
