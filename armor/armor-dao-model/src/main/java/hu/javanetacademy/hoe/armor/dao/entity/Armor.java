@@ -11,7 +11,7 @@ public class Armor extends BaseEntity {
 
 	private String name;
 	private String description;
-	private String price;
+	private Long price;
 
 	public String getName() {
 		return name;
@@ -29,11 +29,11 @@ public class Armor extends BaseEntity {
 		this.description = description;
 	}
 
-	public String getPrice() {
+	public Long getPrice() {
 		return price;
 	}
 
-	public void setPrice(String price) {
+	public void setPrice(Long price) {
 		this.price = price;
 	}
 

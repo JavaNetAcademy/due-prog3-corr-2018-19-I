@@ -12,6 +12,8 @@ public interface ArmorHeroXrefDAO {
 
 	public void deleteAllByHeroId(Long heroId);
 
-	public void deleteAllById(Long id);
+	public void deleteAllByArmorId(Long armorId);
+
+	public void delete(Long id);
 
 }

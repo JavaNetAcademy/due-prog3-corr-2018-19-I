@@ -1,5 +1,7 @@
 package hu.javanetacademy.hoe.armor.dao.dto;
 
+import java.util.List;
+
 /**
  *
  * @author Gonda Gergely
@@ -11,6 +13,7 @@ public class ArmorDTO extends BaseDTO {
 
 	private String name;
 	private String description;
+	private List<ArmorPropertiesCodebookXrefDTO> armorPropertiesCodebookXrefs;
 	private String price;
 
 	public String getName() {
@@ -35,6 +38,14 @@ public class ArmorDTO extends BaseDTO {
 
 	public void setPrice(String price) {
 		this.price = price;
+	}
+
+	public List<ArmorPropertiesCodebookXrefDTO> getArmorPropertiesCodebookXrefs() {
+		return armorPropertiesCodebookXrefs;
+	}
+
+	public void setArmorPropertiesCodebookXrefs(List<ArmorPropertiesCodebookXrefDTO> armorPropertiesCodebookXrefs) {
+		this.armorPropertiesCodebookXrefs = armorPropertiesCodebookXrefs;
 	}
 
 }

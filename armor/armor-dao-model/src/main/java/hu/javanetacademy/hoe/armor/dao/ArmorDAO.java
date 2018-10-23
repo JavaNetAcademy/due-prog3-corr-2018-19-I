@@ -19,4 +19,6 @@ public interface ArmorDAO {
 
 	public void update(Armor armor);
 
+	public void delete(Long id);
+
 }

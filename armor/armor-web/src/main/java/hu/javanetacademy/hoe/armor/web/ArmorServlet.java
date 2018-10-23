@@ -16,7 +16,7 @@ import hu.javanetacademy.hoe.armor.service.imp.ArmorServiceImpl;
  * @author Gonda Gergely
  *
  */
-@WebServlet(name = "ArmorService", urlPatterns = { "/armor/armor" })
+@WebServlet(name = "ArmorServlet", urlPatterns = { "/armor/armor" })
 public class ArmorServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;

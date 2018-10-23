@@ -40,7 +40,13 @@ public class ArmorHeroXrefDAOImpl implements ArmorHeroXrefDAO {
 	}
 
 	@Override
-	public void deleteAllById(Long id) {
+	public void deleteAllByArmorId(Long armorId) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void delete(Long id) {
 		// TODO Auto-generated method stub
 
 	}

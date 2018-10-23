@@ -11,5 +11,8 @@ public interface ArmorPropertiesCodebookXreDAO {
 
 	public void deleteAllByArmorId(Long armorId);
 
-	public void deleteAllById(Long id);
+	public void deleteAllByPropertiesCodebookId(Long propertiesCodebookId);
+
+	public void delete(Long id);
+
 }
