@@ -17,6 +17,7 @@
         <module>speciesspecialproperty</module>
         <module>empires</module>
         <module>weapons</module>
+        <module>settlements</module>
     </modules>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
