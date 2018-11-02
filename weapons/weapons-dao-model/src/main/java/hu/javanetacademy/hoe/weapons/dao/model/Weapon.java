@@ -8,6 +8,7 @@ public class Weapon {
     private long id;
     private String name;
     private String description;
+    private int price;
     private long heroid;
     
     public Weapon() {
@@ -36,6 +37,14 @@ public class Weapon {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public int getPrice() {
+        return price;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
     }
 
     public long getHeroid() {

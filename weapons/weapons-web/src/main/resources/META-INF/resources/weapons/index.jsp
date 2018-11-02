@@ -12,6 +12,12 @@
                 <option value="${x.id}"><c:out value="${x.name}" /></option>
             </c:forEach>
         </select>
+        
+        <ul>
+            <c:forEach items="${weapons}" var="weapon">
+                <li>${weapon.name} (${weapon.price})</li>
+            </c:forEach>
+        </ul>
     </body>
 </html>
 

@@ -47,6 +47,9 @@ public class WeaponsServlet extends HttpServlet {
             getServletContext().getRequestDispatcher("/weapons/noheroes.jsp").include(request, response);
         }
         else {
+            // TODO (richardpaj): legyen ez valaszthato, hogy milyen heroid-hez
+            // toltodnek be a fegyverek
+            request.setAttribute("weapons", weaponService.getForHero(3));
             getServletContext().getRequestDispatcher("/weapons/index.jsp").include(request, response);
         }
     }

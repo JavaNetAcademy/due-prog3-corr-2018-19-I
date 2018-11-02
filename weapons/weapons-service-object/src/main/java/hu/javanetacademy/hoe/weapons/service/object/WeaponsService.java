@@ -11,13 +11,13 @@ import hu.javanetacademy.hoe.weapons.dao.model.WeaponDAOInterface;
  * @author Richard
  */
 public class WeaponsService {
-	WeaponDAOInterface dao = new WeaponDaoJDBCImpl();
+    WeaponDAOInterface dao = new WeaponDaoJDBCImpl();
 
-	public Weapon buy(long id) {
-		return null;
-	}
+    public Weapon buy(long id) {
+        return null;
+    }
 
-	public List<Weapon> getForHero(long pHeroId) {
-		return null;
-	}
+    public List<Weapon> getForHero(long pHeroId) {
+        return dao.getForHero(pHeroId);
+    }
 }
