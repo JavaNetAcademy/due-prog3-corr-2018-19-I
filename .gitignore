@@ -31,3 +31,5 @@
 /armor/armor-web/target/
 /armor/armor-dao-jdbc/target/
 /armor/armor-service-object/target/
+*.iml
+.idea
