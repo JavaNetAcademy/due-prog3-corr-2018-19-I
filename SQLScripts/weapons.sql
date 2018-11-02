@@ -3,6 +3,7 @@ CREATE TABLE `weapons` (
  `name` varchar(255) COLLATE utf8_bin NOT NULL,
  `description` text COLLATE utf8_bin,
  `price` int(11) NOT NULL,
+ `heroid` bigint(20) NOT NULL,
  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='Fegyverek'
 
