@@ -3,6 +3,7 @@ package hu.javanetacademy.hoe.weapons.web;
 import hu.javanetacademy.hoe.hero.dao.model.Hero;
 import hu.javanetacademy.hoe.hero.service.object.HeroService;
 import hu.javanetacademy.hoe.user.dao.model.User;
+import hu.javanetacademy.hoe.weapons.dao.model.Weapon;
 import hu.javanetacademy.hoe.weapons.service.object.WeaponsService;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -55,6 +56,15 @@ public class CreateWeaponsServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        User user = (User) request.getSession().getAttribute("user");
+        Weapon weapon = new Weapon();
+        weapon.setName(request.getParameter("name"));
+        weapon.setDescription(request.getParameter("description"));
+        weapon.setPrice(Integer.parseInt(request.getParameter("price")));
+        weapon.setUserId(user.getId());
+        WeaponsService ws = new WeaponsService();
+        ws.create(weapon);
+        doGet(request, response);
         
     }
 

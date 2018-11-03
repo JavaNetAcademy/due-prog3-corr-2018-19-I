@@ -16,6 +16,10 @@ public class WeaponsService {
     public Weapon buy(long id) {
         return null;
     }
+    
+    public Weapon create(Weapon weapon) {
+        return dao.create(weapon);
+    }
 
     public List<Weapon> getByUser(long pUserId) {
         return dao.getByUser(pUserId);

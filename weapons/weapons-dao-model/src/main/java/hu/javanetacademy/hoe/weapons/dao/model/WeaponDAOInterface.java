@@ -8,5 +8,6 @@ import java.util.List;
  */
 public interface WeaponDAOInterface {
     public Weapon buy(long id);
+    public Weapon create(Weapon weapon);
     public List<Weapon> getByUser(long pUserId);
 }

@@ -15,6 +15,9 @@ import java.util.List;
 
 import hu.javanetacademy.hoe.weapons.dao.model.Weapon;
 import hu.javanetacademy.hoe.weapons.dao.model.WeaponDAOInterface;
+import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -35,6 +38,26 @@ public class WeaponDaoJDBCImpl implements WeaponDAOInterface {
     @Override
     public Weapon buy(long id) {
         throw new UnsupportedOperationException("Not supported yet."); // To change body of generated methods, choose																// Tools | Templates.
+    }
+    
+    @Override
+    public Weapon create(Weapon weapon) {        
+        try {
+            PreparedStatement ps =con.prepareStatement("INSERT INTO weapons(name,description,price,userid) VALUES(?,?,?,?)",Statement.RETURN_GENERATED_KEYS);
+            ps.setString(1, weapon.getName());
+            ps.setString(2, weapon.getDescription());
+            ps.setInt(3, weapon.getPrice());
+            ps.setLong(4, weapon.getUserId());
+            ps.executeUpdate();
+            ResultSet rs= ps.getGeneratedKeys();
+            if(rs.next()){
+                weapon.setId(rs.getLong(1));
+                return weapon;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(WeaponDaoJDBCImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;        
     }
 
     @Override
