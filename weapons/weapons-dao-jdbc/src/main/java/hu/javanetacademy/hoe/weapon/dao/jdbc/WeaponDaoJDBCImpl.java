@@ -38,12 +38,12 @@ public class WeaponDaoJDBCImpl implements WeaponDAOInterface {
     }
 
     @Override
-    public List<Weapon> getForHero(long pHeroId) {
+    public List<Weapon> getByUser(long pUserId) {
         List<Weapon> weapons = new ArrayList<>();
         try {
             PreparedStatement ps = con
-                            .prepareStatement("SELECT id,name,description,price,heroid FROM weapons WHERE heroid=? ORDER BY name");
-            ps.setLong(1, pHeroId);
+                            .prepareStatement("SELECT id,name,description,price,userid FROM weapons WHERE userid=? ORDER BY name");
+            ps.setLong(1, pUserId);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 Weapon res = new Weapon();
@@ -51,7 +51,7 @@ public class WeaponDaoJDBCImpl implements WeaponDAOInterface {
                 res.setName(rs.getString(2));
                 res.setDescription(rs.getString(3));
                 res.setPrice(rs.getInt(4));
-                res.setHeroid(rs.getLong(5));
+                res.setUserId(rs.getLong(5));
                 weapons.add(res);
             }
         } catch (SQLException e) {

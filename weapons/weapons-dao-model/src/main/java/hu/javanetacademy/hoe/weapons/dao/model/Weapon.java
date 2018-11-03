@@ -9,7 +9,7 @@ public class Weapon {
     private String name;
     private String description;
     private int price;
-    private long heroid;
+    private long userid;
     
     public Weapon() {
         
@@ -47,12 +47,12 @@ public class Weapon {
         this.price = price;
     }
 
-    public long getHeroid() {
-        return heroid;
+    public long getUserId() {
+        return userid;
     }
 
-    public void setHeroid(long heroid) {
-        this.heroid = heroid;
+    public void setUserId(long userid) {
+        this.userid = userid;
     }
     
     

@@ -17,7 +17,7 @@ public class WeaponsService {
         return null;
     }
 
-    public List<Weapon> getForHero(long pHeroId) {
-        return dao.getForHero(pHeroId);
+    public List<Weapon> getByUser(long pUserId) {
+        return dao.getByUser(pUserId);
     }
 }

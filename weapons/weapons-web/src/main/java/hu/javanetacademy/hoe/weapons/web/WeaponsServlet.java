@@ -41,17 +41,9 @@ public class WeaponsServlet extends HttpServlet {
         if (user != null) {
             request.setAttribute("heroList", heroService.getHeroByUser(user.getId()));
         }
-        
-        ArrayList<Hero> heroes = (ArrayList<Hero>)request.getAttribute("heroList");
-        if (heroes == null || heroes.size() == 0) {
-            getServletContext().getRequestDispatcher("/weapons/noheroes.jsp").include(request, response);
-        }
-        else {
-            // TODO (richardpaj): legyen ez valaszthato, hogy milyen heroid-hez
-            // toltodnek be a fegyverek
-            request.setAttribute("weapons", weaponService.getForHero(3));
-            getServletContext().getRequestDispatcher("/weapons/index.jsp").include(request, response);
-        }
+
+        request.setAttribute("weapons", weaponService.getByUser(user.getId()));
+        getServletContext().getRequestDispatcher("/weapons/index.jsp").include(request, response);
     }
 
     /**
