@@ -15,6 +15,7 @@
         <module>armor</module>
         <!-- <module>specfajkepessegek</module> -->
         <module>empires</module>
+        <module>goodsOfEmpires</module>
         <module>weapons</module>
         <module>settlements</module>
         <module>ssp</module>
