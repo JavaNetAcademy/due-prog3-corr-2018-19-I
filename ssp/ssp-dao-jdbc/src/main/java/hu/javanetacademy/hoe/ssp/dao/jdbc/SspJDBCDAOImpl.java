@@ -8,6 +8,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -87,18 +88,67 @@ public class SspJDBCDAOImpl implements SspDAOInterface {
     }
 
     @Override
-    public Ssp modify(long pOldSspId, Ssp pNewSsp) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Ssp modify(long pSspId) {
+        try {
+            PreparedStatement ps = con.prepareStatement("UPDATE name,description,speciesid,level,damage,defense FROM ssp WHERE id=?");
+            ps.setLong(1, pSspId);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                Ssp res = new Ssp();
+                res.setName(rs.getString(1));
+                res.setDescription(rs.getString(2));
+                res.setSpeciesid(rs.getLong(3));
+                res.setLevel(rs.getInt(4));
+                res.setDamage(rs.getInt(5));
+                res.setDefense(rs.getInt(6));
+                return res;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(SspJDBCDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
     }
 
     @Override
     public List<Ssp> getForSpecies(long pSpeciesId) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        List<Ssp> result = new ArrayList<>();
+        try {
+            PreparedStatement ps = con.prepareStatement("SELECT id,name,description,speciesid,level,damage,defense FROM ssp WHERE speciesid=?");
+            ps.setLong(1, pSpeciesId);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Ssp res = new Ssp();
+                res.setId(rs.getLong(1));
+                res.setName(rs.getString(2));
+                res.setDescription(rs.getString(3));
+                res.setSpeciesid(rs.getLong(4));
+                res.setLevel(rs.getInt(5));
+                res.setDamage(rs.getInt(6));
+                res.setDefense(rs.getInt(7));
+                result.add(res);
+               }
+        } catch (SQLException ex) {
+            Logger.getLogger(SspJDBCDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return result;
     }
 
     @Override
     public boolean existByName(String pSspName, long pSpeciesId) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            PreparedStatement ps = con.prepareStatement("SELECT name=? FROM ssp WHERE name=? AND speciesid=?", Statement.RETURN_GENERATED_KEYS);
+            ps.setString(1, pSspName);
+            ps.setString(2, pSspName);
+            ps.setLong(3, pSpeciesId);
+            ResultSet rs = ps.executeQuery();
+            
+            if (rs.next()) {
+                return true;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(SspJDBCDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
     }
     
     

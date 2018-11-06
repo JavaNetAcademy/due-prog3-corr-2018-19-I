@@ -10,7 +10,7 @@ public interface SspDAOInterface {
     public Ssp create(Ssp pSsp);
     public Ssp get (long SspId);
     public Ssp delete (long SspId);
-    public Ssp modify (long pOldSspId, Ssp pNewSsp);
+    public Ssp modify (long pSspId);
     
     public List<Ssp> getForSpecies(long pSpeciesId);
     
