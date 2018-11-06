@@ -12,6 +12,7 @@
         <module>ssp-dao-model</module>
         <module>ssp-web</module>
         <module>ssp-dao-jdbc</module>
+        <module>ssp-service-object</module>
     </modules>
     <name>ssp</name>
 </project>

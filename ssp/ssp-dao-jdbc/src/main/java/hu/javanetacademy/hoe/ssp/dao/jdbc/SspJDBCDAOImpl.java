@@ -51,6 +51,29 @@ public class SspJDBCDAOImpl implements SspDAOInterface {
         return null;     
     }
 
+        @Override
+    public Ssp modify(long pSspId) {
+        try {
+            PreparedStatement ps = con.prepareStatement("UPDATE ssp set name,description,speciesid,level,damage,defense WHERE id=?");
+            ps.setLong(1, pSspId);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                Ssp res = new Ssp();
+                res.setName(rs.getString(1));
+                res.setDescription(rs.getString(2));
+                res.setSpeciesid(rs.getLong(3));
+                res.setLevel(rs.getInt(4));
+                res.setDamage(rs.getInt(5));
+                res.setDefense(rs.getInt(6));
+                return res;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(SspJDBCDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+
+    
     @Override
     public Ssp get(long pSspId) {
         try {
@@ -81,28 +104,6 @@ public class SspJDBCDAOImpl implements SspDAOInterface {
             ps.setLong(1, pSspId);
             ps.executeUpdate();
             return null;
-        } catch (SQLException ex) {
-            Logger.getLogger(SspJDBCDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return null;
-    }
-
-    @Override
-    public Ssp modify(long pSspId) {
-        try {
-            PreparedStatement ps = con.prepareStatement("UPDATE name,description,speciesid,level,damage,defense FROM ssp WHERE id=?");
-            ps.setLong(1, pSspId);
-            ResultSet rs = ps.executeQuery();
-            if (rs.next()) {
-                Ssp res = new Ssp();
-                res.setName(rs.getString(1));
-                res.setDescription(rs.getString(2));
-                res.setSpeciesid(rs.getLong(3));
-                res.setLevel(rs.getInt(4));
-                res.setDamage(rs.getInt(5));
-                res.setDefense(rs.getInt(6));
-                return res;
-            }
         } catch (SQLException ex) {
             Logger.getLogger(SspJDBCDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
