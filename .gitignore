@@ -33,3 +33,11 @@
 /armor/armor-service-object/target/
 *.iml
 .idea
+/goodsOfEmpires/goodsOfEmpires-dao-model/target/
+/goodsOfEmpires/goodsOfEmpires-dao-jdbc/target/
+/goodsOfEmpires/goodsOfEmpires-service-object/target/
+/goodsOfEmpires/goodsOfEmpires-web/target/
+/ssp/ssp-service-object/target/
+/factories/factories-dao-model/target/
+/factories/factories-dao-jdbc/target/
+/factories/factories-service-object/target/
