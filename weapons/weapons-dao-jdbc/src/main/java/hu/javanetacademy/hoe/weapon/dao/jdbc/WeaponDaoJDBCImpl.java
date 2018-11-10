@@ -59,6 +59,43 @@ public class WeaponDaoJDBCImpl implements WeaponDAOInterface {
         }
         return null;        
     }
+    
+    @Override
+    public Weapon update(long weaponId, Weapon weapon) {
+        try {
+            PreparedStatement ps =con.prepareStatement("UPDATE weapons SET name=?,description=?,price=? WHERE id=?",Statement.RETURN_GENERATED_KEYS);
+            ps.setString(1, weapon.getName());
+            ps.setString(2, weapon.getDescription());
+            ps.setInt(3, weapon.getPrice());
+            ps.setLong(4, weaponId);
+            ps.executeUpdate();
+            return weapon;
+        } catch (SQLException ex) {
+            Logger.getLogger(WeaponDaoJDBCImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+    
+    @Override
+    public Weapon get(long weaponId) {
+        try {
+            PreparedStatement ps = con.prepareStatement("SELECT id,name,description,price,userid FROM weapons WHERE id=?");
+            ps.setLong(1, weaponId);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                Weapon res = new Weapon();
+                res.setId(rs.getLong(1));
+                res.setName(rs.getString(2));
+                res.setDescription(rs.getString(3));
+                res.setPrice(rs.getInt(4));
+                res.setUserId(rs.getLong(5));
+                return res;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(WeaponDaoJDBCImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
 
     @Override
     public List<Weapon> getByUser(long pUserId) {

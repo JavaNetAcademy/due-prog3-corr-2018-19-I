@@ -20,6 +20,14 @@ public class WeaponsService {
     public Weapon create(Weapon weapon) {
         return dao.create(weapon);
     }
+    
+    public Weapon update(long weaponId, Weapon weapon) {
+        return dao.update(weaponId, weapon);
+    }
+    
+    public Weapon get(long weaponId) {
+        return dao.get(weaponId);
+    }
 
     public List<Weapon> getByUser(long pUserId) {
         return dao.getByUser(pUserId);
