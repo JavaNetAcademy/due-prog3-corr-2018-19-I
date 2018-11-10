@@ -12,5 +12,6 @@
         <module>factories-dao-model</module>
         <module>factories-dao-jdbc</module>
         <module>factories-service-object</module>
-    </modules>
+    <module>factories-web</module>
+  </modules>
 </project>

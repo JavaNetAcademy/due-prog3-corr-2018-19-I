@@ -2,17 +2,17 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-    <artifactId>hoe</artifactId>
+    <artifactId>factories</artifactId>
     <groupId>hu.javanetacademy.hoe</groupId>
     <version>1.0-SNAPSHOT</version>
   </parent>
 
-    <groupId>hu.javanetacademy.hoe</groupId>
-    <artifactId>web</artifactId>
+    <groupId>hu.javanetacademy.hoe.factories</groupId>
+    <artifactId>factories-web</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <packaging>war</packaging>
+    <packaging>jar</packaging>
 
-    <name>web</name>
+    <name>factories-web</name>
 
     <properties>
         <endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>
@@ -20,41 +20,6 @@
     </properties>
     
     <dependencies>
-        <dependency>
-            <groupId>hu.javanetacademy.hoe.user</groupId>
-            <artifactId>user-web</artifactId>
-            <version>1.0-SNAPSHOT</version>
-        </dependency>
-        <dependency>
-            <groupId>hu.javanetacademy.hoe.hero</groupId>
-            <artifactId>hero-web</artifactId>
-            <version>1.0-SNAPSHOT</version>
-        </dependency>
-        <dependency>
-            <groupId>hu.javanetacademy.hoe.pets</groupId>
-            <artifactId>pets-web</artifactId>
-            <version>1.0-SNAPSHOT</version>
-        </dependency>
-        <dependency>
-            <groupId>hu.javanetacademy.hoe.empires</groupId>
-            <artifactId>empires-web</artifactId>
-            <version>1.0-SNAPSHOT</version>
-        </dependency>
-        <dependency>
-            <groupId>hu.javanetacademy.hoe.weapons</groupId>
-            <artifactId>weapons-web</artifactId>
-            <version>1.0-SNAPSHOT</version>
-        </dependency>
-        <dependency>
-            <groupId>hu.javanetacademy.hoe.settlements</groupId>
-            <artifactId>settlements-web</artifactId>
-            <version>1.0-SNAPSHOT</version>
-        </dependency>
-        <dependency>
-            <groupId>hu.javanetacademy.hoe.factories</groupId>
-            <artifactId>factories-web</artifactId>
-            <version>1.0-SNAPSHOT</version>
-        </dependency>
         <dependency>
             <groupId>javax</groupId>
             <artifactId>javaee-web-api</artifactId>
