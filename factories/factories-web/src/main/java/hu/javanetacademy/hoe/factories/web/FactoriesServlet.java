@@ -1,7 +1,11 @@
 package hu.javanetacademy.hoe.factories.web;
 
+import hu.javanetacademy.hoe.empires.dao.model.Empires;
+import hu.javanetacademy.hoe.empires.service.object.EmpiresService;
+import hu.javanetacademy.hoe.user.dao.model.User;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -35,9 +39,15 @@ public class FactoriesServlet extends HttpServlet {
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        request.getRequestDispatcher("/factories/index.jsp").forward(request, response);
+            throws ServletException, IOException {                                                                     
+        response.setContentType("text/html;charset=UTF-8");                                                                                                               
+        EmpiresService empireService = new EmpiresService();                                                           
+        User user = (User) request.getSession().getAttribute("user");                                                  
+        if (user != null) {                                                                                            
+            request.setAttribute("empiresList", empireService.getByUser(user.getId()));                                
+            ArrayList<Empires> empires = (ArrayList<Empires>) request.getAttribute("empiresList");                                                       
+            getServletContext().getRequestDispatcher("/factories/index.jsp").include(request, response);               
+        }                                   
     }
 
     /**
