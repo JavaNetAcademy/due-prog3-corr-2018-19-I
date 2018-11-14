@@ -18,15 +18,15 @@
                 <legend>Gyár létrehozás</legend>                                                                       
                 <div>                                                                                                  
                     <label>Név:</label>                                                                                
-                    <input type="text" name="fname">                                                                   
+                    <input type="text" name="pname">                                                                   
                 </div>
                 <div>                                                                                                  
                     <label>Leírás:</label>                                                                             
-                    <input type="text" name="fdesc">                                                                   
+                    <input type="text" name="pdesc">                                                                   
                 </div>                                                                                                 
                 <div>                                                                                                  
                     <label>Birodalom szint:</label>                                                                    
-                    <select name="empires">                                                                            
+                    <select name="pemp">                                                                            
                         <c:forEach items="${empiresList}" var="x">                                                     
                             <option value="${x.id}"><c:out value="${x.level}" /></option>                              
                         </c:forEach>                                                                                   

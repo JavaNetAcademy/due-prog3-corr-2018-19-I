@@ -3,7 +3,7 @@ package hu.javanetacademy.hoe.factories.dao.model;
 /**
  * @author jrajmund
  */
-public class Factories {
+public class Factories extends BaseDataModel{
     private long empireid;
 
     public Factories() {

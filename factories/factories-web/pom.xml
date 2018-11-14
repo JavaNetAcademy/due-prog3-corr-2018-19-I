@@ -33,6 +33,18 @@
             <type>jar</type>
         </dependency>
         <dependency>
+            <groupId>hu.javanetacademy.hoe.factories</groupId>
+            <artifactId>factories-dao-model</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <type>jar</type>
+        </dependency>
+        <dependency>
+            <groupId>hu.javanetacademy.hoe.factories</groupId>
+            <artifactId>factories-service-object</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <type>jar</type>
+        </dependency>
+        <dependency>
             <groupId>javax</groupId>
             <artifactId>javaee-web-api</artifactId>
             <version>7.0</version>

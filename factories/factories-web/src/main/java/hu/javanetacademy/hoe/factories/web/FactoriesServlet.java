@@ -2,6 +2,8 @@ package hu.javanetacademy.hoe.factories.web;
 
 import hu.javanetacademy.hoe.empires.dao.model.Empires;
 import hu.javanetacademy.hoe.empires.service.object.EmpiresService;
+import hu.javanetacademy.hoe.factories.dao.model.Factories;
+import hu.javanetacademy.hoe.factories.service.object.FactoriesService;
 import hu.javanetacademy.hoe.user.dao.model.User;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -27,7 +29,6 @@ public class FactoriesServlet extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
@@ -39,15 +40,15 @@ public class FactoriesServlet extends HttpServlet {
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {                                                                     
-        response.setContentType("text/html;charset=UTF-8");                                                                                                               
-        EmpiresService empireService = new EmpiresService();                                                           
-        User user = (User) request.getSession().getAttribute("user");                                                  
-        if (user != null) {                                                                                            
-            request.setAttribute("empiresList", empireService.getByUser(user.getId()));                                
-            ArrayList<Empires> empires = (ArrayList<Empires>) request.getAttribute("empiresList");                                                       
-            getServletContext().getRequestDispatcher("/factories/index.jsp").include(request, response);               
-        }                                   
+            throws ServletException, IOException {        
+        response.setContentType("text/html;charset=UTF-8");        
+        EmpiresService empireService = new EmpiresService();        
+        User user = (User) request.getSession().getAttribute("user");        
+        if (user != null) {            
+            request.setAttribute("empiresList", empireService.getByUser(user.getId()));            
+            ArrayList<Empires> empires = (ArrayList<Empires>) request.getAttribute("empiresList");            
+            getServletContext().getRequestDispatcher("/factories/index.jsp").include(request, response);            
+        }        
     }
 
     /**
@@ -61,6 +62,13 @@ public class FactoriesServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        Factories newFactory = new Factories();
+        newFactory.setName(request.getParameter("pname"));
+        newFactory.setDescription(request.getParameter("pdesc"));
+        newFactory.setEmpireid(Long.parseLong(request.getParameter("pemp")));
+        FactoriesService fs = new FactoriesService();
+        fs.create(newFactory);
+        doGet(request, response);
     }
 
     /**
