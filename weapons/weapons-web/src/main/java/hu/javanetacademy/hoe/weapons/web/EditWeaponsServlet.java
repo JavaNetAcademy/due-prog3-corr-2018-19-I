@@ -56,15 +56,18 @@ public class EditWeaponsServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        User user = (User) request.getSession().getAttribute("user");
-        Weapon weapon = new Weapon();
+        long weaponId = Long.parseLong(request.getParameter("id"));
+        String origName = request.getParameter("originalName");
+        WeaponsService ws = new WeaponsService();
+        Weapon weapon = ws.get(weaponId);
+        
         weapon.setName(request.getParameter("name"));
         weapon.setDescription(request.getParameter("description"));
         weapon.setPrice(Integer.parseInt(request.getParameter("price")));
-        weapon.setUserId(user.getId());
-        WeaponsService ws = new WeaponsService();
-        ws.create(weapon);
-        doGet(request, response);
+        
+        ws.update(weaponId, weapon);
+
+        response.sendRedirect("/weapons");
         
     }
 

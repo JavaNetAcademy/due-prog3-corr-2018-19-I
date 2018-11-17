@@ -7,7 +7,7 @@
     </head>
     <body>
         <h1>Fegyver modositasa (${weapon.name})</h1>
-        <form method="post" action="${pageContext.request.contextPath}/weapons/create">
+        <form method="post" action="${pageContext.request.contextPath}/weapons/edit">
             <div>
                 <span>Fegyver neve</span>
                 <input type="text" name="name" value="${weapon.name}" />
@@ -20,6 +20,10 @@
                 <span>Fegyver ara</span>
                 <input type="number" name="price" value="${weapon.price}" />
             </div>
+            
+            <input type="hidden" value="${weapon.id}" name="id" />
+            <input type="hidden" value="${weapon.name}" name="originalName" />
+            
             <input type="submit" value="Mentes">
         </form>
     </body>
