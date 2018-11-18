@@ -15,7 +15,7 @@ import hu.javanetacademy.hoe.user.dao.model.User;
 /**
  * @author krisztian
  */
-@WebServlet(name = "HeroServlet", urlPatterns = { "/hero/hero" })
+@WebServlet(name = "HeroServlet", urlPatterns = { "/hero" })
 public class HeroServlet extends HttpServlet {
 
 	// <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the
@@ -34,9 +34,9 @@ public class HeroServlet extends HttpServlet {
 		response.setContentType("text/html;charset=UTF-8");
 		HeroService hs = new HeroService();
 		User user = (User) request.getSession().getAttribute("user");
-		request.setAttribute("heroes", hs.getHeroByUser(user.getId()));
+		request.setAttribute("heroList", hs.getHeroByUser(user.getId()));
 
-		getServletContext().getRequestDispatcher("/hero/list.jsp").include(request, response);
+		getServletContext().getRequestDispatcher("/hero/index.jsp").include(request, response);
 	}
 
 	/**
@@ -53,7 +53,7 @@ public class HeroServlet extends HttpServlet {
 		User user = (User) request.getSession().getAttribute("user");
 		Hero newHero = new Hero();
 		newHero.setName(request.getParameter("pname"));
-		newHero.setDescription(request.getParameter("pdesc"));
+		newHero.setDescription(request.getParameter("pdescription"));
 		newHero.setUserid(user.getId());
 		HeroService hs = new HeroService();
 		hs.create(newHero);

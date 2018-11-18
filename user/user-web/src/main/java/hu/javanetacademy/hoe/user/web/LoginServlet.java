@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author krisztian
  */
-@WebServlet(name = "LoginServlet", urlPatterns = {"/user/login"})
+@WebServlet(name = "LoginServlet", urlPatterns = {"/login"})
 public class LoginServlet extends HttpServlet {
 
 
@@ -39,7 +39,7 @@ public class LoginServlet extends HttpServlet {
         UserServiceObjectImpl service = new UserServiceObjectImpl();
         User user=service.login(name, password);
         request.getSession().setAttribute("user", user); 
-        getServletContext().getRequestDispatcher("/hero/add.jsp").include(request, response);
+        getServletContext().getRequestDispatcher("/user/menu.jsp").include(request, response);
     }
 
     /**

@@ -12,6 +12,7 @@
         <module>web</module>
         <module>species</module>
         <module>pets</module>
+        <module>job</module>
         <module>armor</module>
         <!-- <module>specfajkepessegek</module> -->
         <module>empires</module>

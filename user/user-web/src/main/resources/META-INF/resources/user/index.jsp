@@ -5,7 +5,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     </head>
     <body>
-        <form action="/user/reg" method="post">
+        <form action="/reg" method="post">
             <fieldset>
                 <legend>Regisztráció</legend>
                 <div>
@@ -18,7 +18,7 @@
                 </div>
                 <div><input type="submit"></div>            
         </form>
-        <form action="/user/login" method="post">
+        <form action="/login" method="post">
             <fieldset>
                 <legend>Bejelentkezés</legend>
                 <div>

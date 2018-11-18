@@ -52,13 +52,31 @@ public class HeroJDBCDAOImpl implements HeroDAOInterface{
     }
 
     @Override
-    public Hero modify(long pOldHeroId, Hero pNewHero) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Hero modify(long pHeroId, Hero pHero) {
+        try {
+            PreparedStatement ps = con.prepareStatement("UPDATE hero SET name=?,description=? WHERE id=?", Statement.RETURN_GENERATED_KEYS);
+            ps.setString(1, pHero.getName());
+            ps.setString(2, pHero.getDescription());
+            ps.setLong(3, pHeroId);
+            ps.executeUpdate();
+            return pHero;
+        } catch (SQLException ex) {
+            Logger.getLogger(HeroJDBCDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
     }
 
     @Override
     public Hero delete(long pHeroId) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            PreparedStatement ps = con.prepareStatement("DELETE FROM hero WHERE id=?", Statement.RETURN_GENERATED_KEYS);
+            ps.setLong(1, pHeroId);
+            ps.executeUpdate();
+            return null;
+        } catch (SQLException ex) {
+            Logger.getLogger(HeroJDBCDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
     }
 
     @Override

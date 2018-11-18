@@ -28,4 +28,12 @@ public class HeroService {
    public Hero get(long heroid) {
        return dao.get(heroid);
    }
+public Hero modify(long pHeroId, Hero pHero) {
+     
+            return dao.modify(pHeroId, pHero);
+       
+    }
+     public Hero delete(long pHeroId) {
+        return dao.delete(pHeroId);
+    }
 }
