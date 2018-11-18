@@ -16,10 +16,28 @@ sudo apt-get update
 sudo apt-get install oracle-java8-installer
 ```
 
+* Debian 9.x
+
+```
+sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 93C4A3FD7BB9C367 &&
+sudo touch /etc/apt/sources.list.d/webupd8team.list &&
+echo "deb http://ppa.launchpad.net/webupd8team/java/ubuntu trusty main" | sudo tee /etc/apt/sources.list.d/webupd8team.list &&
+echo "deb-src http://ppa.launchpad.net/webupd8team/java/ubuntu trusty main" | sudo tee -a /etc/apt/sources.list.d/webupd8team.list
+
+sudo apt update
+sudo apt install oracle-java8-installer
+
+sudo update-alternatives --config java
+```
+
 ### Netbeans 8.2
 
 Mindenképp a netbeans.org oldalon lévőt szedjétek le, ami az App Store-ban van pl. Ubuntu-n, az nem működik random hiba miatt. Sima next->next telepítés, a legelső oldalon 'Customize' és az Apache Tomcat-et is pipáljátok be, plusz figyeljétek, hogy a JDK elérési út helyes-e.
 Linux-on még arra figyeljetek, hogy ne 'sudo'-val telepítsétek, mert gondokat okozhat futtatásnál a jogosultságok miatt.
+
+* Debian 9.x
+
+[Letöltés](https://netbeans.org/downloads/) Platform: OS Independent Zip
 
 ### MySQL
 
@@ -31,6 +49,20 @@ Linux-on még arra figyeljetek, hogy ne 'sudo'-val telepítsétek, mert gondokat
 
 ```
 sudo apt-get install mysql-server
+```
+
+*  Debian 9.x
+
+```
+wget --directory-prefix=/tmp/ https://dev.mysql.com/get/mysql-apt-config_0.8.10-1_all.deb
+sudo dpkg -i /tmp/mysql-apt-config_0.8.10-1_all.deb
+rm -f /tmp/mysql-apt-config_0.8.10-1_all.deb
+
+sudo apt update
+sudo apt install mysql-community-server
+sudo apt install mysql-server
+
+sudo systemctl status mysql
 ```
 
 Ezen felül a Workbench hozzá megtalálható az App Store-ban és az működik. Annyi extra van még ezen felül, hogy fel kell venni kézzel a user-eteket (és a 'hoe' user-t) a MySQL user táblájába. Erről találtok számtalan leírást a neten.

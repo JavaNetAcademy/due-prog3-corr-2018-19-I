@@ -43,3 +43,6 @@
 /factories/factories-service-object/target/
 /factories/factories-web/target/
 /job/job-model/target/
+/job/job-jdbc/target/
+/job/job-service/target/
+/job/job-web/target/
