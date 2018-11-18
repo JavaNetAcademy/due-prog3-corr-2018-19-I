@@ -18,8 +18,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Richard
  */
-@WebServlet(name = "EditWeaponsServlet", urlPatterns = {"/weapons/edit"})
-public class EditWeaponsServlet extends HttpServlet {
+@WebServlet(name = "DeleteWeaponsServlet", urlPatterns = {"/weapons/delete"})
+public class DeleteWeaponsServlet extends HttpServlet {
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -41,7 +41,7 @@ public class EditWeaponsServlet extends HttpServlet {
         Weapon weapon = weaponService.get(Long.parseLong(request.getParameter("id")));
         if (user != null) {
             request.setAttribute("weapon", weapon);
-            getServletContext().getRequestDispatcher("/weapons/edit.jsp").include(request, response);
+            getServletContext().getRequestDispatcher("/weapons/delete.jsp").include(request, response);
         }
     }
 

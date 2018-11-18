@@ -35,14 +35,12 @@ public class WeaponsServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         
         WeaponsService weaponService = new WeaponsService();
-        HeroService heroService = new HeroService();
         
         User user = (User)request.getSession().getAttribute("user");
         if (user != null) {
-            request.setAttribute("heroList", heroService.getHeroByUser(user.getId()));
+            request.setAttribute("weapons", weaponService.getByUser(user.getId()));
         }
 
-        request.setAttribute("weapons", weaponService.getByUser(user.getId()));
         getServletContext().getRequestDispatcher("/weapons/index.jsp").include(request, response);
     }
 
