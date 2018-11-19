@@ -90,6 +90,17 @@ Van a főkönyvtárban egy 'SQLScripts' nevű mappa, amiben a táblalétrehozás
 * 'hoe' projektre Clean and Build ha bármit is változtattok
 * A 'web' projektet tudjátok Run-olni vagy Debug-olni
 
+## Design és menü
+
+A design-hoz hozzácsaptam a főprojekthez a jquery-t és a bootstrap 4-es verziót. A dokumentációt (html kódrészletek, amik tartalmát kell csak kb átírni) itt találjátok hozzá, illetve a menüre és a Pets modul jsp-ire már ráhúztam:
+[Bootstrap](https://getbootstrap.com/docs/4.0/components/)
+
+A menüt jelenleg a következő sorral tudjátok hozzáadni az oldalaitokhoz (lehet kell hozzá dependency-ként a users-web a saját XY-web-etekhez, de nem tuti):
+
+```
+<jsp:include page="/user/menu.jsp"></jsp:include>
+```
+
 ## Discord
 
 Ha bármi kérdés van, elérhetőek vagyunk Discord-on, ha kapok e-mail címet vagy valami más elérést, akkor tudok küldeni invite link-et (Heyzel itt Github-on).
