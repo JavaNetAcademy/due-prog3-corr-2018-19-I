@@ -11,6 +11,11 @@ import javax.servlet.http.HttpServletResponse;
 import hu.javanetacademy.hoe.hero.dao.model.Hero;
 import hu.javanetacademy.hoe.hero.service.object.HeroService;
 import hu.javanetacademy.hoe.user.dao.model.User;
+import java.util.List;
+
+import hu.javanetacademy.hoe.job.model.Job;
+import hu.javanetacademy.hoe.job.model.JobxHero;
+import hu.javanetacademy.hoe.job.service.JobService;
 
 /**
  * @author krisztian
@@ -32,10 +37,14 @@ public class HeroServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		response.setContentType("text/html;charset=UTF-8");
-		HeroService hs = new HeroService();
-		User user = (User) request.getSession().getAttribute("user");
+		
+               
+		JobService jobservice = new JobService();
+		request.setAttribute("jobList", jobservice.getJobList());
+		
+                 HeroService hs = new HeroService();
+                User user = (User) request.getSession().getAttribute("user");
 		request.setAttribute("heroList", hs.getHeroByUser(user.getId()));
-
 		getServletContext().getRequestDispatcher("/hero/index.jsp").include(request, response);
 	}
 
@@ -52,11 +61,16 @@ public class HeroServlet extends HttpServlet {
 			throws ServletException, IOException {
 		User user = (User) request.getSession().getAttribute("user");
 		Hero newHero = new Hero();
-		newHero.setName(request.getParameter("pname"));
+             
+		JobxHero newJobxHero = new JobxHero();
+		newJobxHero.setJobId(Long.parseLong(request.getParameter("job")));
+                
+                newHero.setName(request.getParameter("pname"));
 		newHero.setDescription(request.getParameter("pdescription"));
+		
 		newHero.setUserid(user.getId());
 		HeroService hs = new HeroService();
-		hs.create(newHero);
+		hs.create(newHero, newJobxHero);
 		doGet(request, response);
 	}
 

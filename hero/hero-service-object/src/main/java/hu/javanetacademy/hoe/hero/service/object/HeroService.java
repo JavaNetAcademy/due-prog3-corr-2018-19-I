@@ -4,6 +4,8 @@ import hu.javanetacademy.hoe.base.util.CustomException;
 import hu.javanetacademy.hoe.hero.dao.file.HeroJDBCDAOImpl;
 import hu.javanetacademy.hoe.hero.dao.model.Hero;
 import hu.javanetacademy.hoe.hero.dao.model.HeroDAOInterface;
+import hu.javanetacademy.hoe.job.model.JobxHero;
+import hu.javanetacademy.hoe.job.service.JobService;
 
 import java.util.List;
 
@@ -13,10 +15,17 @@ import java.util.List;
 public class HeroService {
    private HeroDAOInterface dao= new HeroJDBCDAOImpl();
    
-   public Hero create(Hero pNewHero){
+   public Hero create(Hero pNewHero, JobxHero pJobxHero){
        Hero avb = dao.getByNameFromUser(pNewHero.getName(), pNewHero.getUserid());
-       if(avb==null)
-        return dao.create(pNewHero);
+       
+       if(avb==null){
+           dao.create(pNewHero);
+           long heroid = pNewHero.getId();
+            pJobxHero.setHeroId(heroid);
+            JobService jobdao = new JobService();
+            jobdao.createconnector(pJobxHero);
+            return pNewHero;
+   }
        else 
            throw new CustomException();
    }

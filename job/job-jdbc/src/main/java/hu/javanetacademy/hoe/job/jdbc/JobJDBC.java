@@ -2,7 +2,6 @@ package hu.javanetacademy.hoe.job.jdbc;
 
 import hu.javanetacademy.hoe.job.model.Job;
 import hu.javanetacademy.hoe.job.model.JobxHero;
-import hu.javanetacademy.hoe.job.model.JobInterface;
 import hu.javanetacademy.hoe.hero.dao.model.Hero;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -18,7 +17,7 @@ import java.util.logging.Logger;
 /**
  * @author gotriang
  */
-public class JobJDBC implements JobInterface {
+public class JobJDBC {
  
     private Connection con;
 
@@ -31,7 +30,7 @@ public class JobJDBC implements JobInterface {
         }
     }
 
-    @Override
+    
     public Job create(Job pJob) {
         try {
             PreparedStatement ps = con.prepareStatement("INSERT INTO job (name,description) VALUES(?,?)", Statement.RETURN_GENERATED_KEYS);
@@ -49,7 +48,7 @@ public class JobJDBC implements JobInterface {
         return null;
     }
 
-    @Override
+    
     public Job modify(long pJobId, Job pJob, String originalName) {
         try {
             PreparedStatement ps = con.prepareStatement("UPDATE job SET name=?,description=? WHERE id=?", Statement.RETURN_GENERATED_KEYS);
@@ -64,7 +63,7 @@ public class JobJDBC implements JobInterface {
         return null;
     }
 
-    @Override
+    
     public Job delete(long pJobId) {
         try {
             PreparedStatement ps = con.prepareStatement("DELETE FROM job WHERE id=?", Statement.RETURN_GENERATED_KEYS);
@@ -77,7 +76,7 @@ public class JobJDBC implements JobInterface {
         return null;
     }
 
-    @Override
+    
     public Job get(long pJobId) {
         try {
             PreparedStatement ps = con.prepareStatement("SELECT id,name,description FROM job WHERE id=?");
@@ -96,7 +95,7 @@ public class JobJDBC implements JobInterface {
         return null;
     }
 
-    @Override
+    
     public List<Hero> getHeroList(long pJobId) {
         List<Hero> resAll = new ArrayList<>();
         try {
@@ -113,7 +112,7 @@ public class JobJDBC implements JobInterface {
         }
         return resAll;
     }
-@Override
+
     public List<Job> getJobList() {
       List<Job> resAll = new ArrayList<>();
         try {
@@ -132,7 +131,7 @@ public class JobJDBC implements JobInterface {
         return resAll;
     }
     
-    @Override
+    
     public boolean existsByName(String pJobName) {
         try {
             PreparedStatement ps = con.prepareStatement("SELECT name=? FROM job WHERE name=?", Statement.RETURN_GENERATED_KEYS);
@@ -149,23 +148,40 @@ public class JobJDBC implements JobInterface {
         return false;
     }
 
-    @Override
+    
     public JobxHero createconnector(JobxHero pJobxHero) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+     try {
+            PreparedStatement ps = con.prepareStatement("INSERT INTO jobxhero (heroid,jobid,level,xp) VALUES(?,?,1,1)", Statement.RETURN_GENERATED_KEYS);
+            ps.setLong(1, pJobxHero.getHeroId());
+            ps.setLong(2, pJobxHero.getJobId());
+            ps.executeUpdate();
+            ResultSet rs = ps.getGeneratedKeys();
+            if (rs.next()) {
+                pJobxHero.setId(rs.getLong(1));
+                return pJobxHero;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(JobJDBC.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
     }
 
-    @Override
+    
     public JobxHero modifyconnector(long pJobxHeroId, JobxHero pJobxHero) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    @Override
+    
     public JobxHero deleteconnector(long pJobxHeroId) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    @Override
-    public JobxHero getconnector(long pHeroId) {
+    
+    public JobxHero getconnector(long pJobxHeroId) {
+            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    public boolean existsByHeroId(String pHeroId) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

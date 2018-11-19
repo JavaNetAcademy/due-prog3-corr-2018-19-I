@@ -20,6 +20,11 @@
             <artifactId>base-util</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
+        <dependency>
+            <groupId>hu.javanetacademy.hoe.job</groupId>
+            <artifactId>job-service</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
     </dependencies>
     <properties>
         <maven.compiler.source>1.8</maven.compiler.source>

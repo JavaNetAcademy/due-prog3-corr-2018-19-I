@@ -54,7 +54,14 @@
                     <input name="pdescription">
                 </div>
                 <P>
-
+                <div>
+                    <label>Hero munkaköre</label>
+                                <select name="job">
+                                    <c:forEach items="${jobList}" var="job">
+                                        <option value="${job.id}"><c:out value="${job.name}" /></option>
+                                    </c:forEach>
+                                </select>
+                </div>
                 <div>
                     <input type="submit" value="Létrehoz">
                 </div> 

@@ -33,19 +33,19 @@ public class JobxHero  {
         this.id = id;
     }
 
-    public long getHeroid() {
+    public long getHeroId() {
         return heroid;
     }
 
-    public void setHeroid(long heroid) {
+    public void setHeroId(long heroid) {
         this.heroid = heroid;
     }
 
-    public long getJobid() {
+    public long getJobId() {
         return jobid;
     }
 
-    public void setJobid(long jobid) {
+    public void setJobId(long jobid) {
         this.jobid = jobid;
     }
 
@@ -57,11 +57,11 @@ public class JobxHero  {
         this.level = level;
     }
 
-    public int getXp() {
+    public int getXP() {
         return xp;
     }
 
-    public void setXp(int xp) {
+    public void setXP(int xp) {
         this.xp = xp;
     }
 
