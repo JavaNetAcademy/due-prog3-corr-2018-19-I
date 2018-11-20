@@ -43,9 +43,9 @@ public class FactoriesServlet extends HttpServlet {
             throws ServletException, IOException {        
         response.setContentType("text/html;charset=UTF-8");        
         EmpiresService empireService = new EmpiresService();        
-        User user = (User) request.getSession().getAttribute("user");        
-        if (user != null) {            
-            request.setAttribute("empiresList", empireService.getByUser(user.getId()));            
+        User loggedInUser = (User) request.getSession().getAttribute("user");        
+        if (loggedInUser != null) {            
+            request.setAttribute("empiresList", empireService.getByUser(loggedInUser.getId()));            
             ArrayList<Empires> empires = (ArrayList<Empires>) request.getAttribute("empiresList");            
             getServletContext().getRequestDispatcher("/factories/index.jsp").include(request, response);            
         }        
@@ -66,6 +66,8 @@ public class FactoriesServlet extends HttpServlet {
         newFactory.setName(request.getParameter("pname"));
         newFactory.setDescription(request.getParameter("pdesc"));
         newFactory.setEmpireid(Long.parseLong(request.getParameter("pemp")));
+        User loggedInUser = (User) request.getSession().getAttribute("user");
+        newFactory.setUserid(loggedInUser.getId());
         FactoriesService fs = new FactoriesService();
         fs.create(newFactory);
         doGet(request, response);

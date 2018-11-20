@@ -32,10 +32,11 @@ public class FactoriesDaoJDBCImpl implements FactoriesDao {
     @Override
     public Factories create(Factories pFactory) {
         try {
-            PreparedStatement ps = con.prepareStatement("INSERT INTO factories (name, description, empireid) VALUES (?,?,?)", Statement.RETURN_GENERATED_KEYS);
+            PreparedStatement ps = con.prepareStatement("INSERT INTO factories (name, description, userid, empireid) VALUES (?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, pFactory.getName());
             ps.setString(2, pFactory.getDescription());
-            ps.setLong(3, pFactory.getEmpireid());
+            ps.setLong(3, pFactory.getUserid());
+            ps.setLong(4, pFactory.getEmpireid());
             ps.executeUpdate();
             ResultSet rs = ps.getGeneratedKeys();
             if (rs.next()) {
