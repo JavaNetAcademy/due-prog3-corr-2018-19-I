@@ -1,14 +1,9 @@
 package hu.javanetacademy.hoe.factories.web;
 
-import hu.javanetacademy.hoe.empires.dao.model.Empires;
-import hu.javanetacademy.hoe.empires.service.object.EmpiresService;
+import hu.javanetacademy.hoe.base.util.CustomException;
 import hu.javanetacademy.hoe.factories.dao.model.Factories;
 import hu.javanetacademy.hoe.factories.service.object.FactoriesService;
-import hu.javanetacademy.hoe.user.dao.model.User;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -18,8 +13,8 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * @author jrajmund
  */
-@WebServlet(name = "FactoriesServlet", urlPatterns = {"/factories"})
-public class FactoriesServlet extends HttpServlet {
+@WebServlet(name = "FactoriesEditServlet", urlPatterns = {"/factoriesedit"})
+public class FactoriesEditServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -42,20 +37,7 @@ public class FactoriesServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        EmpiresService empireService = new EmpiresService();
-        FactoriesService fs = new FactoriesService();
-        User loggedInUser = (User) request.getSession().getAttribute("user");
-        if (loggedInUser != null) {
-            request.setAttribute("empiresList", empireService.getByUser(loggedInUser.getId()));
-        }
-        ArrayList<Empires> empires = (ArrayList<Empires>) request.getAttribute("empiresList");
-        if (empires == null || empires.isEmpty()) {
-            getServletContext().getRequestDispatcher("/factories/errornoempire.jsp").include(request, response);
-        } else {
-            request.setAttribute("factories", fs.getByUser(loggedInUser.getId()));
-            getServletContext().getRequestDispatcher("/factories/index.jsp").include(request, response);
-        }
+
     }
 
     /**
@@ -69,16 +51,30 @@ public class FactoriesServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        Factories newFactory = new Factories();
-        newFactory.setName(request.getParameter("pname"));
-        newFactory.setDescription(request.getParameter("pdesc"));
-        newFactory.setEmpireid(Long.parseLong(request.getParameter("pemp")));
-        User loggedInUser = (User) request.getSession().getAttribute("user");
-        newFactory.setUserid(loggedInUser.getId());
         FactoriesService fs = new FactoriesService();
-        fs.create(newFactory);
-        doGet(request, response);
-        response.sendRedirect("/factories");
+        long selected = Long.parseLong(request.getParameter("selectedFactory"));
+        if (request.getParameter("delete") != null) {
+            fs.delete(selected);
+            response.sendRedirect("/factories");
+        }
+        if (request.getParameter("modify") != null) {
+            try {
+                if (request.getParameter("newfname") != null || request.getParameter("newfdesc") != null) {
+                    Factories factory = fs.get(selected);
+                    if (!request.getParameter("newfname").equals("")) {
+                        factory.setName(request.getParameter("newfname"));
+                    }
+                    if (!request.getParameter("newfdesc").equals("")) {
+                        factory.setDescription(request.getParameter("newfdesc"));
+                    }
+                    fs.modify(selected, factory);
+                    response.sendRedirect("/factories");
+                }
+            } catch (CustomException ex) {
+                request.setAttribute("errormessage", ex.getMessage());
+                request.getRequestDispatcher("").forward(request, response);
+            }
+        }
     }
 
     /**
@@ -92,3 +88,4 @@ public class FactoriesServlet extends HttpServlet {
     }// </editor-fold>
 
 }
+

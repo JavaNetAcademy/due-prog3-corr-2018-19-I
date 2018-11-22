@@ -8,6 +8,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -63,5 +64,91 @@ public class FactoriesDaoJDBCImpl implements FactoriesDao {
             Logger.getLogger(FactoriesDaoJDBCImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
         return false;
+    }
+
+    @Override
+    public List<Factories> getByUser(long pUserId) {
+        List<Factories> lf = new ArrayList<>();
+        try {
+            PreparedStatement ps = con.prepareStatement("SELECT id, name, description, userid, empireid FROM factories WHERE userid=? ORDER BY id");
+            ps.setLong(1, pUserId);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Factories factories = new Factories();
+                factories.setId(rs.getLong(1));
+                factories.setName(rs.getString(2));
+                factories.setDescription(rs.getString(3));
+                factories.setUserid(rs.getLong(4));
+                factories.setEmpireid(rs.getLong(5));
+                lf.add(factories);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(FactoriesDaoJDBCImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return lf;
+    }
+
+    @Override
+    public Factories delete(long pFactoryId) {
+        try {
+            PreparedStatement ps = con.prepareStatement("DELETE FROM factories WHERE id=?");
+            ps.setLong(1, pFactoryId);
+            ps.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(FactoriesDaoJDBCImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+
+    @Override
+    public Factories modify(long pOldFactoryId, Factories pNewFactory) {
+        try {
+            PreparedStatement ps = con.prepareStatement("UPDATE factories SET name=?, description=? WHERE id=?");
+            ps.setString(1, pNewFactory.getName());
+            ps.setString(2, pNewFactory.getDescription());
+            ps.setLong(3, pOldFactoryId);
+            ps.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(FactoriesDaoJDBCImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+
+    @Override
+    public boolean existsByNameDescId(Factories pFactory) {
+        try {
+            PreparedStatement ps = con.prepareStatement("SELECT id, name, description FROM factories WHERE id=? AND name=? AND description=?");
+            ps.setLong(1, pFactory.getId());
+            ps.setString(2, pFactory.getName());
+            ps.setString(3, pFactory.getDescription());
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                return true;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(FactoriesDaoJDBCImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+    }
+
+    @Override
+    public Factories get(long pFactoryId) {
+        try {
+            PreparedStatement ps = con.prepareStatement("SELECT id, name, description, userid, empireid FROM factories WHERE id=?");
+            ps.setLong(1, pFactoryId);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                Factories factory = new Factories();
+                factory.setId(rs.getLong(1));
+                factory.setName(rs.getString(2));
+                factory.setDescription(rs.getString(3));
+                factory.setUserid(rs.getLong(4));
+                factory.setEmpireid(rs.getLong(5));
+                return factory;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(FactoriesDaoJDBCImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
     }
 }
