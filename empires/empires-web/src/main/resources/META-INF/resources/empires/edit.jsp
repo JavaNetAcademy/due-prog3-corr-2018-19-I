@@ -6,48 +6,54 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     </head>
     <body>
-        <form action="edit" method="post" style="float:left;">
-            <fieldset>
-                <legend>Birodalom ${empires.name} Szerkesztés</legend>
-                <table>
-                    <thead>
-                        <tr>
-                            <th></th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td><label>Név</label></td>
-                            <td><input type="text" value="${empires.name}" name="pname" /></td>
-                        </tr>
-                        <tr>
-                            <td><label>Leírás</label></td>
-                            <td><input type="text" value="${empires.description}" name="pdescription" /></td>
-                        </tr>  
-                        <tr>
-                            <td><label>User</label></td>
-                            <td><span>${empires.userid}</span></td>
-                        </tr>
-                        <tr>
-                            <td><label>Szint</label></td>
-                            <td><span>${empires.level}</span></td>
-                        </tr>
-                        <tr>
-                            <td><label>Vagyon</label></td>
-                            <td><span>${empires.property}</span></td>
-                        </tr>
-                    </tbody>
-                </table>
-                <input type="hidden" value="${empires.id}" name="empiresid" />
+        <jsp:include page="/user/menu.jsp"></jsp:include>
 
-                <div>
-                    <input type="submit" value="Mentés">
-                    <a href="/empires">Vissza</a>
+            <div class="container"> 
+                <div class="w-75 p-3" style="background-color: #eee;">
+                    <form action="edit" method="post">
+                        <fieldset>
+                            <legend>Birodalom ${empires.name} Szerkesztés</legend>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><label>Név</label></td>
+                                    <td><input type="text" value="${empires.name}" name="pname" class="form-control"/></td>
+                                </tr>
+                                <tr>
+                                    <td><label>Leírás</label></td>
+                                    <td><input type="text" value="${empires.description}" name="pdescription" class="form-control" /></td>
+                                </tr>  
+                                <tr>
+                                    <td><label>User</label></td>
+                                    <td><span>${empires.userid}</span></td>
+                                </tr>
+                                <tr>
+                                    <td><label>Szint</label></td>
+                                    <td><span>${empires.level}</span></td>
+                                </tr>
+                                <tr>
+                                    <td><label>Vagyon</label></td>
+                                    <td><span>${empires.property}</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <input type="hidden" value="${empires.id}" name="empiresid" />
 
-                </div>  
+                        <div>
+                            <input type="submit" value="Mentés" class="btn btn-primary">
+                            <a href="/pets" class="btn btn-light">Vissza</a>
 
-            </fieldset>
-        </form>         
+                        </div>  
+
+                    </fieldset>
+                </form>
+            </div>
+        </div>
     </body>
 </html>

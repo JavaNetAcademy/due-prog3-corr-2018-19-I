@@ -10,6 +10,8 @@ import hu.javanetacademy.hoe.empires.service.object.EmpiresService;
 import hu.javanetacademy.hoe.user.dao.model.User;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.Date;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -39,10 +41,9 @@ public class EmpiresServlet extends HttpServlet {
         EmpiresService hs = new EmpiresService();
         User user = (User) request.getSession().getAttribute("user");
         request.setAttribute("empiresList", hs.getByUser(user.getId()));
-        getServletContext().getRequestDispatcher("/empires/index.jsp").include(request, response);
-
-       // getServletContext().getRequestDispatcher("/empires/list.jsp").include(request, response);
-
+        Empires newEmpires = new Empires();
+        newEmpires.setName(request.getParameter("pname"));                    
+         getServletContext().getRequestDispatcher("/empires/index.jsp").include(request, response);
     }
 
     /**

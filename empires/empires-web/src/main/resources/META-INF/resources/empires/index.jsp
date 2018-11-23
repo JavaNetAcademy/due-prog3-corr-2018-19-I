@@ -5,58 +5,77 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     </head>
     <body>
-        <form action="empires" method="get" style="float:left;">      
-            <fieldset>
-                <legend>Birodalom lista:</legend>
+        <jsp:include page="/user/menu.jsp"></jsp:include>
 
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Név (leírás)</th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <c:forEach var="oneempires" items="${empiresList}">
-                            <tr>
-                                <td><span>${oneempires.name} (${oneempires.description})</span></td>
-                                <td>
-                                    <a href="<c:url value="/edit">
-                                           <c:param name="empiresid" value="${oneempires.id}"/>
-                                 </c:url>"
-                                    >Szerkesztés</a>
-                                </td>
-                                <td>
-                                    <a href="<c:url value="/del">
-                                           <c:param name="empiresid" value="${oneempires.id}"/>
-                                 </c:url>"
-                                    >Törlés</a>
-                                </td>
-                            </tr>
-                        </c:forEach>
-                    </tbody>
-                </table>
-            </fieldset>
-        </form>
-         <form action="empires" method="post" style="float:left;">
-            <fieldset>
+            <div class="w-75 p-3" style="background-color: #eee; text-align: center;" ><h1>Birodalmak</h1></div>
+            </br>
+            <div class="container">
 
-                <legend>Birodalom létrehozása</legend>
-                <P>
-                <div>
-                    <label>Birodalom neve</label>
-                    <input name="pname">
-                </div>
-                <P>
-                <div>
-                    <label>Birodalom leírása</label>
-                    <input name="pdescription">
-                </div>
-                <P>
+                <div class="w-50 p-3" style="background-color: #eee;">
+                    <form action="empires" method="post">
+                        <fieldset>
 
-                <div>
-                    <input type="submit" value="Létrehoz">
+                            <legend>Birodalom létrehozása</legend>
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th></th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><label>Birodalom neve:</label></td>
+                                        <td><input name="pname" class="form-control" /></td>
+                                    </tr>
+                                <th></th>
+                                <th></th>
+                                <tr> 
+                                    <td><label>Birodalom leírása:</label><td>
+                                    <td><input type="textarea" name="pdescription" class="form-control"/></td>
+                                </tr>                           
+                                </tbody>
+                            </table>       
+                            <div><input type="submit" value="Létrehoz" class="btn btn-primary"></div> 
+                    </form>
                 </div> 
-        </form>
+                </br>
+
+                <div class="w-75 p-3" style="background-color: #eee;">
+                    <form action="empires" method="get" >      
+                        <fieldset>
+                            <legend>Birodalom lista:</legend>
+
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Név</th><th>Leírás</th><th>Felhasználó Név</th><th>UserId</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                <c:forEach var="oneempires" items="${empiresList}">
+                                    <tr>
+                                        <td><span>${oneempires.name} </span></td><td><span>${oneempires.description}</span></td><td><span>${user.name}</span></td><td><span>${oneempires.userid}</span></td>
+                                        <td>
+                                            <a class="btn btn-light" href="<c:url value="/edit"> 
+                                                   <c:param name="empiresid" value="${oneempires.id}"/>
+                                               </c:url>"
+                                               >Szerkesztés</a>
+
+
+                                            <a class="btn btn-danger" href="<c:url value="/del">
+                                                   <c:param name="empiresid" value="${oneempires.id}"/>
+                                               </c:url>"
+                                               >Törlés</a>
+                                        </td>
+                                    </tr>
+                                </c:forEach>
+                            </tbody>
+                        </table>
+                    </fieldset>
+                </form>
+            </div>
+         </div>
     </body>
 </html>

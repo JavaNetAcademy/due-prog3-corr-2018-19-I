@@ -2,6 +2,8 @@ package hu.javanetacademy.hoe.empires.dao.jdbc;
 
 import hu.javanetacademy.hoe.empires.dao.model.Empires;
 import hu.javanetacademy.hoe.empires.dao.model.EmpiresDaoInterface;
+import java.awt.print.PrinterException;
+import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -45,6 +47,7 @@ public class EmpiresDaoJDBCImpl implements EmpiresDaoInterface {
                 return pEmpires;
 
             }
+               
         } catch (SQLException ex) {
             Logger.getLogger(EmpiresDaoJDBCImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
