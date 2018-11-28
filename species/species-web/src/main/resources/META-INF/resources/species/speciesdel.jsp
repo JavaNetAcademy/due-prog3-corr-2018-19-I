@@ -4,13 +4,13 @@
 
 <html>
     <head>
-        <title>Job_Del</title>
+        <title>Species_Del</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     </head>
     <body>
-        <form action="jobdel" method="post" style="float:left;">
+        <form action="speciesdel" method="post" style="float:left;">
             <fieldset>
-                <legend>job  ${job.name}  Törlés</legend>
+                <legend>species  ${species.name}  Törlés</legend>
 
                 <table>
                     <thead>
@@ -22,21 +22,21 @@
                     <tbody>
                         <tr>
                             <td><label>Név</label></td>
-                            <td><span>${job.name}</span></td>
+                            <td><span>${species.name}</span></td>
                         </tr>
                         <tr>
                             <td><label>Leírás</label></td>
-                            <td><span>${job.description}</span></td>
+                            <td><span>${species.description}</span></td>
                         </tr>
                        
                     </tbody>
                 </table>
-                <input type="hidden" value="${job.id}" name="jobid" />
+                <input type="hidden" value="${species.id}" name="speciesid" />
 
-                <h4>Biztos törölni akarod a job-t?</h4>
+                <h4>Biztos törölni akarod a speciest?</h4>
                 <div style="display:block;">
                     <input type="submit" value="Törlés">
-                    <a href="/job">Vissza</a>
+                    <a href="/species">Vissza</a>
                 </div>  
             </fieldset>
         </form>         

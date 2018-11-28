@@ -1,17 +1,14 @@
-
-
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <html>
     <head>
-        <title>Job_Del</title>
+        <title>Species_Edit</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     </head>
     <body>
-        <form action="jobdel" method="post" style="float:left;">
+        <form action="/speciesedit" method="post" style="float:left;">
             <fieldset>
-                <legend>job  ${job.name}  Törlés</legend>
-
+                <legend>Species ${species.name} Szerkesztés</legend>
                 <table>
                     <thead>
                         <tr>
@@ -22,22 +19,25 @@
                     <tbody>
                         <tr>
                             <td><label>Név</label></td>
-                            <td><span>${job.name}</span></td>
+                            <td><input type="text" value="${species.name}" name="pname" /></td>
                         </tr>
                         <tr>
                             <td><label>Leírás</label></td>
-                            <td><span>${job.description}</span></td>
-                        </tr>
+                            <td><input type="text" value="${species.description}" name="pdescription" /></td>
+                        </tr>  
                        
                     </tbody>
                 </table>
-                <input type="hidden" value="${job.id}" name="jobid" />
+                <input type="hidden" value="${species.id}" name="speciesid" />
+                <input type="hidden" value="${species.name}" name="originalSpeciesName" />
 
-                <h4>Biztos törölni akarod a job-t?</h4>
-                <div style="display:block;">
-                    <input type="submit" value="Törlés">
-                    <a href="/job">Vissza</a>
+
+                <div>
+                    <input type="submit" value="Mentés">
+                    <a href="/species">Vissza</a>
+
                 </div>  
+
             </fieldset>
         </form>         
     </body>

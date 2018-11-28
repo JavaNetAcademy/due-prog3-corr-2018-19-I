@@ -8,4 +8,10 @@
     </parent>
     <artifactId>species</artifactId>
     <packaging>pom</packaging>
+    <modules>
+        <module>species-model</module>
+        <module>species-jdbc</module>
+        <module>species-service</module>
+        <module>species-web</module>
+    </modules>
 </project>

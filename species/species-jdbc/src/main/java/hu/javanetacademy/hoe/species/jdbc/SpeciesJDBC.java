@@ -1,7 +1,7 @@
-package hu.javanetacademy.hoe.job.jdbc;
+package hu.javanetacademy.hoe.species.jdbc;
 
-import hu.javanetacademy.hoe.job.model.Job;
-import hu.javanetacademy.hoe.job.model.JobxHero;
+import hu.javanetacademy.hoe.species.model.Species;
+import hu.javanetacademy.hoe.species.model.SpeciesxHero;
 import hu.javanetacademy.hoe.hero.dao.model.Hero;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -17,11 +17,11 @@ import java.util.logging.Logger;
 /**
  * @author gotriang
  */
-public class JobJDBC {
+public class SpeciesJDBC {
  
     private Connection con;
 
-    public JobJDBC() {
+    public SpeciesJDBC() {
         try {
             Class.forName("com.mysql.jdbc.Driver");
             con = DriverManager.getConnection("jdbc:mysql://localhost/hoe?useSSL=false", "hoe", "hoe");
@@ -31,76 +31,76 @@ public class JobJDBC {
     }
 
     
-    public Job create(Job pJob) {
+    public Species create(Species pSpecies) {
         try {
-            PreparedStatement ps = con.prepareStatement("INSERT INTO job (name,description) VALUES(?,?)", Statement.RETURN_GENERATED_KEYS);
-            ps.setString(1, pJob.getName());
-            ps.setString(2, pJob.getDescription());
+            PreparedStatement ps = con.prepareStatement("INSERT INTO species (name,description) VALUES(?,?)", Statement.RETURN_GENERATED_KEYS);
+            ps.setString(1, pSpecies.getName());
+            ps.setString(2, pSpecies.getDescription());
             ps.executeUpdate();
             ResultSet rs = ps.getGeneratedKeys();
             if (rs.next()) {
-                pJob.setId(rs.getLong(1));
-                return pJob;
+                pSpecies.setId(rs.getLong(1));
+                return pSpecies;
             }
         } catch (SQLException ex) {
-            Logger.getLogger(JobJDBC.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(SpeciesJDBC.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
     }
 
     
-    public Job modify(long pJobId, Job pJob, String originalName) {
+    public Species modify(long pSpeciesId, Species pSpecies, String originalName) {
         try {
-            PreparedStatement ps = con.prepareStatement("UPDATE job SET name=?,description=? WHERE id=?", Statement.RETURN_GENERATED_KEYS);
-            ps.setString(1, pJob.getName());
-            ps.setString(2, pJob.getDescription());
-            ps.setLong(3, pJobId);
+            PreparedStatement ps = con.prepareStatement("UPDATE species SET name=?,description=? WHERE id=?", Statement.RETURN_GENERATED_KEYS);
+            ps.setString(1, pSpecies.getName());
+            ps.setString(2, pSpecies.getDescription());
+            ps.setLong(3, pSpeciesId);
             ps.executeUpdate();
-            return pJob;
+            return pSpecies;
         } catch (SQLException ex) {
-            Logger.getLogger(JobJDBC.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(SpeciesJDBC.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
     }
 
     
-    public Job delete(long pJobId) {
+    public Species delete(long pSpeciesId) {
         try {
-            PreparedStatement ps = con.prepareStatement("DELETE FROM job WHERE id=?", Statement.RETURN_GENERATED_KEYS);
-            ps.setLong(1, pJobId);
+            PreparedStatement ps = con.prepareStatement("DELETE FROM species WHERE id=?", Statement.RETURN_GENERATED_KEYS);
+            ps.setLong(1, pSpeciesId);
             ps.executeUpdate();
             return null;
         } catch (SQLException ex) {
-            Logger.getLogger(JobJDBC.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(SpeciesJDBC.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
     }
 
     
-    public Job get(long pJobId) {
+    public Species get(long pSpeciesId) {
         try {
-            PreparedStatement ps = con.prepareStatement("SELECT id,name,description FROM job WHERE id=?");
-            ps.setLong(1, pJobId);
+            PreparedStatement ps = con.prepareStatement("SELECT id,name,description FROM species WHERE id=?");
+            ps.setLong(1, pSpeciesId);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
-                Job res = new Job();
+                Species res = new Species();
                 res.setId(rs.getLong(1));
                 res.setName(rs.getString(2));
                 res.setDescription(rs.getString(3));
                 return res;
             }
         } catch (SQLException ex) {
-            Logger.getLogger(JobJDBC.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(SpeciesJDBC.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
     }
 
     
-    public List<Hero> getHeroList(long pJobId) {
+    public List<Hero> getHeroList(long pSpeciesId) {
         List<Hero> resAll = new ArrayList<>();
         try {
-            PreparedStatement ps = con.prepareStatement("SELECT hero.id,hero.name FROM hero INNER JOIN on hero.id=jobxhero.heroid WHERE jobxhero.jobid=? ORDER BY name");
-            ps.setLong(1, pJobId);
+            PreparedStatement ps = con.prepareStatement("SELECT id,name FROM hero WHERE speciesid=? ORDER BY name");
+            ps.setLong(1, pSpeciesId);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 Hero res = new Hero();
@@ -113,13 +113,13 @@ public class JobJDBC {
         return resAll;
     }
 
-    public List<Job> getJobList() {
-      List<Job> resAll = new ArrayList<>();
+    public List<Species> getSpeciesList() {
+      List<Species> resAll = new ArrayList<>();
         try {
-            PreparedStatement ps = con.prepareStatement("SELECT id,name,description FROM job ORDER BY name");
+            PreparedStatement ps = con.prepareStatement("SELECT id,name,description FROM species ORDER BY name");
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                Job res = new Job();
+                Species res = new Species();
                 res.setId(rs.getLong(1));
                 res.setName(rs.getString(2)); 
                 res.setDescription(rs.getString(3));
@@ -132,52 +132,52 @@ public class JobJDBC {
     }
     
     
-    public boolean existsByName(String pJobName) {
+    public boolean existsByName(String pSpeciesName) {
         try {
-            PreparedStatement ps = con.prepareStatement("SELECT name=? FROM job WHERE name=?", Statement.RETURN_GENERATED_KEYS);
-            ps.setString(1, pJobName);
-            ps.setString(2, pJobName);
+            PreparedStatement ps = con.prepareStatement("SELECT name=? FROM species WHERE name=?", Statement.RETURN_GENERATED_KEYS);
+            ps.setString(1, pSpeciesName);
+            ps.setString(2, pSpeciesName);
             ResultSet rs = ps.executeQuery();
             
             if (rs.next()) {
                 return true;
             }
         } catch (SQLException ex) {
-            Logger.getLogger(JobJDBC.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(SpeciesJDBC.class.getName()).log(Level.SEVERE, null, ex);
         }
         return false;
     }
 
     
-    public JobxHero createconnector(JobxHero pJobxHero) {
+    public SpeciesxHero createconnector(SpeciesxHero pSpeciesxHero) {
      try {
-            PreparedStatement ps = con.prepareStatement("INSERT INTO jobxhero (heroid,jobid,level,xp) VALUES(?,?,1,1)", Statement.RETURN_GENERATED_KEYS);
-            ps.setLong(1, pJobxHero.getHeroId());
-            ps.setLong(2, pJobxHero.getJobId());
+            PreparedStatement ps = con.prepareStatement("INSERT INTO speciesxhero (heroid,speciesid) VALUES(?,?)", Statement.RETURN_GENERATED_KEYS);
+            ps.setLong(1, pSpeciesxHero.getHeroId());
+            ps.setLong(2, pSpeciesxHero.getSpeciesId());
             ps.executeUpdate();
             ResultSet rs = ps.getGeneratedKeys();
             if (rs.next()) {
-                pJobxHero.setId(rs.getLong(1));
-                return pJobxHero;
+                pSpeciesxHero.setId(rs.getLong(1));
+                return pSpeciesxHero;
             }
         } catch (SQLException ex) {
-            Logger.getLogger(JobJDBC.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(SpeciesJDBC.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
     }
 
     
-    public JobxHero modifyconnector(long pJobxHeroId, JobxHero pJobxHero) {
+    public SpeciesxHero modifyconnector(long pSpeciesxHeroId, SpeciesxHero pSpeciesxHero) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     
-    public JobxHero deleteconnector(long pJobxHeroId) {
+    public SpeciesxHero deleteconnector(long pSpeciesxHeroId) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     
-    public JobxHero getconnector(long pJobxHeroId) {
+    public SpeciesxHero getconnector(long pSpeciesxHeroId) {
             throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     

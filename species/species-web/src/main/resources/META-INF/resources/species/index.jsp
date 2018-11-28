@@ -1,13 +1,13 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
     <head>
-        <title>Job</title>
+        <title>Species</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     </head>
     <body>
-        <form action="job" method="get" style="float:left;">      
+        <form action="species" method="get" style="float:left;">      
             <fieldset>
-                <legend>Job lista:</legend>
+                <legend>Species lista:</legend>
 
                 <table>
                     <thead>
@@ -17,18 +17,18 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <c:forEach var="onejob" items="${jobList}">
+                        <c:forEach var="onespecies" items="${speciesList}">
                             <tr>
-                                <td><span>${onejob.name} (${onejob.description})</span></td>
+                                <td><span>${onespecies.name} (${onespecies.description})</span></td>
                                 <td>
-                                    <a href="<c:url value="/jobedit">
-                                           <c:param name="jobid" value="${onejob.id}"/>
+                                    <a href="<c:url value="/speciesedit">
+                                           <c:param name="speciesid" value="${onespecies.id}"/>
                                  </c:url>"
                                     >Szerkesztés</a>
                                 </td>
                                 <td>
-                                    <a href="<c:url value="/jobdel">
-                                           <c:param name="jobid" value="${onejob.id}"/>
+                                    <a href="<c:url value="/speciesdel">
+                                           <c:param name="speciesid" value="${onespecies.id}"/>
                                  </c:url>"
                                     >Törlés</a>
                                 </td>
@@ -38,18 +38,18 @@
                 </table>
             </fieldset>
         </form>
-         <form action="job" method="post" style="float:left;">
+         <form action="species" method="post" style="float:left;">
             <fieldset>
 
-                <legend>Job létrehozása</legend>
+                <legend>Species létrehozása</legend>
                 <P>
                 <div>
-                    <label>Job neve</label>
+                    <label>Species neve</label>
                     <input name="pname">
                 </div>
                 <P>
                 <div>
-                    <label>Job leírása</label>
+                    <label>Species leírása</label>
                     <input name="pdescription">
                 </div>
                 <P>

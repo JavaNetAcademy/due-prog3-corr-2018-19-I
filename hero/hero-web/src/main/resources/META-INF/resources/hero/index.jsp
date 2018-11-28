@@ -7,7 +7,7 @@
     <body>
         <form action="heroedit" method="get" style="float:left;">      
             <fieldset>
-                <legend>Munkakör lista:</legend>
+                <legend>Hero lista:</legend>
 
                 <table>
                     <thead>
@@ -55,10 +55,19 @@
                 </div>
                 <P>
                 <div>
-                    <label>Hero munkaköre</label>
+                    <label>Hero job</label>
                                 <select name="job">
                                     <c:forEach items="${jobList}" var="job">
                                         <option value="${job.id}"><c:out value="${job.name}" /></option>
+                                    </c:forEach>
+                                </select>
+                </div>
+                  <P>
+                <div>
+                    <label>Hero species</label>
+                                <select name="species">
+                                    <c:forEach items="${speciesList}" var="species">
+                                        <option value="${species.id}"><c:out value="${species.name}" /></option>
                                     </c:forEach>
                                 </select>
                 </div>

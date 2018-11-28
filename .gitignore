@@ -46,3 +46,7 @@
 /job/job-jdbc/target/
 /job/job-service/target/
 /job/job-web/target/
+/species/species-model/target/
+/species/species-jdbc/target/
+/species/species-service/target/
+/species/species-web/target/

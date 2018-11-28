@@ -3,22 +3,32 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>hu.javanetacademy.hoe</groupId>
-        <artifactId>job</artifactId>
+        <artifactId>species</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
-    <groupId>hu.javanetacademy.hoe.job</groupId>
-    <artifactId>job-model</artifactId>
+    <groupId>hu.javanetacademy.hoe.species</groupId>
+    <artifactId>species-service</artifactId>
     <packaging>jar</packaging>
     <dependencies>
-       <dependency>
+        <dependency>
             <groupId>hu.javanetacademy.hoe.base</groupId>
             <artifactId>base-util</artifactId>
             <version>1.0-SNAPSHOT</version>
-        </dependency>       
+        </dependency>
         <dependency>
             <groupId>hu.javanetacademy.hoe.hero</groupId>
             <artifactId>hero-dao-model</artifactId>
             <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>species-jdbc</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>species-model</artifactId>
+            <version>${project.version}</version>
         </dependency>
     </dependencies>
     <properties>
