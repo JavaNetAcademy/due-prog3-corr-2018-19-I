@@ -21,6 +21,7 @@
         <module>settlements</module>
         <module>ssp</module>
         <module>factories</module>
+        <module>culturalbuilding</module>
     </modules>
     <dependencies>
         <dependency>
