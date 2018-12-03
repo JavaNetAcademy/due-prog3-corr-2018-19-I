@@ -50,3 +50,7 @@
 /species/species-jdbc/target/
 /species/species-service/target/
 /species/species-web/target/
+/culturalbuilding/culturalbuilding-dao-model/target/
+/culturalbuilding/culturalbuilding-dao-jdbc/target/
+/culturalbuilding/culturalbuilding-service-object/target/
+/culturalbuilding/culturalbuilding-web/target/

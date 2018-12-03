@@ -15,7 +15,7 @@
             <artifactId>culturalbuilding-dao-jdbc</artifactId> 
         </dependency>
         <dependency>
-            <groupId>hu.javanetacademy.hoe</groupId>
+            <groupId>hu.javanetacademy.hoe.base</groupId>
             <artifactId>base-util</artifactId> 
         </dependency>
     </dependencies> 

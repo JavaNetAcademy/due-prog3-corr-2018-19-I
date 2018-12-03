@@ -9,6 +9,7 @@
     <groupId>hu.javanetacademy.hoe.goodsOfEmpires</groupId>
     <artifactId>goodsOfEmpires-dao-model</artifactId>
     <packaging>jar</packaging>
+    <name>goodsOfEmpires-dao-model</name>
     <properties>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
