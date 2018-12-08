@@ -54,3 +54,7 @@
 /culturalbuilding/culturalbuilding-dao-jdbc/target/
 /culturalbuilding/culturalbuilding-service-object/target/
 /culturalbuilding/culturalbuilding-web/target/
+/skills/skills-dao-model/target/
+/skills/skills-dao-jdbc/target/
+/skills/skills-web/target/
+/skills/skills-sercice-object/target/
