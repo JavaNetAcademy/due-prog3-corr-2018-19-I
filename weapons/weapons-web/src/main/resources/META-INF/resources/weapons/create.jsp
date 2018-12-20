@@ -6,6 +6,8 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     </head>
     <body>
+        <jsp:include page="/user/menu.jsp"></jsp:include>
+        
         <h1>Fegyver letrehozasa</h1>
         <form method="post" action="${pageContext.request.contextPath}/weapons/create">
             <div>

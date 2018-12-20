@@ -5,12 +5,40 @@
         <title>Támadó fegyverek</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     </head>
-    <body>        
-        <ul>
-            <c:forEach items="${weapons}" var="weapon">
-                <li>${weapon.name} (${weapon.price})</li>
-            </c:forEach>
-        </ul>
+    <body>
+        <jsp:include page="/user/menu.jsp"></jsp:include>
+        
+        <div class="container">
+            <fieldset>
+                <legend>Weapon lista</legend>
+                
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Név (leírás)</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <c:forEach items="${weapons}" var="weapon">
+                            <tr>
+                                <td><span>${weapon.name} (${weapon.description})</span></td>
+                                <td>
+                                    <a class="btn btn-light" href="<c:url value="/weapons/edit">
+                                           <c:param name="id" value="${weapon.id}"/>
+                                       </c:url>"
+                                       >Szerkesztés</a>
+                                    <a class="btn btn-danger" href="<c:url value="/weapons/delete">
+                                           <c:param name="id" value="${weapon.id}"/>
+                                       </c:url>"
+                                       >Törlés</a>
+                                </td>
+                            </tr>
+                        </c:forEach>
+                    </tbody>
+                </table>
+            </fieldset>
+        </div>
     </body>
 </html>
 

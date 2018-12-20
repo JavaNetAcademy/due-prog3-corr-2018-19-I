@@ -1,6 +1,6 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <link rel='stylesheet' href='webjars/bootstrap/4.1.3/css/bootstrap.min.css'>
+    <link rel='stylesheet' href='/webjars/bootstrap/4.1.3/css/bootstrap.min.css'>
 </head>
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -35,5 +35,5 @@
     </div>
 </nav>
 
-<script type="text/javascript" src="webjars/jquery/2.2.1/jquery.min.js"></script>
-<script type="text/javascript" src="webjars/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="/webjars/jquery/2.2.1/jquery.min.js"></script>
+<script type="text/javascript" src="/webjars/bootstrap/4.1.3/js/bootstrap.min.js"></script>

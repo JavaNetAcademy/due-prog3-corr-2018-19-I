@@ -6,6 +6,8 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     </head>
     <body>
+        <jsp:include page="/user/menu.jsp"></jsp:include>
+        
         <h1>Fegyver torlese (${weapon.name})</h1>
         <form method="post" action="${pageContext.request.contextPath}/weapons/delete">
             <div>
