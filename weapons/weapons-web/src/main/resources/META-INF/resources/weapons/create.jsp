@@ -8,22 +8,27 @@
     <body>
         <jsp:include page="/user/menu.jsp"></jsp:include>
         
-        <h1>Fegyver letrehozasa</h1>
-        <form method="post" action="${pageContext.request.contextPath}/weapons/create">
-            <div>
-                <span>Fegyver neve</span>
-                <input type="text" name="name" />
-            </div>
-            <div>
-                <span>Fegyver leirasa</span>
-                <textarea name="description"></textarea>
-            </div>
-            <div>
-                <span>Fegyver ara</span>
-                <input type="number" name="price" />
-            </div>
-            <input type="submit" value="Mentes">
-        </form>
+        <div class="container">
+            <fieldset>
+                <legend>Fegyver letrehozasa</legend>
+
+                <form method="post" action="${pageContext.request.contextPath}/weapons/create">
+                    <div class="form-group">
+                        <label for="name">Fegyver neve</label>
+                        <input type="text" name="name" id="name" class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <label for="description">Fegyver leirasa</label>
+                        <textarea name="description" id="description" class="form-control"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="price">Fegyver ara</label>
+                        <input type="number" name="price" id="price" class="form-control" />
+                    </div>
+                    <input type="submit" value="Mentes" class="btn btn-primary">
+                </form>
+            </fieldset>
+        </div>
     </body>
 </html>
 

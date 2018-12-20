@@ -8,26 +8,31 @@
     <body>
         <jsp:include page="/user/menu.jsp"></jsp:include>
         
-        <h1>Fegyver modositasa (${weapon.name})</h1>
-        <form method="post" action="${pageContext.request.contextPath}/weapons/edit">
-            <div>
-                <span>Fegyver neve</span>
-                <input type="text" name="name" value="${weapon.name}" />
-            </div>
-            <div>
-                <span>Fegyver leirasa</span>
-                <textarea name="description">${weapon.description}</textarea>
-            </div>
-            <div>
-                <span>Fegyver ara</span>
-                <input type="number" name="price" value="${weapon.price}" />
-            </div>
-            
-            <input type="hidden" value="${weapon.id}" name="id" />
-            <input type="hidden" value="${weapon.name}" name="originalName" />
-            
-            <input type="submit" value="Mentes">
-        </form>
+        <div class="container">
+            <fieldset>
+                <legend>Fegyver modositasa (${weapon.name})</legend>
+
+                <form method="post" action="${pageContext.request.contextPath}/weapons/edit">
+                    <div class="form-group">
+                        <label for="name">Fegyver neve</label>
+                        <input type="text" name="name" id="name" value="${weapon.name}" class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <label for="description">Fegyver leirasa</label>
+                        <textarea name="description" id="description" class="form-control">${weapon.description}</textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="name">Fegyver ara</label>
+                        <input type="number" name="price" id="price" class="form-control" value="${weapon.price}" />
+                    </div>
+
+                    <input type="hidden" value="${weapon.id}" name="id" />
+                    <input type="hidden" value="${weapon.name}" name="originalName" />
+
+                    <input type="submit" value="Mentes" class="btn btn-primary">
+                </form>
+            </fieldset>
+        </div>
     </body>
 </html>
 

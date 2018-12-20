@@ -10,7 +10,7 @@
         
         <div class="container">
             <fieldset>
-                <legend>Weapon lista <a class="btn btn-primary" href="/weapons/create">Új fegyver</a></legend>
+                <legend>Fegyver lista <a class="btn btn-primary" href="/weapons/create">Új fegyver</a></legend>
                 
                 <table class="table">
                     <thead>

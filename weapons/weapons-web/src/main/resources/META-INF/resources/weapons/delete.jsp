@@ -8,21 +8,26 @@
     <body>
         <jsp:include page="/user/menu.jsp"></jsp:include>
         
-        <h1>Fegyver torlese (${weapon.name})</h1>
-        <form method="post" action="${pageContext.request.contextPath}/weapons/delete">
-            <div>
-                <span>Fegyver neve ${weapon.name}</span>
-            </div>
-            <div>
-                <span>Fegyver leirasa ${weapon.description}</span>
-            </div>
-            <div>
-                <span>Fegyver ara: ${weapon.price}</span>
-            </div>
+        <div class="container">
+            <fieldset>
+                <legend>Fegyver torlese (${weapon.name})</legend>
             
-            <input type="submit" value="Torles">
-            <a href="/weapons">Vissza</a>
-        </form>
+                <form method="post" action="${pageContext.request.contextPath}/weapons/delete">
+                    <div>
+                        <span>Fegyver neve: ${weapon.name}</span>
+                    </div>
+                    <div>
+                        <span>Fegyver leirasa: ${weapon.description}</span>
+                    </div>
+                    <div>
+                        <span>Fegyver ara: ${weapon.price}</span>
+                    </div>
+
+                    <input type="submit" value="Torles" class="btn btn-danger">
+                    <a href="/weapons" class="btn btn-light">Vissza</a>
+                </form>
+            </fieldset>
+        </div>
     </body>
 </html>
 
