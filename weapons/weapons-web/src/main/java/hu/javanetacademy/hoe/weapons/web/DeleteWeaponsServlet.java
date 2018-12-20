@@ -57,18 +57,11 @@ public class DeleteWeaponsServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         long weaponId = Long.parseLong(request.getParameter("id"));
-        String origName = request.getParameter("originalName");
         WeaponsService ws = new WeaponsService();
-        Weapon weapon = ws.get(weaponId);
         
-        weapon.setName(request.getParameter("name"));
-        weapon.setDescription(request.getParameter("description"));
-        weapon.setPrice(Integer.parseInt(request.getParameter("price")));
-        
-        ws.update(weaponId, weapon);
+        ws.delete(weaponId);
 
         response.sendRedirect("/weapons");
-        
     }
 
     /**

@@ -77,6 +77,19 @@ public class WeaponDaoJDBCImpl implements WeaponDAOInterface {
     }
     
     @Override
+    public Weapon delete(long weaponId) {
+        try {
+            PreparedStatement ps = con.prepareStatement("DELETE FROM weapons WHERE id=?", Statement.RETURN_GENERATED_KEYS);
+            ps.setLong(1, weaponId);
+            ps.executeUpdate();
+            return null;
+        } catch (SQLException ex) {
+            Logger.getLogger(WeaponDaoJDBCImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+    
+    @Override
     public Weapon get(long weaponId) {
         try {
             PreparedStatement ps = con.prepareStatement("SELECT id,name,description,price,userid FROM weapons WHERE id=?");

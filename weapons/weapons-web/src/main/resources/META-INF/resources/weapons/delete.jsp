@@ -12,7 +12,7 @@
             <fieldset>
                 <legend>Fegyver torlese (${weapon.name})</legend>
             
-                <form method="post" action="${pageContext.request.contextPath}/weapons/delete">
+                <form method="post">
                     <div>
                         <span>Fegyver neve: ${weapon.name}</span>
                     </div>
@@ -22,7 +22,9 @@
                     <div>
                         <span>Fegyver ara: ${weapon.price}</span>
                     </div>
-
+                    
+                    <input type="hidden" value="${weapon.id}" name="id" />
+                    
                     <input type="submit" value="Torles" class="btn btn-danger">
                     <a href="/weapons" class="btn btn-light">Vissza</a>
                 </form>

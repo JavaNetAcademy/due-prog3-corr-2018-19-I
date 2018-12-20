@@ -25,6 +25,10 @@ public class WeaponsService {
         return dao.update(weaponId, weapon);
     }
     
+    public Weapon delete(long weaponId) {
+        return dao.delete(weaponId);
+    }
+    
     public Weapon get(long weaponId) {
         return dao.get(weaponId);
     }
