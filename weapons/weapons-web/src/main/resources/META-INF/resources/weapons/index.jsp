@@ -10,12 +10,13 @@
         
         <div class="container">
             <fieldset>
-                <legend>Weapon lista</legend>
+                <legend>Weapon lista <a class="btn btn-primary" href="/weapons/create">Új fegyver</a></legend>
                 
                 <table class="table">
                     <thead>
                         <tr>
                             <th>Név (leírás)</th>
+                            <th>Ár</th>
                             <th></th>
                         </tr>
                     </thead>
@@ -23,6 +24,9 @@
                         <c:forEach items="${weapons}" var="weapon">
                             <tr>
                                 <td><span>${weapon.name} (${weapon.description})</span></td>
+                                <td>
+                                    ${weapon.price}
+                                </td>
                                 <td>
                                     <a class="btn btn-light" href="<c:url value="/weapons/edit">
                                            <c:param name="id" value="${weapon.id}"/>
