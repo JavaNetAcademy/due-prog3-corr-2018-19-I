@@ -4,7 +4,7 @@
 
 <html>
     <head>
-        <title>Empires_Del</title>
+        <title> Empires_Del</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     </head>
     <body>
@@ -14,7 +14,7 @@
                 <div class="w-75 p-3" style="background-color: #eee;">
                     <form action="del" method="post">
                         <fieldset>
-                            <legend>empires  ${empires.name}  Törlés</legend>
+                            <legend> ${empires.name} birodalom törlése</legend>
 
                         <table class="table">
                             <thead>
@@ -48,7 +48,7 @@
                         </table>
                         <input type="hidden" value="${empires.id}" name="empiresid" />
 
-                        <h4>Biztos törölni akarod a birodalmad?</h4>
+                        <h4>Biztos törölni akarod a birodalmat?</h4>
                         <div style="display:block;">
                             <input type="submit" value="Törlés" class="btn btn-danger">
                             <a href="/empires" class="btn btn-light">Vissza</a>

@@ -12,7 +12,7 @@
                 <div class="w-75 p-3" style="background-color: #eee;">
                     <form action="edit" method="post">
                         <fieldset>
-                            <legend>Birodalom ${empires.name} Szerkesztés</legend>
+                            <legend> ${empires.name} birodalom szerkesztése</legend>
                         <table class="table">
                             <thead>
                                 <tr>
