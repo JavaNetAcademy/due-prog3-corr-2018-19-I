@@ -22,8 +22,15 @@ public class EmpiresService {
         }
     }
 
-    public Empires modify(long pempiresId, Empires pempires) {
-        boolean exists = dao.existsByName(pempires.getName(), pempires.getUserid());
+    public Empires modify(long pempiresId, String originalName, Empires pempires) {
+
+ boolean exists = false;
+        String empiresName = pempires.getName(); 
+        
+         if (!empiresName.equals(originalName)) {
+            exists = dao.existsByName(pempires.getName(), pempires.getUserid());
+        }
+        
         if (exists == false) {
             return dao.modify(pempiresId, pempires);
         } else {

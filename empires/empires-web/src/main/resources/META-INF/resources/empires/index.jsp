@@ -24,16 +24,36 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td><label>Birodalom neve:</label></td>
-                                        <td><input name="pname" class="form-control" /></td>
-                                    </tr>
+                                <th></th>
+                                <th></th>
+                                <tr>
+                                    <td><label>Birodalom neve:</label></td>
+                                    <td><input type="textarea" name="pname" class="form-control"/></td>
+                                </tr>
                                 <th></th>
                                 <th></th>
                                 <tr> 
                                     <td><label>Birodalom leírása:</label><td>
                                     <td><input type="textarea" name="pdescription" class="form-control"/></td>
-                                </tr>                           
+                                </tr>  
+                                <th></th>
+                                <th></th>
+                                <tr> 
+                                    <td><label>Felhasználó:</label><td>
+                                    <td><input type="textarea" name="puserid" class="form-control"/></td>
+                                </tr> 
+                                <th></th>
+                                <th></th>
+                                <tr> 
+                                    <td><label>Birodalom szintje:</label><td>
+                                    <td><input type="textarea" name="plevel" class="form-control"/></td>
+                                </tr> 
+                                <th></th>
+                                <th></th>
+                                <tr> 
+                                    <td><label>Birodalom vagyona:</label><td>
+                                    <td><input type="textarea" name="pproperty" class="form-control"/></td>
+                                </tr> 
                                 </tbody>
                             </table>       
                             <div><input type="submit" value="Létrehoz" class="btn btn-primary"></div> 
@@ -76,6 +96,6 @@
                     </fieldset>
                 </form>
             </div>
-         </div>
+        </div>
     </body>
 </html>

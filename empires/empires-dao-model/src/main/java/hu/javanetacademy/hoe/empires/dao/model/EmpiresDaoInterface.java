@@ -10,7 +10,7 @@ public interface EmpiresDaoInterface {
 
     public Empires create(Empires pEmpires);
 
-    public Empires modify(long pempiresId, Empires pempires);
+    public Empires modify(long pOldempiresId, Empires pNewempires);
 
     public Empires delete(long pEmpiresId);
 

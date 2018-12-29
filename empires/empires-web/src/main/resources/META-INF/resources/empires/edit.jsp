@@ -31,15 +31,15 @@
                                 </tr>  
                                 <tr>
                                     <td><label>User</label></td>
-                                    <td><span>${empires.userid}</span></td>
+                                    <td><input type="text" value="${empires.userid}" name="puserid" class="form-control" /></td>
                                 </tr>
                                 <tr>
                                     <td><label>Szint</label></td>
-                                    <td><span>${empires.level}</span></td>
+                                    <td><input type="text" value="${empires.level}" name="plevel" class="form-control" /></td>
                                 </tr>
                                 <tr>
                                     <td><label>Vagyon</label></td>
-                                    <td><span>${empires.property}</span></td>
+                                   <td><input type="text" value="${empires.property}" name="pproperty" class="form-control" /></td>
                                 </tr>
                             </tbody>
                         </table>

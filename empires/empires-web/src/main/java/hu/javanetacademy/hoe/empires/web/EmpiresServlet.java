@@ -39,11 +39,10 @@ public class EmpiresServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         EmpiresService hs = new EmpiresService();
+        
         User user = (User) request.getSession().getAttribute("user");
         request.setAttribute("empiresList", hs.getByUser(user.getId()));
-        Empires newEmpires = new Empires();
-        newEmpires.setName(request.getParameter("pname"));                    
-         getServletContext().getRequestDispatcher("/empires/index.jsp").include(request, response);
+        getServletContext().getRequestDispatcher("/empires/index.jsp").include(request, response);
     }
 
     /**
@@ -57,13 +56,13 @@ public class EmpiresServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        User user = (User) request.getSession().getAttribute("user");
+
         Empires newEmpires = new Empires();
         newEmpires.setName(request.getParameter("pname"));
-        newEmpires.setDescription(request.getParameter("pdescription"));
-        newEmpires.setUserid(user.getId());
-        newEmpires.setLevel(1);
-        newEmpires.setProperty(1);
+        newEmpires.setDescription(request.getParameter("pdescription"));   
+        newEmpires.setUserid(Long.parseLong(request.getParameter("puserid")));
+        newEmpires.setLevel(Long.parseLong(request.getParameter("plevel")));
+        newEmpires.setProperty(Long.parseLong(request.getParameter("pproperty")));
         EmpiresService hs = new EmpiresService();
         hs.create(newEmpires);
         doGet(request, response);

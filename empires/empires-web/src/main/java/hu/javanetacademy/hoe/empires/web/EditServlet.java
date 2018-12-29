@@ -55,13 +55,14 @@ public class EditServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         long empiresid = Long.parseLong(request.getParameter("empiresid"));
+         String origName = request.getParameter("originalName");
         EmpiresService empiresService = new EmpiresService();
         Empires empires = empiresService.get(empiresid);
         
        empires.setName(request.getParameter("pname"));
        empires.setDescription(request.getParameter("pdescription"));      
        
-        empiresService.modify(empiresid, empires);
+        empiresService.modify(empiresid, origName, empires);
 
         response.sendRedirect("/empires");
     }
