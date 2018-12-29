@@ -54,13 +54,21 @@ public class EditServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+         User user = (User) request.getSession().getAttribute("user");
         long empiresid = Long.parseLong(request.getParameter("empiresid"));
          String origName = request.getParameter("originalName");
-        EmpiresService empiresService = new EmpiresService();
-        Empires empires = empiresService.get(empiresid);
+        EmpiresService empiresService = new EmpiresService();      
+        Empires empires = empiresService.get(empiresid); 
         
        empires.setName(request.getParameter("pname"));
        empires.setDescription(request.getParameter("pdescription"));      
+         empires.setUserid(user.getId());
+       //empires.setUserid(Long.parseLong(request.getParameter("puserid")));
+        empires.setLevel(Long.parseLong(request.getParameter("plevel")));
+        empires.setProperty(Long.parseLong(request.getParameter("pproperty")));
+       
+       
+       
        
         empiresService.modify(empiresid, origName, empires);
 

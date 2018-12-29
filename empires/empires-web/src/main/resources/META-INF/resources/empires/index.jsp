@@ -39,44 +39,44 @@
                                 <th></th>
                                 <th></th>
                                 <tr> 
-                                    <td><label>Felhasználó:</label><td>
-                                    <td><input type="textarea" name="puserid" class="form-control"/></td>
-                                </tr> 
-                                <th></th>
-                                <th></th>
-                                <tr> 
-                                    <td><label>Birodalom szintje:</label><td>
-                                    <td><input type="textarea" name="plevel" class="form-control"/></td>
-                                </tr> 
-                                <th></th>
-                                <th></th>
-                                <tr> 
-                                    <td><label>Birodalom vagyona:</label><td>
-                                    <td><input type="textarea" name="pproperty" class="form-control"/></td>
-                                </tr> 
-                                </tbody>
-                            </table>       
-                            <div><input type="submit" value="Létrehoz" class="btn btn-primary"></div> 
-                    </form>
-                </div> 
-                </br>
+                                    <td><label>Felhasználó:</label><td>                                
+                                      <td><span>${user.name}</span></td>                                
+                            </tr> 
+                            <th></th>
+                            <th></th>
+                            <tr> 
+                                <td><label>Birodalom szintje:</label><td>
+                                <td><input type="textarea" name="plevel" class="form-control"/></td>
+                            </tr> 
+                            <th></th>
+                            <th></th>
+                            <tr> 
+                                <td><label>Birodalom vagyona:</label><td>
+                                <td><input type="textarea" name="pproperty" class="form-control"/></td>
+                            </tr> 
+                            </tbody>
+                        </table>       
+                        <div><input type="submit" value="Létrehoz" class="btn btn-primary"></div> 
+                </form>
+            </div> 
+            </br>
 
-                <div class="w-75 p-3" style="background-color: #eee;">
-                    <form action="empires" method="get" >      
-                        <fieldset>
-                            <legend>Birodalom lista:</legend>
+            <div class="w-75 p-3" style="background-color: #eee;">
+                <form action="empires" method="get" >      
+                    <fieldset>
+                        <legend>Birodalom lista:</legend>
 
-                            <table class="table">
-                                <thead>
-                                    <tr>
-                                        <th>Név</th><th>Leírás</th><th>Felhasználó Név</th><th>UserId</th>
-                                        <th></th>
-                                    </tr>
-                                </thead>
-                                <tbody>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Név</th><th>Leírás</th><th>User</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
                                 <c:forEach var="oneempires" items="${empiresList}">
                                     <tr>
-                                        <td><span>${oneempires.name} </span></td><td><span>${oneempires.description}</span></td><td><span>${user.name}</span></td><td><span>${oneempires.userid}</span></td>
+                                        <td><span>${oneempires.name} </span></td><td><span>${oneempires.description}</span></td><td><span>${user.name}</span></td>
                                         <td>
                                             <a class="btn btn-light" href="<c:url value="/edit"> 
                                                    <c:param name="empiresid" value="${oneempires.id}"/>

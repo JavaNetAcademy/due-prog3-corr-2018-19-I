@@ -31,7 +31,8 @@
                                 </tr>  
                                 <tr>
                                     <td><label>User</label></td>
-                                    <td><input type="text" value="${empires.userid}" name="puserid" class="form-control" /></td>
+                                    <td><span>${user.name}</span></td> 
+
                                 </tr>
                                 <tr>
                                     <td><label>Szint</label></td>
@@ -39,15 +40,15 @@
                                 </tr>
                                 <tr>
                                     <td><label>Vagyon</label></td>
-                                   <td><input type="text" value="${empires.property}" name="pproperty" class="form-control" /></td>
+                                    <td><input type="text" value="${empires.property}" name="pproperty" class="form-control" /></td>
                                 </tr>
                             </tbody>
                         </table>
                         <input type="hidden" value="${empires.id}" name="empiresid" />
-
+                        <input type="hidden" value="${empires.name}" name="originalName" />
                         <div>
                             <input type="submit" value="Mentés" class="btn btn-primary">
-                            <a href="/pets" class="btn btn-light">Vissza</a>
+                            <a href="/empires" class="btn btn-light">Vissza</a>
 
                         </div>  
 

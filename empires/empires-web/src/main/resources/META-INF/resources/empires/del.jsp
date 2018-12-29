@@ -34,7 +34,7 @@
                                 </tr>
                                 <tr>
                                     <td><label>User</label></td>
-                                    <td><span>${empires.userid}</span></td>
+                                     <td><span>${user.name}</span></td>                                    
                                 </tr>
                                 <tr>
                                     <td><label>Szint</label></td>

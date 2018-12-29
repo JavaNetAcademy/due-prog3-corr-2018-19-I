@@ -43,7 +43,8 @@ public class EmpiresServlet extends HttpServlet {
         User user = (User) request.getSession().getAttribute("user");
         request.setAttribute("empiresList", hs.getByUser(user.getId()));
         getServletContext().getRequestDispatcher("/empires/index.jsp").include(request, response);
-    }
+        
+       }
 
     /**
      * Handles the HTTP <code>POST</code> method.
@@ -56,11 +57,12 @@ public class EmpiresServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
+        User user = (User) request.getSession().getAttribute("user");
         Empires newEmpires = new Empires();
         newEmpires.setName(request.getParameter("pname"));
-        newEmpires.setDescription(request.getParameter("pdescription"));   
-        newEmpires.setUserid(Long.parseLong(request.getParameter("puserid")));
+        newEmpires.setDescription(request.getParameter("pdescription")); 
+         newEmpires.setUserid(user.getId());
+        //newEmpires.setUserid(Long.parseLong(request.getParameter("puserid")));
         newEmpires.setLevel(Long.parseLong(request.getParameter("plevel")));
         newEmpires.setProperty(Long.parseLong(request.getParameter("pproperty")));
         EmpiresService hs = new EmpiresService();
