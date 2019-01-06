@@ -19,9 +19,11 @@ public interface ISkillsDao {
 
     public boolean isUsed(long pSkillId);
 
-    public List<SkillBase> availableSkils(long pHeroLevel, long pJobId);
+    public List<SkillBase> availableSkils(long pHeroId, long pHeroLevel, long pJobId);
 
     public List<Skill> getAll();
+    
+    public List<SkillBase> notUsedByHero (long pHeroId);
 
 }
 

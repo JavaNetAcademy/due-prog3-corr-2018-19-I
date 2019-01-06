@@ -6,6 +6,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -65,7 +67,7 @@ public class HeroSkillsDaoImpl implements IHeroSkillsDao{
                 return true;
             }
         } catch (SQLException ex) {
-            Logger.getLogger(SkillsDaoImpl.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(HeroSkillsDaoImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
         return false;
     }
@@ -93,25 +95,35 @@ public class HeroSkillsDaoImpl implements IHeroSkillsDao{
             }
 
         } catch (SQLException ex) {
-            Logger.getLogger(SkillsDaoImpl.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(HeroSkillsDaoImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
     }
     
     @Override
-    public long knownLevel(long skillId, long pHeroId){
+    public List<HeroSkill> skillsByHero( long pHeroId) {
+        List<HeroSkill> rsList = new ArrayList<>();
         try {
-            PreparedStatement ps = con.prepareStatement("SELECT skill_level FROM skills_of_heroes WHERE skill_id=? AND hero_id=?");
-            ps.setLong(1, skillId);
-            ps.setLong(2, pHeroId);
+            PreparedStatement ps = con.prepareStatement("SELECT skills.id, skills.name, skills.description,"
+                    + " skills.offensive, skills.valueInCombat, skills_of_heroes.skill_level FROM skills INNER JOIN skills_of_heroes ON "
+                    + "skills.id=skills_of_heroes.skill_id where skills_of_heroes.hero_id=?");
+            ps.setLong(1, pHeroId);
             ResultSet rs = ps.executeQuery();
-            if(rs.next()){
-                return rs.getLong(1);
+            while (rs.next()) {
+                HeroSkill rsSkill = new HeroSkill();
+                rsSkill.setId(rs.getLong(1));
+                rsSkill.setName(rs.getString(2));
+                rsSkill.setDescription(rs.getString(3));
+                rsSkill.setOffensive(rs.getBoolean(4));
+                rsSkill.setValueInCombat(rs.getLong(5));
+                rsSkill.setHeroId(pHeroId);
+                rsSkill.setSkillLevel(rs.getLong(6));
+                rsList.add(rsSkill);
             }
         } catch (SQLException ex) {
             Logger.getLogger(HeroSkillsDaoImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return 0;
+        return rsList;
     }
 
 }

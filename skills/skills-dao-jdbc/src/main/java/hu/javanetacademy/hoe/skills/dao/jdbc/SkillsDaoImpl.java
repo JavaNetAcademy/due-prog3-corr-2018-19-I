@@ -113,18 +113,10 @@ public class SkillsDaoImpl implements ISkillsDao {
 
     @Override
     public Skill getByName(String pName) {
-        try {
-            PreparedStatement ps = con.prepareStatement("SELECT skills_for_job.job_id FROM skills INNER JOIN skills_for_job ON "
-                    + "skills.id=skills_for_job.skill_id where skills.name=?");
+        try {          
+            PreparedStatement ps = con.prepareStatement("SELECT id,description,offensive,valueInCombat,reqLevel FROM skills WHERE name=?");
             ps.setString(1, pName);
             ResultSet rs = ps.executeQuery();
-            List<Long> rsJobs = new ArrayList<>();
-            while (rs.next()) {
-                rsJobs.add(rs.getLong(1));
-            }
-            ps = con.prepareStatement("SELECT id,description,offensive,valueInCombat,reqLevel FROM skills WHERE name=?");
-            ps.setString(1, pName);
-            rs = ps.executeQuery();
             if (rs.next()) {
                 Skill rsSkill = new Skill();
                 rsSkill.setId(rs.getLong(1));
@@ -133,7 +125,7 @@ public class SkillsDaoImpl implements ISkillsDao {
                 rsSkill.setOffensive(rs.getBoolean(3));
                 rsSkill.setValueInCombat(rs.getLong(4));
                 rsSkill.setReqLevel(rs.getLong(5));
-                rsSkill.setReqJobIds(rsJobs);
+                rsSkill.setReqJobIds(getJobsById(rs.getLong(1)));
                 return rsSkill;
             }
 
@@ -160,14 +152,16 @@ public class SkillsDaoImpl implements ISkillsDao {
     }
 
     @Override
-    public List<SkillBase> availableSkils(long pHeroLevel, long pJobId) {
+    public List<SkillBase> availableSkils(long pHeroId,long pHeroLevel, long pJobId) {
         List<SkillBase> rsList = new ArrayList<>();
         try {
-            PreparedStatement ps = con.prepareStatement("SELECT skills.id, skills.name, skills.description,"
-                    + " skills.offensive, skills.valueInCombat FROM skills INNER JOIN skills_for_job ON "
-                    + "skills.id=skills_for_job.skill_id where skills_for_job.job_id=? and skills.reqLevel>=?");
-            ps.setLong(1, pJobId);
-            ps.setLong(2, pHeroLevel);
+            PreparedStatement ps = con.prepareStatement("SELECT skills.id, skills.name, skills.description, skills.offensive, skills.valueInCombat "
+                    + "FROM skills INNER JOIN skills_for_job "
+                    + "ON skills.id=skills_for_job.skill_id "
+                    + "WHERE skills.id NOT IN (SELECT skill_id FROM skills_of_heroes WHERE hero_id=?) and skills_for_job.job_id=? and skills.reqLevel>=?");                                                                  
+            ps.setLong(1, pHeroId);
+            ps.setLong(2, pJobId);
+            ps.setLong(3, pHeroLevel);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 SkillBase rsSkill = new SkillBase();
@@ -201,7 +195,32 @@ public class SkillsDaoImpl implements ISkillsDao {
                 rsSkill.setReqJobIds(getJobsById(rs.getLong(1)));
                 rsList.add(rsSkill);
             }
-        } catch (Exception e) {
+        } catch (SQLException ex) {
+            Logger.getLogger(SkillsDaoImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return rsList;
+    }
+    
+    @Override
+    public List<SkillBase> notUsedByHero (long pHeroId){
+    List<SkillBase> rsList = new ArrayList<>();
+        try {
+            PreparedStatement ps = con.prepareStatement("SELECT id, name, description, offensive, valueInCombat "
+                    + "FROM skills "
+                    + "WHERE id NOT IN (SELECT skill_id FROM skills_of_heroes WHERE hero_id=?)");                                                                              
+            ps.setLong(1, pHeroId);           
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                SkillBase rsSkill = new SkillBase();
+                rsSkill.setId(rs.getLong(1));
+                rsSkill.setName(rs.getString(2));
+                rsSkill.setDescription(rs.getString(3));
+                rsSkill.setOffensive(rs.getBoolean(4));
+                rsSkill.setValueInCombat(rs.getLong(5));
+                rsList.add(rsSkill);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(SkillsDaoImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
         return rsList;
     }
@@ -216,7 +235,8 @@ public class SkillsDaoImpl implements ISkillsDao {
                 rsJobs.add(rs.getLong(1));
             }
             return rsJobs;
-        } catch (Exception e) {
+        } catch (SQLException ex) {
+            Logger.getLogger(SkillsDaoImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
     }

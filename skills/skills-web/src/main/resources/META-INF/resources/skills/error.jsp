@@ -10,7 +10,7 @@
          <jsp:include page="/user/menu.jsp"></jsp:include>
          <br>
         <div class="alert alert-danger" role="alert">
-            <h1 class="text-center">A képességek használata foglalkozásokhoz kötött. Így legalább egy munkának léteznie kell. </h1>
+            <h1 class="text-center">${message}</h1>
         </div>        
     </body>
 </html>

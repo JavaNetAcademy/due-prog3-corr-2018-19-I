@@ -1,5 +1,6 @@
 package hu.javanetacademy.hoe.skills.dao.model;
 
+import java.util.List;
 
 /**
  * @author Kovacs Maria
@@ -14,7 +15,7 @@ public interface IHeroSkillsDao {
 
     public HeroSkill get(long pSkillId, long pHeroId);
     
-    public long knownLevel(long skillId, long pHeroId);
+    public List<HeroSkill> skillsByHero( long pHeroId) ;
 
 }
 

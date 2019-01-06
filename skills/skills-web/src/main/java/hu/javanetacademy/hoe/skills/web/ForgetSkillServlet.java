@@ -1,7 +1,9 @@
-package hu.javanetacademy.hoe.skills.skills.web;
+package hu.javanetacademy.hoe.skills.web;
 
+import hu.javanetacademy.hoe.skills.dao.model.HeroSkill;
+import hu.javanetacademy.hoe.skills.dao.model.Skill;
+import hu.javanetacademy.hoe.skills.sercice.object.HeroSkillsServiceImpl;
 import hu.javanetacademy.hoe.skills.sercice.object.SkillsServiceImpl;
-import hu.javanetacademy.hoe.skills.sercice.object.exceptions.UsedByHeroException;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,10 +14,8 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * @author Kovacs Maria
  */
-@WebServlet(name = "DelSkillServlet", urlPatterns = {"/delskill"})
-public class DelSkillServlet extends HttpServlet {
-
-    
+@WebServlet(name = "ForgetSkillServlet", urlPatterns = {"/forgetskill"})
+public class ForgetSkillServlet extends HttpServlet {
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -40,22 +40,11 @@ public class DelSkillServlet extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-     protected void doPost(HttpServletRequest request, HttpServletResponse response)
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-         SkillsServiceImpl skillServ = new SkillsServiceImpl();
-         boolean delOk =true;
-         String delMessage ="Sikeres törles";
-         try {
-             skillServ.delete(Long.parseLong(request.getParameter("skillId")));         
-        } catch (UsedByHeroException ex) {
-            delMessage="Nem törölhetö, mert megtanulta már egy hős";
-            delOk=false;
-        } catch(Exception ex){
-            delMessage="Baj van";
-            delOk=false;
-        }
-         request.setAttribute("delMessage", delMessage);
-         getServletContext().getRequestDispatcher("/skills/modskills.jsp").forward(request,response);
+        HeroSkillsServiceImpl hSkillServ = new HeroSkillsServiceImpl();
+        hSkillServ.forget(Long.parseLong(request.getParameter("selectedSkillId")), Long.parseLong(request.getParameter("selectedHeroId")));
+        getServletContext().getRequestDispatcher("/heroskills").forward(request, response);
     }
 
     /**

@@ -1,18 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package hu.javanetacademy.hoe.skills.skills.web;
+package hu.javanetacademy.hoe.skills.web;
 
+import hu.javanetacademy.hoe.job.model.Job;
 import hu.javanetacademy.hoe.job.service.JobService;
 import hu.javanetacademy.hoe.skills.dao.model.Skill;
 import hu.javanetacademy.hoe.skills.sercice.object.SkillsServiceImpl;
-import hu.javanetacademy.hoe.skills.sercice.object.exceptions.NoJobForSkillException;
-import hu.javanetacademy.hoe.skills.sercice.object.exceptions.NoNameForSkillException;
-import hu.javanetacademy.hoe.skills.sercice.object.exceptions.NoRequiredLevelException;
-import hu.javanetacademy.hoe.skills.sercice.object.exceptions.NoValueInCombatException;
-import hu.javanetacademy.hoe.skills.sercice.object.exceptions.UsedSkillNameException;
+import hu.javanetacademy.hoe.skills.sercice.object.exceptions.SkillsException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -25,11 +17,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- *
  * @author Kovacs Maria
  */
-@WebServlet(name = "ModSkillsServlet", urlPatterns = {"/modskills"})
-public class ModSkillsServlet extends HttpServlet {
+@WebServlet(name = "SkillsServlet", urlPatterns = {"/skills"})
+public class SkillsServlet extends HttpServlet {
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -44,12 +35,19 @@ public class ModSkillsServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        SkillsServiceImpl skillServ = new SkillsServiceImpl();
-        Skill sk = skillServ.get(Long.parseLong(request.getParameter("skillId")));
-        request.setAttribute("modSk", sk);
         JobService jobServ = new JobService();
-        request.setAttribute("jobList", jobServ.getJobList());
-        getServletContext().getRequestDispatcher("/skills/modskills.jsp").include(request, response);
+        List<Job> jobList = jobServ.getJobList();
+        if (jobList == null || jobList.isEmpty()) {
+            request.setAttribute("message","A képességek használata foglalkozásokhoz kötött. Így legalább egy munkának léteznie kell.");
+            getServletContext().getRequestDispatcher("/skills/error.jsp").include(request, response);
+        } else {
+
+            SkillsServiceImpl skillServ = new SkillsServiceImpl();
+            request.setAttribute("skillList", skillServ.getAll());
+
+            request.setAttribute("jobList", jobServ.getJobList());
+            getServletContext().getRequestDispatcher("/skills/adminindex.jsp").include(request, response);
+        }
     }
 
     /**
@@ -65,9 +63,7 @@ public class ModSkillsServlet extends HttpServlet {
             throws ServletException, IOException {
         Skill newSkill = new Skill();
         Map<String, String> messages = new HashMap<>();
-        boolean modOk = false;
-        request.setAttribute("messages", messages);
-        newSkill.setId(Long.parseLong(request.getParameter("skillId")));
+        boolean inputOk = false;
         newSkill.setName(request.getParameter("pname"));
         newSkill.setDescription(request.getParameter("pdescription"));
         newSkill.setOffensive(Boolean.valueOf(request.getParameter("poffensive")));
@@ -91,27 +87,31 @@ public class ModSkillsServlet extends HttpServlet {
                 }
             }
             newSkill.setReqJobIds(jobIds);
-            skillServ.modify(newSkill.getId(), newSkill);
-            modOk = true;
-        } catch (NoNameForSkillException ex) {
-            messages.put("pname", ex.getMessage());
-        } catch (UsedSkillNameException ex) {
-            messages.put("pname", ex.getMessage());
-        } catch (NoValueInCombatException ex) {
-            messages.put("pvalueInCombat", ex.getMessage());
-        } catch (NoRequiredLevelException ex) {
-            messages.put("preqLevel", ex.getMessage());
-        } catch (NoJobForSkillException ex) {
-            messages.put("JobIds", ex.getMessage());
+            skillServ.create(newSkill);
+            inputOk = true;
+        } catch (SkillsException ex) {
+            switch(ex.errCode){
+                case 0:
+                     messages.put("pname", ex.getMessage());
+                     break;
+                case 1:
+                     messages.put("pname", ex.getMessage());
+                     break;
+                case 2:
+                     messages.put("pvalueInCombat", ex.getMessage());
+                     break;
+                case 3:
+                     messages.put("preqLevel", ex.getMessage());
+                     break;
+                case 4:
+                     messages.put("JobIds", ex.getMessage());
+                     break;                
+            }                                
         }
-
-        String modMessage;
-        if (modOk) {
-            modMessage = "Sikeres módosítás";
-        } else {
-            modMessage = "Nem sikerült módosítani";
+        if (!inputOk) {
+            request.setAttribute("userinput", newSkill);
         }
-        request.setAttribute("modMessage", modMessage);
+        request.setAttribute("messages", messages);
         doGet(request, response);
     }
 

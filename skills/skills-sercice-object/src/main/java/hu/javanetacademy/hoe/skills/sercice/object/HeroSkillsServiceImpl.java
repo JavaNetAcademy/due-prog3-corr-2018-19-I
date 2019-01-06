@@ -1,37 +1,41 @@
 package hu.javanetacademy.hoe.skills.sercice.object;
 
-import hu.javanetacademy.hoe.base.util.CustomException;
 import hu.javanetacademy.hoe.skills.dao.jdbc.HeroSkillsDaoImpl;
 import hu.javanetacademy.hoe.skills.dao.model.HeroSkill;
 import hu.javanetacademy.hoe.skills.dao.model.IHeroSkillsDao;
+import hu.javanetacademy.hoe.skills.sercice.object.exceptions.SkillErrors;
+import hu.javanetacademy.hoe.skills.sercice.object.exceptions.SkillsException;
+import java.util.List;
 
 /**
  * @author Kovacs Maria
  */
 public class HeroSkillsServiceImpl {
-    
-   private IHeroSkillsDao dao = new HeroSkillsDaoImpl();
-   
+
+    private IHeroSkillsDao dao = new HeroSkillsDaoImpl();
+
     public HeroSkill learn(HeroSkill pHeroSkill) {
-        HeroSkill temp = dao.learn(pHeroSkill);
-        if (temp != null) {
-            return temp;
+        if (dao.get(pHeroSkill.getId(), pHeroSkill.getHeroId()) == null) {
+            return dao.learn(pHeroSkill);
         } else {
-            throw new CustomException();
+            throw new SkillsException(SkillErrors.ALRAEDY_KNOWN);
         }
     }
 
     public HeroSkill modifyLevel(HeroSkill pHeroSkill) {
-        long temp = dao.knownLevel(pHeroSkill.getId(), pHeroSkill.getHeroId());
-        if (temp > 0) {
+        if (dao.get(pHeroSkill.getId(), pHeroSkill.getHeroId()) != null) {
             return dao.modifyLevel(pHeroSkill);
         } else {
-            throw new CustomException();
+            throw new SkillsException(SkillErrors.NOT_KNOWN);
         }
     }
-        
+
     public boolean forget(long pSkillId, long pHeroId) {
-        return dao.forget(pSkillId, pHeroId);
+        if (dao.get(pSkillId, pHeroId) != null) {
+            return dao.forget(pSkillId, pHeroId);
+        } else {
+            throw new SkillsException(SkillErrors.NOT_KNOWN);
+        }                
     }
 
     public HeroSkill get(long pSkillId, long pHeroId) {
@@ -39,13 +43,12 @@ public class HeroSkillsServiceImpl {
         if (temp != null) {
             return temp;
         } else {
-            throw new CustomException();
+            throw new SkillsException(SkillErrors.NOT_KNOWN);
         }
     }
 
-    public long knownLevel(long skillId, long pHeroId){
-        return dao.knownLevel(skillId, pHeroId);
-    }
-    
-}
+    public List<HeroSkill> skillsByHero(long pHeroId) {
+        return dao.skillsByHero(pHeroId);
 
+    }
+}

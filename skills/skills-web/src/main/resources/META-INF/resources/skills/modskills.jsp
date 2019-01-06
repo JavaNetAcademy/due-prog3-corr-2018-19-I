@@ -10,8 +10,7 @@
     <body>
         <jsp:include page="/user/menu.jsp"></jsp:include>
             <div class="container">
-                <fieldset>
-                    <legend>A módositani kínánt képesség</legend>
+                <h3>A módositani kínánt képesség</h3>
                     <form action="/modskills" method="post">
                         <table class="table">
                             <thead class="thead-dark">
@@ -41,8 +40,18 @@
                                         </c:choose>
                                     </select>
                                 </td>
-                                <td><input type="number" name="pvalueInCombat"value="${modSk.valueInCombat}"></td>
-                                <td><input type="number" name="preqLevel" value="${modSk.reqLevel}"></td>
+                                <td>
+                                    <c:choose>
+                                                <c:when test="${modSk.valueInCombat==0}"><input type="number" name="pvalueInCombat"> </c:when>
+                                                <c:otherwise><input type="number" name="pvalueInCombat" value="${modSk.valueInCombat}"> </c:otherwise>
+                                            </c:choose>
+                                </td>
+                                <td>
+                                    <c:choose>
+                                                <c:when test="${modSk.reqLevel==0}"><input type="number" name="preqLevel"></c:when>
+                                                <c:otherwise><input type="number" name="preqLevel" value="${modSk.reqLevel}"></c:otherwise>
+                                            </c:choose>
+                                </td>                                       
                             </tr>
                             <tr>
                                 <td> <span class="error">${messages.pname}</span></td>
@@ -54,7 +63,7 @@
                         </tbody>                
                     </table>
                     <br>
-                    <label>Azok a foglalkozások, ahol engedélyezett a képesseg:</label>         
+                    <h3>Azok a foglalkozások, ahol engedélyezett a képesseg:</h3>
                     <table class="table">
                         <thead class="thead-dark">
                             <tr>                   
@@ -88,13 +97,12 @@
                     </table>
                     <br>
                     <input type="hidden" value="${modSk.id}" name="skillId" />
-
                     <div class="row">                         
                         <div class="col-6 col-md-4">
                             <input type="submit" value="Módosit" class="btn btn-primary">
                         </div> 
                         <div class="col-12 col-md-8">
-                            <label>${modMessage}</label>
+                            ${modMessage}
                         </div>
                     </div>
                 </form>
@@ -106,14 +114,13 @@
                             <input type="submit" value="Töröl" class="btn btn-primary">
                         </div>
                         <div class="col-12 col-md-8">
-                            <label>${delMessage}</label>
+                            ${delMessage}
                         </div>
                     </div>
                 </form>
                 <div style="float: right;">
                     <a href="skills"><input type="submit" value="Vissza" class="btn btn-primary"></a>
                 </div>  
-            </fieldset>
         </div>
     </body>
 </html>
