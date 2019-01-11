@@ -58,3 +58,7 @@
 /skills/skills-dao-jdbc/target/
 /skills/skills-web/target/
 /skills/skills-sercice-object/target/
+/vehicles/vehicles-dao-model/target/
+/vehicles/vehicles-service-object/target/
+/vehicles/vehicles-dao-jdbc/target/
+/vehicles/vehicles-web/target/

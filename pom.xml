@@ -23,6 +23,7 @@
         <module>factories</module>
         <module>culturalbuilding</module>
         <module>skills</module>
+        <module>vehicles</module>
     </modules>
     <dependencies>
         <dependency>
