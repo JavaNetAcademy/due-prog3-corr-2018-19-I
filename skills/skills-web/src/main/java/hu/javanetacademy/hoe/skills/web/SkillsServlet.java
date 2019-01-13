@@ -38,7 +38,7 @@ public class SkillsServlet extends HttpServlet {
         JobService jobServ = new JobService();
         List<Job> jobList = jobServ.getJobList();
         if (jobList == null || jobList.isEmpty()) {
-            request.setAttribute("message","A képességek használata foglalkozásokhoz kötött. Így legalább egy munkának léteznie kell.");
+            request.setAttribute("message", "A képességek használata foglalkozásokhoz kötött. Így legalább egy munkának léteznie kell.");
             getServletContext().getRequestDispatcher("/skills/error.jsp").include(request, response);
         } else {
 
@@ -90,23 +90,27 @@ public class SkillsServlet extends HttpServlet {
             skillServ.create(newSkill);
             inputOk = true;
         } catch (SkillsException ex) {
-            switch(ex.errCode){
+            switch (ex.errCode) {
                 case 0:
-                     messages.put("pname", ex.getMessage());
-                     break;
+                    messages.put("pname", ex.getMessage());
+                    break;
                 case 1:
-                     messages.put("pname", ex.getMessage());
-                     break;
+                    messages.put("pname", ex.getMessage());
+                    break;
                 case 2:
-                     messages.put("pvalueInCombat", ex.getMessage());
-                     break;
+                    if (messages.get("pvalueInCombat") == null) {
+                        messages.put("pvalueInCombat", ex.getMessage());
+                    }
+                    break;
                 case 3:
-                     messages.put("preqLevel", ex.getMessage());
-                     break;
+                    if (messages.get("preqLevel") == null) {
+                        messages.put("preqLevel", ex.getMessage());
+                    }
+                    break;
                 case 4:
-                     messages.put("JobIds", ex.getMessage());
-                     break;                
-            }                                
+                    messages.put("JobIds", ex.getMessage());
+                    break;
+            }
         }
         if (!inputOk) {
             request.setAttribute("userinput", newSkill);

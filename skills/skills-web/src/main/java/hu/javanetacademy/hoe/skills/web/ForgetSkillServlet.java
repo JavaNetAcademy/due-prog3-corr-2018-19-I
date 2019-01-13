@@ -1,9 +1,6 @@
 package hu.javanetacademy.hoe.skills.web;
 
-import hu.javanetacademy.hoe.skills.dao.model.HeroSkill;
-import hu.javanetacademy.hoe.skills.dao.model.Skill;
 import hu.javanetacademy.hoe.skills.sercice.object.HeroSkillsServiceImpl;
-import hu.javanetacademy.hoe.skills.sercice.object.SkillsServiceImpl;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

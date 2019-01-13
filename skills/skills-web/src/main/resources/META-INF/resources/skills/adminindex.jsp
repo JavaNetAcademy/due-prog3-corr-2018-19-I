@@ -105,7 +105,7 @@
                 <div><input type="submit" value="Hozzáad" class="btn btn-primary"></div>            
             </form>
             <hr><br>
-            <form action="/skills" method="get">                               
+            <c:if test="${not empty skillList}">
                 <h3>Az eddigi tanulható kepessegek</h3>
                 <table class="table table-striped">
                     <thead class="text-center">
@@ -168,7 +168,7 @@
                         </c:forEach>
                     </tbody>
                 </table>
-            </form>
+            </c:if>
         </div>
     </body>
 </html>
