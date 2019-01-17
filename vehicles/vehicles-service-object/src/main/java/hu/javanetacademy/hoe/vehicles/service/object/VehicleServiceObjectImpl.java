@@ -4,6 +4,7 @@ import hu.javanetacademy.hoe.vehicles.dao.jdbc.VehicleDaoJDBCImpl;
 import hu.javanetacademy.hoe.vehicles.dao.model.Vehicle;
 import hu.javanetacademy.hoe.vehicles.dao.model.VehicleDao;
 import hu.javanetacademy.hoe.base.util.CustomException;
+import java.util.List;
 
 /**
  *
@@ -11,7 +12,7 @@ import hu.javanetacademy.hoe.base.util.CustomException;
  */
 public class VehicleServiceObjectImpl {
 
-    VehicleDao dao = new VehicleDaoJDBCImpl();
+    private VehicleDao dao = new VehicleDaoJDBCImpl();
 
     public Vehicle Create(Vehicle vehicle) {
         Vehicle existing = dao.GetByName(vehicle.getName());
@@ -20,5 +21,9 @@ public class VehicleServiceObjectImpl {
         }
         throw new CustomException();
 //        return null;
+    }
+
+    public List<Vehicle> GetAll() {
+        return dao.GetAll();
     }
 }

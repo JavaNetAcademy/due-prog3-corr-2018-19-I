@@ -75,11 +75,11 @@
 			<artifactId>skills-web</artifactId>
 			<version>1.0-SNAPSHOT</version>
 		</dependency>
-		<!--<dependency>
+		<dependency>
 			<groupId>hu.javanetacademy.hoe.vehicles</groupId>
 			<artifactId>vehicles-web</artifactId>
 			<version>1.0-SNAPSHOT</version>
-		</dependency>-->
+		</dependency>
 		<dependency>
 			<groupId>javax</groupId>
 			<artifactId>javaee-web-api</artifactId>

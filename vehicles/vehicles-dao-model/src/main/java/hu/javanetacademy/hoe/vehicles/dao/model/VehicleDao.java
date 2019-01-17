@@ -1,5 +1,7 @@
 package hu.javanetacademy.hoe.vehicles.dao.model;
 
+import java.util.List;
+
 /**
  *
  * @author jbasiszta
@@ -7,6 +9,8 @@ package hu.javanetacademy.hoe.vehicles.dao.model;
 public interface VehicleDao {
     public Vehicle Create(Vehicle vehicle);
     public Vehicle GetByName(String name);
+    public List<Vehicle> GetAll();
+
 //    public Vehicle Create(
 //            String name,
 //            String description,

@@ -6,6 +6,7 @@
         <artifactId>vehicles</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
+    <groupId>hu.javanetacademy.hoe.vehicles</groupId>
     <artifactId>vehicles-dao-jdbc</artifactId>
     <packaging>jar</packaging>
     <dependencies>

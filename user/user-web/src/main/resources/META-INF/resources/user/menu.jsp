@@ -24,6 +24,7 @@
                     <a class="dropdown-item" href="../armor">Armor</a>
                     <a class="dropdown-item" href="../settlements">Settlements</a>
                     <a class="dropdown-item" href="../factories">Factories</a>
+                    <a class="dropdown-item" href="../vehicles">Vehicles</a>
                     <a class="dropdown-item" href="../skills">Skills</a>
                 </div>
             </li>

@@ -13,6 +13,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -21,14 +23,14 @@ import java.util.logging.Logger;
  * @author jbasiszta
  */
 public class VehicleDaoJDBCImpl implements VehicleDao {
-    private  Connection con;
-    
+
+    private Connection con;
+
     public VehicleDaoJDBCImpl() {
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            con=DriverManager.getConnection("jdbc:mysql://localhost/hoe?useSSL=false", "hoe", "hoe");
-        }
-        catch(Exception e) {
+            con = DriverManager.getConnection("jdbc:mysql://localhost/hoe?useSSL=false", "hoe", "hoe");
+        } catch (Exception e) {
             System.exit(100);
         }
     }
@@ -47,11 +49,11 @@ public class VehicleDaoJDBCImpl implements VehicleDao {
             ps.setLong(5, vehicle.getMaxSpeedTimeout());
             ps.setLong(6, vehicle.getMaxLoad());
             ps.setLong(7, vehicle.getCrew());
-            ps.setLong(8, vehicle.getPrice());                    
-                    
+            ps.setLong(8, vehicle.getPrice());
+
             ps.executeUpdate();
-            ResultSet rs= ps.getGeneratedKeys();
-            if(rs.next()){
+            ResultSet rs = ps.getGeneratedKeys();
+            if (rs.next()) {
                 vehicle.setId(rs.getLong(1));
                 return vehicle;
             }
@@ -70,7 +72,7 @@ public class VehicleDaoJDBCImpl implements VehicleDao {
             ps.setString(1, name);
 
             ResultSet rs = ps.executeQuery();
-            if(rs.next()){
+            if (rs.next()) {
                 Vehicle vehicle = new Vehicle();
                 vehicle.setId(rs.getLong(1));
                 vehicle.setName(rs.getString(2));
@@ -83,6 +85,36 @@ public class VehicleDaoJDBCImpl implements VehicleDao {
                 vehicle.setPrice(rs.getLong(9));
                 return vehicle;
             }
+        } catch (SQLException ex) {
+            Logger.getLogger(VehicleDaoJDBCImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+
+    @Override
+    public List<Vehicle> GetAll() {
+        try {
+            PreparedStatement ps = con.prepareStatement(
+                    "SELECT id, name, description, avgSpeed, maxSpeed, maxSpeedTimeout, maxLoad, crew, price "
+                    + "FROM vehicle");
+
+            ResultSet rs = ps.executeQuery();
+            List<Vehicle> results = new ArrayList<>();
+
+            while (rs.next()) {
+                Vehicle vehicle = new Vehicle();
+                vehicle.setId(rs.getLong(1));
+                vehicle.setName(rs.getString(2));
+                vehicle.setDescription(rs.getString(3));
+                vehicle.setAvgSpeed(rs.getLong(4));
+                vehicle.setMaxSpeed(rs.getLong(5));
+                vehicle.setMaxSpeedTimeout(rs.getLong(6));
+                vehicle.setMaxLoad(rs.getLong(7));
+                vehicle.setCrew(rs.getLong(8));
+                vehicle.setPrice(rs.getLong(9));
+                results.add(vehicle);
+            }
+            return results;
         } catch (SQLException ex) {
             Logger.getLogger(VehicleDaoJDBCImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
