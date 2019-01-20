@@ -1,7 +1,7 @@
 package hu.javanetacademy.hoe.speciesspecialproperty.service.object;
 
 import hu.javanetacademy.hoe.base.util.CustomException;
-import hu.javanetacademy.hoe.ssp.dao.jdbc.SspJDBCDAOImpl;
+import hu.javanetacademy.hoe.speciesspecialproperty.dao.jdbc.SspJDBCDAOImpl;
 
 import hu.javanetacademy.hoe.speciesspecialproperty.dao.model.SpeciesSpecialProperty;
 
@@ -16,7 +16,7 @@ public class speciesspecialpropertyService {
     private SpeciesSpecialPropertyDao dao = new SspJDBCDAOImpl();
     
     public SpeciesSpecialProperty create (SpeciesSpecialProperty pNewSsp){
-        if (dao.getByName(pNewSsp.getName()) != null){ //Ha létezik már ilyen nevű ssp az adott ID-jű fajnak, akkor 
+        if (dao.getByName(pNewSsp.getName()) != null){ //Ha létezik már ilyen nevű SpeciesSpecialProperty az adott ID-jű fajnak, akkor 
             throw new CustomException(); //hibát jelez,
         }
         else {
