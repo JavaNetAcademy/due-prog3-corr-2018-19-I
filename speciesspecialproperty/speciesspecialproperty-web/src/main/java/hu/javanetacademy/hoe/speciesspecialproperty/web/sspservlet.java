@@ -1,4 +1,4 @@
-package hu.javanetacademy.hoe.ssp.web;
+package hu.javanetacademy.hoe.speciesspecialproperty.web;
 
 import java.io.IOException;
 
