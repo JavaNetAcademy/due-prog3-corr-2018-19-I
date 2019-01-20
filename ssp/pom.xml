@@ -9,7 +9,7 @@
     <artifactId>ssp</artifactId>
     <packaging>pom</packaging>
     <modules>
-        <module>ssp-dao-model</module>
+        <module>SpeciesSpecialProperty-dao-model</module>
         <module>ssp-web</module>
         <module>ssp-dao-jdbc</module>
         <module>ssp-service-object</module>

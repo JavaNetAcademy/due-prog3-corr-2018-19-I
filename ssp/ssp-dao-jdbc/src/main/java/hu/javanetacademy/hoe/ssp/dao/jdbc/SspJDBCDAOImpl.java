@@ -1,7 +1,6 @@
 package hu.javanetacademy.hoe.ssp.dao.jdbc;
 
-import hu.javanetacademy.hoe.ssp.dao.model.Ssp;
-import hu.javanetacademy.hoe.ssp.dao.model.SspDAOInterface;
+import hu.javanetacademy.hoe.ssp.dao.model.SpeciesSpecialProperty;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -12,13 +11,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
+import hu.javanetacademy.hoe.ssp.dao.model.SpeciesSpecialPropertyDao;
 
 /**
- *
- * @author user
+  * @author sviktor75 / Szabó Viktor / vts4gv
  */
-public class SspJDBCDAOImpl implements SspDAOInterface {
+public class SspJDBCDAOImpl implements SpeciesSpecialPropertyDao {
 
     // Kapcsolat létrehozása az adatbázissal
     private Connection con;
@@ -33,12 +31,15 @@ public class SspJDBCDAOImpl implements SspDAOInterface {
     }
 
     @Override
-    public Ssp create(Ssp pSsp) {
+    public SpeciesSpecialProperty create (SpeciesSpecialProperty pSsp){
            try {
-            PreparedStatement ps = con.prepareStatement("INSERT INTO ssp (name,description,speciesid,level,damage,defense) VALUES(?,?,?,1,1,1)", Statement.RETURN_GENERATED_KEYS);
+            PreparedStatement ps = con.prepareStatement("INSERT INTO ssp (name,description,speciesid,level,damage,defense) VALUES(?,?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, pSsp.getName());
             ps.setString(2, pSsp.getDescription());
             ps.setLong(3, pSsp.getSpeciesid());
+            ps.setInt(4, pSsp.getLevel());
+            ps.setInt(5, pSsp.getDamage());
+            ps.setInt(6, pSsp.getDefense());
             ps.executeUpdate();
             ResultSet rs = ps.getGeneratedKeys();
             if (rs.next()) {
@@ -48,17 +49,78 @@ public class SspJDBCDAOImpl implements SspDAOInterface {
         } catch (SQLException ex) {
             Logger.getLogger(SspJDBCDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return null;     
+        return null;   
+    }
+    
+    @Override
+    public SpeciesSpecialProperty getById(long pSspId){
+        try{
+            PreparedStatement ps =con.prepareStatement("SELECT id,name,description,speciesid,level,damage,defense FROM ssp WHERE id=?");
+            ps.setLong(1,pSspId);
+            ResultSet rs=ps.executeQuery();
+            if(rs.next()){
+               SpeciesSpecialProperty res=new SpeciesSpecialProperty();
+               res.setId(rs.getLong(1));
+               res.setName(rs.getString(2));
+               res.setDescription(rs.getString(3));
+               res.setSpeciesid(rs.getLong(4));
+               res.setLevel(rs.getInt(5));
+               res.setDamage(rs.getInt(6));
+               res.setDefense(rs.getInt(7));
+            return res;
+        }
+        }catch (SQLException ex) {
+            Logger.getLogger(SspJDBCDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;   
+    }
+    
+    @Override
+    public SpeciesSpecialProperty getByName(String pSspName){
+        try{
+            PreparedStatement ps =con.prepareStatement("SELECT id,name,description,speciesid,level,damage,defense FROM ssp WHERE name=?");
+            ps.setString(1,pSspName);
+            ResultSet rs=ps.executeQuery();
+            if(rs.next()){
+               SpeciesSpecialProperty res=new SpeciesSpecialProperty();
+               res.setId(rs.getLong(1));
+               res.setName(rs.getString(2));
+               res.setDescription(rs.getString(3));
+               res.setSpeciesid(rs.getLong(4));
+               res.setLevel(rs.getInt(5));
+               res.setDamage(rs.getInt(6));
+               res.setDefense(rs.getInt(7));
+            return res;
+        }
+        }catch (SQLException ex) {
+            Logger.getLogger(SspJDBCDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;   
+    }
+    
+    
+    @Override
+    public SpeciesSpecialProperty delete (long specialPropertyId) {
+        try {
+            PreparedStatement ps = con.prepareStatement("DELETE FROM ssp WHERE id=?", Statement.RETURN_GENERATED_KEYS);
+            ps.setLong(1, specialPropertyId);
+            ps.executeUpdate();
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(SspJDBCDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
     }
 
+/*
         @Override
-    public Ssp modify(long pSspId) {
+    public PropertyLevelAttribute modify(long pSspId) {
         try {
             PreparedStatement ps = con.prepareStatement("UPDATE ssp set name,description,speciesid,level,damage,defense WHERE id=?");
             ps.setLong(1, pSspId);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
-                Ssp res = new Ssp();
+                PropertyLevelAttribute res = new PropertyLevelAttribute();
                 res.setName(rs.getString(1));
                 res.setDescription(rs.getString(2));
                 res.setSpeciesid(rs.getLong(3));
@@ -73,52 +135,17 @@ public class SspJDBCDAOImpl implements SspDAOInterface {
         return null;
     }
 
+    */
     
     @Override
-    public Ssp get(long pSspId) {
-        try {
-            PreparedStatement ps = con.prepareStatement("SELECT id,name,description,speciesid,level,damage,defense FROM ssp WHERE id=?");
-            ps.setLong(1, pSspId);
-            ResultSet rs = ps.executeQuery();
-            if (rs.next()) {
-                Ssp res = new Ssp();
-                res.setId(rs.getLong(1));
-                res.setName(rs.getString(2));
-                res.setDescription(rs.getString(3));
-                res.setSpeciesid(rs.getLong(4));
-                res.setLevel(rs.getInt(5));
-                res.setDamage(rs.getInt(6));
-                res.setDefense(rs.getInt(7));
-                return res;
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(SspJDBCDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return null;
-    }
-
-    @Override
-    public Ssp delete(long pSspId) {
-        try {
-            PreparedStatement ps = con.prepareStatement("DELETE FROM ssp WHERE id=?", Statement.RETURN_GENERATED_KEYS);
-            ps.setLong(1, pSspId);
-            ps.executeUpdate();
-            return null;
-        } catch (SQLException ex) {
-            Logger.getLogger(SspJDBCDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return null;
-    }
-
-    @Override
-    public List<Ssp> getForSpecies(long pSpeciesId) {
-        List<Ssp> result = new ArrayList<>();
+    public List<SpeciesSpecialProperty> getBySpecies(long pSpeciesId){
+        List<SpeciesSpecialProperty> result = new ArrayList<>();
         try {
             PreparedStatement ps = con.prepareStatement("SELECT id,name,description,speciesid,level,damage,defense FROM ssp WHERE speciesid=?");
             ps.setLong(1, pSpeciesId);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                Ssp res = new Ssp();
+                SpeciesSpecialProperty res = new SpeciesSpecialProperty();
                 res.setId(rs.getLong(1));
                 res.setName(rs.getString(2));
                 res.setDescription(rs.getString(3));
@@ -133,25 +160,4 @@ public class SspJDBCDAOImpl implements SspDAOInterface {
         }
         return result;
     }
-
-    @Override
-    public boolean existByName(String pSspName, long pSpeciesId) {
-        try {
-            PreparedStatement ps = con.prepareStatement("SELECT name=? FROM ssp WHERE name=? AND speciesid=?", Statement.RETURN_GENERATED_KEYS);
-            ps.setString(1, pSspName);
-            ps.setString(2, pSspName);
-            ps.setLong(3, pSpeciesId);
-            ResultSet rs = ps.executeQuery();
-            
-            if (rs.next()) {
-                return true;
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(SspJDBCDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return false;
-    }
-    
-    
-    
 }

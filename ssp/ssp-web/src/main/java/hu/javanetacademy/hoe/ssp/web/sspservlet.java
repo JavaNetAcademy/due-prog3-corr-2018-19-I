@@ -9,8 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- *
- * @author user
+  * @author sviktor75 / Szabó Viktor / vts4gv
  */
 @WebServlet(name = "sspservice", urlPatterns = { "/ssp/ssp" })
 public class sspservlet extends HttpServlet {

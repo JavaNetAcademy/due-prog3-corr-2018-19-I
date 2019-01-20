@@ -11,7 +11,7 @@
     <dependencies>
         <dependency>
             <groupId>hu.javanetacademy.hoe.ssp</groupId>
-            <artifactId>ssp-dao-model</artifactId>
+            <artifactId>SpeciesSpecialProperty-dao-model</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
         <dependency>
@@ -20,7 +20,7 @@
             <version>1.0-SNAPSHOT</version>
         </dependency>
         <dependency>
-            <groupId>hu.javanetacademy.hoe.base</groupId>
+            <groupId>${project.groupId}</groupId>
             <artifactId>base-util</artifactId>
             <version>${project.version}</version>
         </dependency>

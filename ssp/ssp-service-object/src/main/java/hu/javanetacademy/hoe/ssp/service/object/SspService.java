@@ -1,27 +1,22 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package hu.javanetacademy.hoe.ssp.service.object;
 
 import hu.javanetacademy.hoe.base.util.CustomException;
 import hu.javanetacademy.hoe.ssp.dao.jdbc.SspJDBCDAOImpl;
-import hu.javanetacademy.hoe.ssp.dao.model.SspDAOInterface;
-import hu.javanetacademy.hoe.ssp.dao.model.Ssp;
+
+import hu.javanetacademy.hoe.ssp.dao.model.SpeciesSpecialProperty;
 
 import java.util.List;
+import hu.javanetacademy.hoe.ssp.dao.model.SpeciesSpecialPropertyDao;
 
 /**
- *
- * @author user
+ * @author sviktor75 / Szabó Viktor / vts4gv
  */
 public class SspService {
     
-    private SspDAOInterface dao = new SspJDBCDAOImpl();
+    private SpeciesSpecialPropertyDao dao = new SspJDBCDAOImpl();
     
-    public Ssp create (Ssp pNewSsp){
-        if (dao.existByName(pNewSsp.getName(),pNewSsp.getSpeciesid())){ //Ha létezik már ilyen nevű ssp az adott ID-jű fajnak, akkor 
+    public SpeciesSpecialProperty create (SpeciesSpecialProperty pNewSsp){
+        if (dao.getByName(pNewSsp.getName()) != null){ //Ha létezik már ilyen nevű ssp az adott ID-jű fajnak, akkor 
             throw new CustomException(); //hibát jelez,
         }
         else {
@@ -29,22 +24,22 @@ public class SspService {
         }
     }
     
-    public Ssp delete(long sspId){
-        return dao.delete(sspId);
+    public SpeciesSpecialProperty delete(long pSspId){
+        return dao.delete(pSspId);
     }
     
-    public Ssp get(long pSspId){
-        return dao.get(pSspId);
+    public SpeciesSpecialProperty getById(long pSspId){
+        return dao.getById(pSspId);
     }
     
-    public List<Ssp> getFroSpecies(long pSpeciesId){
-        return dao.getForSpecies(pSpeciesId);
+    public List<SpeciesSpecialProperty> getBySpecies(long pSpeciesId){
+        return dao.getBySpecies(pSpeciesId);
     }
-    
-    public Ssp modify(long pSspId){
+    /*
+    public PropertyLevelAttribute modify(long pSspId){
         return dao.modify(pSspId);
     }
-    
+    */
     
     
 }
