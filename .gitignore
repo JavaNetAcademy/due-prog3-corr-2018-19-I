@@ -62,3 +62,10 @@
 /vehicles/vehicles-service-object/target/
 /vehicles/vehicles-dao-jdbc/target/
 /vehicles/vehicles-web/target/
+/SpeciesSpecialProperty/SpeciesSpecialProperty-dao-model/target/
+/SpeciesSpecialProperty/ssp-dao-jdbc/target/
+/SpeciesSpecialProperty/ssp-service-object/target/
+/SpeciesSpecialProperty/ssp-web/target/
+/SpeciesSpecialProperty/speciesspecialproperty-web/target/
+/SpeciesSpecialProperty/speciesspecialproperty-dao-jdbc/target/
+/SpeciesSpecialProperty/speciesspecialproperty-service-object/target/

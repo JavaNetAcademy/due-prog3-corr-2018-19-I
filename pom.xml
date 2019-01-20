@@ -14,12 +14,11 @@
         <module>pets</module>
         <module>job</module>
         <module>armor</module>
-        <!-- <module>specfajkepessegek</module> -->
+        <module>speciesspecialproperty</module>
         <module>empires</module>
         <module>goodsOfEmpires</module>
         <module>weapons</module>
         <module>settlements</module>
-        <module>ssp</module>
         <module>factories</module>
         <module>culturalbuilding</module>
         <module>skills</module>
