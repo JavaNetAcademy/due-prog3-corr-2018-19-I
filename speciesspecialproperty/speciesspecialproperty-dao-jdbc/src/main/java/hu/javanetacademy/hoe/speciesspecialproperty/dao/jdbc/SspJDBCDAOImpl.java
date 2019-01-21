@@ -24,7 +24,7 @@ public class SspJDBCDAOImpl implements SpeciesSpecialPropertyDao {
     public SspJDBCDAOImpl() {
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            con = DriverManager.getConnection("jdbc:mysql://sql.autodl.de/hoe?useSSL=false", "hoe", "hoe");
+            con = DriverManager.getConnection("jdbc:mysql://localhost/hoe?useSSL=false", "hoe", "hoe");
         } catch (Exception e) {
             System.exit(100);
         }

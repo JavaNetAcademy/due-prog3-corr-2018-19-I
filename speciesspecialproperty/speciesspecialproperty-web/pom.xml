@@ -12,6 +12,16 @@
 	
     <dependencies>
         <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>speciesspecialproperty-dao-model</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>speciesspecialproperty-dao-jdbc</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
             <groupId>javax</groupId>
             <artifactId>javaee-web-api</artifactId>
             <version>7.0</version>
