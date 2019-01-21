@@ -7,9 +7,9 @@ import java.util.List;
  * @author jbasiszta
  */
 public interface VehicleDao {
-    public Vehicle Create(Vehicle vehicle);
-    public Vehicle GetByName(String name);
-    public List<Vehicle> GetAll();
+    public Vehicle create(Vehicle vehicle);
+    public Vehicle getByName(String name);
+    public List<Vehicle> getAll();
 
 //    public Vehicle Create(
 //            String name,

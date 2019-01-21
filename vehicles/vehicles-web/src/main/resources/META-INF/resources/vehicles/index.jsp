@@ -42,7 +42,7 @@
 
             <form action="vehicles" method="post">
                 <fieldset>
-                    <legend>Vehicle letrehozas</legend>
+                    <legend>Uj Vehicle  hozzaadasa</legend>
 
                     <table class="table">
                         <thead>
@@ -54,25 +54,39 @@
                         <tbody>
                             <tr>
                                 <td><label>Nev</label></td>
-                                <td><input name="pname" class="form-control" /></td>
+                                <td><input type="textarea" name="pname" class="form-control" /></td>
                             </tr>
                             <tr>
                                 <td><label>Leiras</label></td>
-                                <td><input type="textarea" name="pdesc" class="form-control" /></td>
+                                <td><input type="textarea" name="pdescription" class="form-control" /></td>
                             </tr>
                             <tr>
-                                <td><label>Hos</label></td>
-                                <td>
-                                    <select name="hero" class="form-control">
-                                        <c:forEach items="${heroList}" var="x">
-                                            <option value="${x.id}"><c:out value="${x.name}" /></option>
-                                        </c:forEach>
-                                    </select>
-                                </td>
+                                <td><label>Atlagsebesseg</label></td>
+                                <td><input type="textarea" name="pavgspeed" class="form-control" /></td>
+                            </tr>
+                            <tr>
+                                <td><label>Legnagyobb sebesseg</label></td>
+                                <td><input type="textarea" name="pmaxspeed" class="form-control" /></td>
+                            </tr>
+                            <tr>
+                                <td><label>Legnagyobb sebesseg mennyi ideig tarthato</label></td>
+                                <td><input type="textarea" name="pmaxspeedtimeout" class="form-control" /></td>
+                            </tr>
+                            <tr>
+                                <td><label>Maximum rakomany sulya</label></td>
+                                <td><input type="textarea" name="pmaxload" class="form-control" /></td>
+                            </tr>
+                            <tr>
+                                <td><label>Szukseges legenyseg letszama</label></td>
+                                <td><input type="textarea" name="pcrew" class="form-control" /></td>
+                            </tr>
+                            <tr>
+                                <td><label>Ar</label></td>
+                                <td><input type="textarea" name="pprice" class="form-control" /></td>
                             </tr>
                         </tbody>
                     </table>
-                    <div><input type="submit" value="Hozzáad" class="btn btn-primary"></div>
+                    <div><input type="submit" value="Hozzaad" class="btn btn-primary"></div>
             </form>
         </div>
     </body>

@@ -36,10 +36,11 @@ public class VehicleDaoJDBCImpl implements VehicleDao {
     }
 
     @Override
-    public Vehicle Create(Vehicle vehicle) {
+    public Vehicle create(Vehicle vehicle) {
         try {
             PreparedStatement ps = con.prepareStatement(
-                    "INSERT INTO vehicle(name, description, avgSpeed, maxSpeed, maxSpeedTimeout, maxLoad, crew, price) "
+
+                    "INSERT INTO vehicle(name, description, avg_speed, max_speed, max_speed_timeout, max_load, crew, price) "
                     + "VALUES(?,?,?,?,?,?,?,?)",
                     Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, vehicle.getName());
@@ -64,10 +65,10 @@ public class VehicleDaoJDBCImpl implements VehicleDao {
     }
 
     @Override
-    public Vehicle GetByName(String name) {
+    public Vehicle getByName(String name) {
         try {
             PreparedStatement ps = con.prepareStatement(
-                    "SELECT id, name, description, avgSpeed, maxSpeed, maxSpeedTimeout, maxLoad, crew, price "
+                    "SELECT id, name, description, avg_speed, max_speed, max_speed_timeout, max_load, crew, price "
                     + "FROM vehicle WHERE name=?");
             ps.setString(1, name);
 
@@ -92,10 +93,10 @@ public class VehicleDaoJDBCImpl implements VehicleDao {
     }
 
     @Override
-    public List<Vehicle> GetAll() {
+    public List<Vehicle> getAll() {
         try {
             PreparedStatement ps = con.prepareStatement(
-                    "SELECT id, name, description, avgSpeed, maxSpeed, maxSpeedTimeout, maxLoad, crew, price "
+                    "SELECT id, name, description, avg_speed, max_speed, max_speed_timeout, max_load, crew, price "
                     + "FROM vehicle");
 
             ResultSet rs = ps.executeQuery();

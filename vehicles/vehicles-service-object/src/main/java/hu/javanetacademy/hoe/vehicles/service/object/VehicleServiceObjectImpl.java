@@ -14,16 +14,16 @@ public class VehicleServiceObjectImpl {
 
     private VehicleDao dao = new VehicleDaoJDBCImpl();
 
-    public Vehicle Create(Vehicle vehicle) {
-        Vehicle existing = dao.GetByName(vehicle.getName());
+    public Vehicle create(Vehicle vehicle) {
+        Vehicle existing = dao.getByName(vehicle.getName());
         if (existing == null) {
-            return dao.Create(vehicle);
+            return dao.create(vehicle);
         }
         throw new CustomException();
 //        return null;
     }
 
-    public List<Vehicle> GetAll() {
-        return dao.GetAll();
+    public List<Vehicle> getAll() {
+        return dao.getAll();
     }
 }
