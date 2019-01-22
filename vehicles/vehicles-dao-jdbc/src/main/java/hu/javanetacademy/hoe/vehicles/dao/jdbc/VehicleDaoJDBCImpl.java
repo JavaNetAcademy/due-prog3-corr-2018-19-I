@@ -93,6 +93,34 @@ public class VehicleDaoJDBCImpl implements VehicleDao {
     }
 
     @Override
+    public Vehicle getById(long id) {
+        try {
+            PreparedStatement ps = con.prepareStatement(
+                    "SELECT id, name, description, avg_speed, max_speed, max_speed_timeout, max_load, crew, price "
+                    + "FROM vehicle WHERE id=?");
+            ps.setLong(1, id);
+
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                Vehicle vehicle = new Vehicle();
+                vehicle.setId(rs.getLong(1));
+                vehicle.setName(rs.getString(2));
+                vehicle.setDescription(rs.getString(3));
+                vehicle.setAvgSpeed(rs.getLong(4));
+                vehicle.setMaxSpeed(rs.getLong(5));
+                vehicle.setMaxSpeedTimeout(rs.getLong(6));
+                vehicle.setMaxLoad(rs.getLong(7));
+                vehicle.setCrew(rs.getLong(8));
+                vehicle.setPrice(rs.getLong(9));
+                return vehicle;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(VehicleDaoJDBCImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+
+    @Override
     public List<Vehicle> getAll() {
         try {
             PreparedStatement ps = con.prepareStatement(
@@ -120,5 +148,16 @@ public class VehicleDaoJDBCImpl implements VehicleDao {
             Logger.getLogger(VehicleDaoJDBCImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
+    }
+
+    @Override
+    public void delete(long id) {
+        try {
+            PreparedStatement ps = con.prepareStatement("DELETE FROM vehicle WHERE id=?", Statement.RETURN_GENERATED_KEYS);
+            ps.setLong(1, id);
+            ps.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(VehicleDaoJDBCImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }

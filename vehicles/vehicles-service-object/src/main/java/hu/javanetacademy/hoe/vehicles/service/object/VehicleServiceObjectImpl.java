@@ -12,7 +12,7 @@ import java.util.List;
  */
 public class VehicleServiceObjectImpl {
 
-    private VehicleDao dao = new VehicleDaoJDBCImpl();
+    private final VehicleDao dao = new VehicleDaoJDBCImpl();
 
     public Vehicle create(Vehicle vehicle) {
         Vehicle existing = dao.getByName(vehicle.getName());
@@ -20,10 +20,18 @@ public class VehicleServiceObjectImpl {
             return dao.create(vehicle);
         }
         throw new CustomException();
-//        return null;
+    }
+
+    public Vehicle getById(long id) {
+        Vehicle vehicle = dao.getById(id);
+        return vehicle;
     }
 
     public List<Vehicle> getAll() {
         return dao.getAll();
+    }
+
+    public void delete(long id) {
+        dao.delete(id);
     }
 }

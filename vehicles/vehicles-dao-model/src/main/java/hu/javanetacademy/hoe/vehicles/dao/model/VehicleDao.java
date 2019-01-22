@@ -9,7 +9,9 @@ import java.util.List;
 public interface VehicleDao {
     public Vehicle create(Vehicle vehicle);
     public Vehicle getByName(String name);
+    public Vehicle getById(long id);
     public List<Vehicle> getAll();
+    public void delete(long id);
 
 //    public Vehicle Create(
 //            String name,

@@ -16,7 +16,7 @@
                         <table class="table">
                             <thead>
                                 <tr>
-                                    <th>Nev (leiras)</th>
+                                    <th>Név (leírás)</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -27,11 +27,11 @@
                                         <a class="btn btn-light" href="<c:url value="/vehicleedit">
                                                <c:param name="vehicleid" value="${item.id}"/>
                                            </c:url>"
-                                           >Szerkesztes</a>
+                                           >Szerkesztés</a>
                                         <a class="btn btn-danger" href="<c:url value="/vehicledelete">
                                                <c:param name="vehicleid" value="${item.id}"/>
                                            </c:url>"
-                                           >Torles</a>
+                                           >Törlés</a>
                                     </td>
                                 </tr>
                             </c:forEach>
@@ -42,7 +42,7 @@
 
             <form action="vehicles" method="post">
                 <fieldset>
-                    <legend>Uj Vehicle  hozzaadasa</legend>
+                    <legend>Új Vehicle  hozzáadása</legend>
 
                     <table class="table">
                         <thead>
@@ -53,35 +53,35 @@
                         </thead>
                         <tbody>
                             <tr>
-                                <td><label>Nev</label></td>
+                                <td><label>Név</label></td>
                                 <td><input type="textarea" name="pname" class="form-control" /></td>
                             </tr>
                             <tr>
-                                <td><label>Leiras</label></td>
+                                <td><label>Leírás</label></td>
                                 <td><input type="textarea" name="pdescription" class="form-control" /></td>
                             </tr>
                             <tr>
-                                <td><label>Atlagsebesseg</label></td>
+                                <td><label>Átlagsebesség</label></td>
                                 <td><input type="textarea" name="pavgspeed" class="form-control" /></td>
                             </tr>
                             <tr>
-                                <td><label>Legnagyobb sebesseg</label></td>
+                                <td><label>Legnagyobb sebesség</label></td>
                                 <td><input type="textarea" name="pmaxspeed" class="form-control" /></td>
                             </tr>
                             <tr>
-                                <td><label>Legnagyobb sebesseg mennyi ideig tarthato</label></td>
+                                <td><label>Legnagyobb sebesség mennyi ideig tartható</label></td>
                                 <td><input type="textarea" name="pmaxspeedtimeout" class="form-control" /></td>
                             </tr>
                             <tr>
-                                <td><label>Maximum rakomany sulya</label></td>
+                                <td><label>Maximum rakomány súlya</label></td>
                                 <td><input type="textarea" name="pmaxload" class="form-control" /></td>
                             </tr>
                             <tr>
-                                <td><label>Szukseges legenyseg letszama</label></td>
+                                <td><label>Szükséges legénység létszáma</label></td>
                                 <td><input type="textarea" name="pcrew" class="form-control" /></td>
                             </tr>
                             <tr>
-                                <td><label>Ar</label></td>
+                                <td><label>Ár</label></td>
                                 <td><input type="textarea" name="pprice" class="form-control" /></td>
                             </tr>
                         </tbody>
