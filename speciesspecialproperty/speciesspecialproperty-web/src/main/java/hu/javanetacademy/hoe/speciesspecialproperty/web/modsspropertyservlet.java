@@ -14,8 +14,8 @@ import javax.servlet.http.HttpServletResponse;
 /**
   * @author sviktor75 / Szabó Viktor / vts4gv
  */
-@WebServlet(name = "SpeciesSpecialPropertyServlet", urlPatterns = { "/speciesspecialproperty" })
-public class SpeciesSpecialPropertyServlet extends HttpServlet {
+@WebServlet(name = "modsspropertyservlet", urlPatterns = { "/modssproperty" })
+public class modsspropertyservlet extends HttpServlet {
 
     /**
      *
@@ -28,33 +28,15 @@ public class SpeciesSpecialPropertyServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         
-        //response.getWriter().print("Fajok spéci tulajdonságainál vagyok.");
-        
         speciesspecialpropertyService sspservice = new speciesspecialpropertyService();
         request.setAttribute("ssplist", sspservice.getSpeciesList());
         
         SpeciesService speciesservice = new SpeciesService();
         request.setAttribute("speciesList", speciesservice.getSpeciesList());
         
-        getServletContext().getRequestDispatcher("/speciesspecialproperty/adminindex.jsp").include(request, response);
+        getServletContext().getRequestDispatcher("/speciesspecialproperty/modssproperty.jsp").include(request, response);
         
-        /*
-        
-        //Species feltöltése listához
-        
-        SpeciesService speciesservice = new SpeciesService();
-	List<Species> speciesList = speciesservice.getSpeciesList();
-        
-        if (speciesList == null || speciesList.isEmpty()){
-            getServletContext().getRequestDispatcher("/speciesspecialproperty/error.jsp").include(request, response);
-        }
-        else{
-            request.setAttribute("speciesList", speciesList);
-            getServletContext().getRequestDispatcher("/speciesspecialproperty/adminindex.jsp").include(request, response);
-        }
-       
-            
-        */      
+
 	}
         
     /**

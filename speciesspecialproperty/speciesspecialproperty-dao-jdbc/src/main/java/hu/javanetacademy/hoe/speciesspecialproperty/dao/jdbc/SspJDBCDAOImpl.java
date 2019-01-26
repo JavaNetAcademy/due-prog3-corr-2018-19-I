@@ -160,4 +160,27 @@ public class SspJDBCDAOImpl implements SpeciesSpecialPropertyDao {
         }
         return result;
     }
+    
+    @Override
+    public List<SpeciesSpecialProperty> getSpeciesSpecialPropertyList(){
+        List<SpeciesSpecialProperty> result = new ArrayList<>();
+        try {
+            PreparedStatement ps = con.prepareStatement("SELECT id,name,description,speciesid,level,damage,defense FROM ssp WHERE speciesid=?");
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                SpeciesSpecialProperty res = new SpeciesSpecialProperty();
+                res.setId(rs.getLong(1));
+                res.setName(rs.getString(2));
+                res.setDescription(rs.getString(3));
+                res.setSpeciesid(rs.getLong(4));
+                res.setLevel(rs.getInt(5));
+                res.setDamage(rs.getInt(6));
+                res.setDefense(rs.getInt(7));
+                result.add(res);
+               }
+        } catch (SQLException ex) {
+            Logger.getLogger(SspJDBCDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return result;
+    }
 }

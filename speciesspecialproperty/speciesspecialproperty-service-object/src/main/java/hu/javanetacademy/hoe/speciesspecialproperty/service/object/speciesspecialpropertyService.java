@@ -31,6 +31,10 @@ public class speciesspecialpropertyService {
     public SpeciesSpecialProperty getById(long pSspId){
         return dao.getById(pSspId);
     }
+
+    public List<SpeciesSpecialProperty> getSpeciesList() {
+        return dao.getSpeciesSpecialPropertyList();
+    }
     
     public List<SpeciesSpecialProperty> getBySpecies(long pSpeciesId){
         return dao.getBySpecies(pSpeciesId);

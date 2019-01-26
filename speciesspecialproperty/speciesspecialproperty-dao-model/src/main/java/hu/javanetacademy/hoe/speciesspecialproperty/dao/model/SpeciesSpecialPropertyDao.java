@@ -13,5 +13,6 @@ public interface SpeciesSpecialPropertyDao {
     public SpeciesSpecialProperty delete (long specialPropertyId);
    // public void modify (long specialPropertyId); //tulajdonságonként egy-egy
     
+    public List<SpeciesSpecialProperty> getSpeciesSpecialPropertyList();
     public List<SpeciesSpecialProperty> getBySpecies(long pSpeciesId);
 }
