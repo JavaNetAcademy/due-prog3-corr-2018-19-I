@@ -1,5 +1,6 @@
 package hu.javanetacademy.hoe.speciesspecialproperty.web;
 
+import hu.javanetacademy.hoe.speciesspecialproperty.dao.model.SpeciesSpecialProperty;
 import hu.javanetacademy.hoe.species.service.SpeciesService;
 import hu.javanetacademy.hoe.speciesspecialproperty.service.object.speciesspecialpropertyService;
 
@@ -17,24 +18,19 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet(name = "SpeciesSpecialPropertyServlet", urlPatterns = { "/speciesspecialproperty" })
 public class SpeciesSpecialPropertyServlet extends HttpServlet {
 
-    /**
-     *
-     * @param request
-     * @param response
-     * @throws ServletException
-     * @throws IOException
-     */
     @Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         
         //response.getWriter().print("Fajok spéci tulajdonságainál vagyok.");
         
-        speciesspecialpropertyService sspservice = new speciesspecialpropertyService();
-        request.setAttribute("ssplist", sspservice.getSpeciesList());
-        
         SpeciesService speciesservice = new SpeciesService();
+        speciesspecialpropertyService sspservice = new speciesspecialpropertyService();
+        
+        request.setAttribute("ssplist", sspservice.getSpeciesList());
         request.setAttribute("speciesList", speciesservice.getSpeciesList());
+        
+        
         
         getServletContext().getRequestDispatcher("/speciesspecialproperty/adminindex.jsp").include(request, response);
         
@@ -66,7 +62,9 @@ public class SpeciesSpecialPropertyServlet extends HttpServlet {
      */
     @Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+	
+
+        
         
         
         }

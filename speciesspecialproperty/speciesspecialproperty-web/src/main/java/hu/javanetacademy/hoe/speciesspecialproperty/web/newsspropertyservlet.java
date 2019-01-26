@@ -1,5 +1,6 @@
 package hu.javanetacademy.hoe.speciesspecialproperty.web;
 
+import hu.javanetacademy.hoe.speciesspecialproperty.dao.model.SpeciesSpecialProperty;
 import hu.javanetacademy.hoe.species.service.SpeciesService;
 import hu.javanetacademy.hoe.speciesspecialproperty.service.object.speciesspecialpropertyService;
 
@@ -17,13 +18,6 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet(name = "newsspropertyservlet", urlPatterns = { "/newssproperty" })
 public class newsspropertyservlet extends HttpServlet {
 
-    /**
-     *
-     * @param request
-     * @param response
-     * @throws ServletException
-     * @throws IOException
-     */
     @Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -39,18 +33,17 @@ public class newsspropertyservlet extends HttpServlet {
 
 	}
         
-    /**
-     *
-     * @param request
-     * @param response
-     * @throws ServletException
-     * @throws IOException
-     */
     @Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+        SpeciesSpecialProperty newSsp = new SpeciesSpecialProperty();
+        newSsp.setName(request.getParameter("sspname"));
+        newSsp.setDescription(request.getParameter("sspdesc"));
+        newSsp.setSpeciesid(Long.parseLong(request.getParameter("sp.id")));
+        newSsp.setLevel(Integer.parseInt(request.getParameter("ssplevel")));
+        newSsp.setDefense(Integer.parseInt(request.getParameter("sspdefense")));
+        newSsp.setDamage(Integer.parseInt(request.getParameter("sspdamage")));   
         
         
-        }
-
+    }
 }
