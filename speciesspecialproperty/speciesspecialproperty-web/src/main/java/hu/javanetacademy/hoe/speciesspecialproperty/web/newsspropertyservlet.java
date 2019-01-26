@@ -22,16 +22,14 @@ public class newsspropertyservlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         
-        speciesspecialpropertyService sspservice = new speciesspecialpropertyService();
-        request.setAttribute("ssplist", sspservice.getSpeciesList());
-        
         SpeciesService speciesservice = new SpeciesService();
+        speciesspecialpropertyService sspservice = new speciesspecialpropertyService();
+        
+        request.setAttribute("ssplist", sspservice.getSpeciesList());
         request.setAttribute("speciesList", speciesservice.getSpeciesList());
         
         getServletContext().getRequestDispatcher("/speciesspecialproperty/newssproperty.jsp").include(request, response);
-        
-
-	}
+    }
         
     @Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -39,11 +37,14 @@ public class newsspropertyservlet extends HttpServlet {
         SpeciesSpecialProperty newSsp = new SpeciesSpecialProperty();
         newSsp.setName(request.getParameter("sspname"));
         newSsp.setDescription(request.getParameter("sspdesc"));
-        newSsp.setSpeciesid(Long.parseLong(request.getParameter("sp.id")));
+        newSsp.setSpeciesid(Long.parseLong(request.getParameter("species")));
         newSsp.setLevel(Integer.parseInt(request.getParameter("ssplevel")));
         newSsp.setDefense(Integer.parseInt(request.getParameter("sspdefense")));
         newSsp.setDamage(Integer.parseInt(request.getParameter("sspdamage")));   
         
+        speciesspecialpropertyService sspservice = new speciesspecialpropertyService();
+        sspservice.create(newSsp);
         
+        doGet(request, response);
     }
 }
