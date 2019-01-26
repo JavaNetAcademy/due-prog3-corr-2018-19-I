@@ -5,10 +5,21 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>SpeciesSpecialProperty</title>                         
+        <title>Species Special Property</title>                         
     </head>    
     <body>        
         <jsp:include page="/user/menu.jsp"></jsp:include>
  
+        <div>
+        <label>Species</label>
+            <select name="species">
+                <c:forEach items="${speciesList}" var="species">
+                    <option value="${species.id}"><c:out value="${species.name}" /></option>
+                </c:forEach>
+            </select>
+        </div>
+
+        
+        
     </body>
 </html>

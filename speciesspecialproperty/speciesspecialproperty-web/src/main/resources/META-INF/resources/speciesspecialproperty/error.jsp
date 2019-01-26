@@ -5,13 +5,13 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Species Special Property - Error Page</title>
     </head>
     <body>
          <jsp:include page="/user/menu.jsp"></jsp:include>
          <br>
         <div class="alert alert-danger" role="alert">
-            <h1 class="text-center">${message}</h1>
+            <h3>Hiba!</h3>
         </div>        
     </body>
 </html>

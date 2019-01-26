@@ -1,12 +1,9 @@
 package hu.javanetacademy.hoe.speciesspecialproperty.web;
 
 import hu.javanetacademy.hoe.species.model.Species;
-import hu.javanetacademy.hoe.speciesspecialproperty.dao.model.SpeciesSpecialProperty;
-
+import hu.javanetacademy.hoe.species.service.SpeciesService;
 
 import java.io.IOException;
-import java.util.HashSet;
-import java.util.Set;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -18,7 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
   * @author sviktor75 / Szabó Viktor / vts4gv
  */
-@WebServlet(name = "sspservice", urlPatterns = { "/ssp" })
+@WebServlet(name = "SpeciesSpecialPropertyServlet", urlPatterns = { "/speciesspecialproperty" })
 public class SpeciesSpecialPropertyServlet extends HttpServlet {
 
        
@@ -30,13 +27,18 @@ public class SpeciesSpecialPropertyServlet extends HttpServlet {
         //response.getWriter().print("Fajok spéci tulajdonságainál vagyok.");
         
         //Species feltöltése listához
-        List<Species> species = (List<Species>)request.getAttribute("getSpeciesList");
-        if (species==null || species.size()==0){
-            getServletContext().getRequestDispatcher("/ssp/error.jsp").include(request, response);
+        
+        SpeciesService speciesservice = new SpeciesService();
+	//request.setAttribute("speciesList", speciesservice.getSpeciesList());
+        List<Species> speciesList = speciesservice.getSpeciesList();
+        
+        //List<Species> speciesList = (List<Species>)request.getAttribute("getSpeciesList");
+        if (speciesList == null || speciesList.isEmpty()){
+            getServletContext().getRequestDispatcher("/speciesspecialproperty/error.jsp").include(request, response);
         }
         else{
-            //
-            getServletContext().getRequestDispatcher("/ssp/adminindex.jsp").include(request, response);
+            request.setAttribute("speciesList", speciesList);
+            getServletContext().getRequestDispatcher("/speciesspecialproperty/adminindex.jsp").include(request, response);
         }
        
             

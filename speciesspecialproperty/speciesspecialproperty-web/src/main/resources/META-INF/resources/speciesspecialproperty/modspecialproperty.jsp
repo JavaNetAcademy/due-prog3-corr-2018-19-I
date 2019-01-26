@@ -5,7 +5,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Skills</title>
+        <title>Species Special Property - Modify Page</title>
     </head>
     <body>
         <jsp:include page="/user/menu.jsp"></jsp:include>
