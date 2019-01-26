@@ -23,6 +23,7 @@
         <module>culturalbuilding</module>
         <module>skills</module>
         <module>vehicles</module>
+        <module>naturaldisaster</module>
     </modules>
     <dependencies>
         <dependency>
