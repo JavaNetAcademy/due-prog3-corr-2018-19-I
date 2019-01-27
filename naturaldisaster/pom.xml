@@ -7,8 +7,11 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
     <artifactId>naturaldisaster</artifactId>
+	<name>naturaldisaster</name>
     <packaging>pom</packaging>
     <modules>
         <module>naturaldisaster-dao-model</module>
+        <module>naturaldisaster-dao-jdbc</module>
+        <module>naturaldisaster-service</module>
     </modules>
 </project>
