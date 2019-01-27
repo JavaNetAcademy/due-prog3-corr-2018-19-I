@@ -21,6 +21,20 @@
                 <a class="nav-link active" href="#">Faj speciális képességének törlése</a>
             </nav>
 
+            <form class="form-inline" action="/delssproperty" method="post">
+                <div class="form-group mb-2">
+                    <h3>Faj választása: </h3>
+                </div>
+                <div class="form-group mx-sm-3 mb-2">
+                    <select class="form-control" name="selectedSspId">
+                        <c:forEach items="${sspropertyList}" var="ssproperty">
+                            <option value="${ssproperty.id}">${ssproperty.name}</option>
+                        </c:forEach>
+                    </select>
+                </div>
+                <div><input type="submit" value="Töröl" class="btn btn-primary mb-2"></div>
+            </form>
+
         
         
     </body>

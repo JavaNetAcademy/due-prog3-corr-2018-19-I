@@ -27,19 +27,7 @@ public class SpeciesSpecialPropertyServlet extends HttpServlet {
         //response.getWriter().print("Fajok spéci tulajdonságainál vagyok.");
         
         SpeciesService speciesservice = new SpeciesService();
-        request.setAttribute("speciesList", speciesservice.getSpeciesList());
-        
-        //request.setAttribute("test", "valami");
-        
-        getServletContext().getRequestDispatcher("/speciesspecialproperty/adminindex.jsp").include(request, response);
-        
-        
-        /*
-        
-        //Species feltöltése listához
-        
-        SpeciesService speciesservice = new SpeciesService();
-	List<Species> speciesList = speciesservice.getSpeciesList();
+        List<Species> speciesList = speciesservice.getSpeciesList();
         
         if (speciesList == null || speciesList.isEmpty()){
             getServletContext().getRequestDispatcher("/speciesspecialproperty/error.jsp").include(request, response);
@@ -48,9 +36,9 @@ public class SpeciesSpecialPropertyServlet extends HttpServlet {
             request.setAttribute("speciesList", speciesList);
             getServletContext().getRequestDispatcher("/speciesspecialproperty/adminindex.jsp").include(request, response);
         }
-       
-            
-        */      
+        
+//request.setAttribute("test", "valami");
+        
 	}
         
     @Override

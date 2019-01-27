@@ -33,7 +33,7 @@ public class speciesspecialpropertyService {
         return dao.getById(pSspId);
     }
 
-    public List<SpeciesSpecialProperty> getSpecialPropertyList() {
+    public List<SpeciesSpecialProperty> getSpeciesSpecialPropertyList() {
         return dao.getSpeciesSpecialPropertyList();
     }
     
