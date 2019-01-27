@@ -25,7 +25,7 @@ public class newsspropertyservlet extends HttpServlet {
         SpeciesService speciesservice = new SpeciesService();
         speciesspecialpropertyService sspservice = new speciesspecialpropertyService();
         
-        request.setAttribute("ssplist", sspservice.getSpeciesList());
+        request.setAttribute("ssplist", sspservice.getSpecialPropertyList());
         request.setAttribute("speciesList", speciesservice.getSpeciesList());
         
         getServletContext().getRequestDispatcher("/speciesspecialproperty/newssproperty.jsp").include(request, response);

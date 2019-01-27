@@ -9,7 +9,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-        <title>JSP Page</title>
+        <title>Species Special Property - Create Page</title>
     </head>
     <body>        
     <jsp:include page="/user/menu.jsp"></jsp:include>
@@ -21,7 +21,7 @@
             <a class="nav-link" href="<c:url value="/delssproperty"></c:url>">Faj speciális képességének törlése</a>
         </nav>
         <div class="container">
-            <form action="newssproperty" method="post">
+            <form action="/newssproperty" method="post">
                 <fieldset>
                     <legend>Új speciális képesség létrehozása</legend>
 

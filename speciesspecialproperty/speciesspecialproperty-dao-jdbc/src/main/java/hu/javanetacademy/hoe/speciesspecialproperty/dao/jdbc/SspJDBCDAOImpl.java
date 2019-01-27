@@ -33,7 +33,7 @@ public class SspJDBCDAOImpl implements SpeciesSpecialPropertyDao {
     @Override
     public SpeciesSpecialProperty create (SpeciesSpecialProperty pSsp){
            try {
-            PreparedStatement ps = con.prepareStatement("INSERT INTO ssp (name,description,speciesid,level,damage,defense) VALUES(?,?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
+            PreparedStatement ps = con.prepareStatement("INSERT INTO speciesspecialproperty (name,description,speciesid,level,damage,defense) VALUES(?,?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, pSsp.getName());
             ps.setString(2, pSsp.getDescription());
             ps.setLong(3, pSsp.getSpeciesid());
@@ -55,7 +55,7 @@ public class SspJDBCDAOImpl implements SpeciesSpecialPropertyDao {
     @Override
     public SpeciesSpecialProperty getById(long pSspId){
         try{
-            PreparedStatement ps =con.prepareStatement("SELECT id,name,description,speciesid,level,damage,defense FROM ssp WHERE id=?");
+            PreparedStatement ps =con.prepareStatement("SELECT id,name,description,speciesid,level,damage,defense FROM speciesspecialproperty WHERE id=?");
             ps.setLong(1,pSspId);
             ResultSet rs=ps.executeQuery();
             if(rs.next()){
@@ -78,7 +78,7 @@ public class SspJDBCDAOImpl implements SpeciesSpecialPropertyDao {
     @Override
     public SpeciesSpecialProperty getByName(String pSspName){
         try{
-            PreparedStatement ps =con.prepareStatement("SELECT id,name,description,speciesid,level,damage,defense FROM ssp WHERE name=?");
+            PreparedStatement ps =con.prepareStatement("SELECT id,name,description,speciesid,level,damage,defense FROM speciesspecialproperty WHERE name=?");
             ps.setString(1,pSspName);
             ResultSet rs=ps.executeQuery();
             if(rs.next()){
@@ -102,7 +102,7 @@ public class SspJDBCDAOImpl implements SpeciesSpecialPropertyDao {
     @Override
     public SpeciesSpecialProperty delete (long specialPropertyId) {
         try {
-            PreparedStatement ps = con.prepareStatement("DELETE FROM ssp WHERE id=?", Statement.RETURN_GENERATED_KEYS);
+            PreparedStatement ps = con.prepareStatement("DELETE FROM speciesspecialproperty WHERE id=?", Statement.RETURN_GENERATED_KEYS);
             ps.setLong(1, specialPropertyId);
             ps.executeUpdate();
             
@@ -116,7 +116,7 @@ public class SspJDBCDAOImpl implements SpeciesSpecialPropertyDao {
         @Override
     public PropertyLevelAttribute modify(long pSspId) {
         try {
-            PreparedStatement ps = con.prepareStatement("UPDATE ssp set name,description,speciesid,level,damage,defense WHERE id=?");
+            PreparedStatement ps = con.prepareStatement("UPDATE speciesspecialproperty set name,description,speciesid,level,damage,defense WHERE id=?");
             ps.setLong(1, pSspId);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
@@ -141,7 +141,7 @@ public class SspJDBCDAOImpl implements SpeciesSpecialPropertyDao {
     public List<SpeciesSpecialProperty> getBySpecies(long pSpeciesId){
         List<SpeciesSpecialProperty> result = new ArrayList<>();
         try {
-            PreparedStatement ps = con.prepareStatement("SELECT id,name,description,speciesid,level,damage,defense FROM ssp WHERE speciesid=?");
+            PreparedStatement ps = con.prepareStatement("SELECT id,name,description,speciesid,level,damage,defense FROM speciesspecialproperty WHERE speciesid=?");
             ps.setLong(1, pSpeciesId);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
@@ -165,7 +165,7 @@ public class SspJDBCDAOImpl implements SpeciesSpecialPropertyDao {
     public List<SpeciesSpecialProperty> getSpeciesSpecialPropertyList(){
         List<SpeciesSpecialProperty> result = new ArrayList<>();
         try {
-            PreparedStatement ps = con.prepareStatement("SELECT id,name,description,speciesid,level,damage,defense FROM ssp WHERE speciesid=?");
+            PreparedStatement ps = con.prepareStatement("SELECT id,name,description,speciesid,level,damage,defense FROM speciesspecialproperty WHERE speciesid=?");
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 SpeciesSpecialProperty res = new SpeciesSpecialProperty();

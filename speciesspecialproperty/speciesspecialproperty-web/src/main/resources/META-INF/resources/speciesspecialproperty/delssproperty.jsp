@@ -9,7 +9,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Species Special Property - Main Page</title>
+        <title>Species Special Property - Delete Page</title>
     </head>
     <body>        
         <jsp:include page="/user/menu.jsp"></jsp:include>

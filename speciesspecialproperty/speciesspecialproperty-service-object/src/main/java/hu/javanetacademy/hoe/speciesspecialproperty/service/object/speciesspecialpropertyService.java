@@ -20,7 +20,8 @@ public class speciesspecialpropertyService {
             throw new CustomException(); //hibát jelez,
         }
         else {
-            return dao.create(pNewSsp); //különben létrehozza.
+            dao.create(pNewSsp); //különben létrehozza.
+            return pNewSsp;
         }
     }
     
@@ -32,7 +33,7 @@ public class speciesspecialpropertyService {
         return dao.getById(pSspId);
     }
 
-    public List<SpeciesSpecialProperty> getSpeciesList() {
+    public List<SpeciesSpecialProperty> getSpecialPropertyList() {
         return dao.getSpeciesSpecialPropertyList();
     }
     

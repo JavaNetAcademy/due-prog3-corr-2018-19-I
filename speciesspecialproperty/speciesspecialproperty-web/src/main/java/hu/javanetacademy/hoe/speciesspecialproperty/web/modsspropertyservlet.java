@@ -29,7 +29,7 @@ public class modsspropertyservlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         
         speciesspecialpropertyService sspservice = new speciesspecialpropertyService();
-        request.setAttribute("ssplist", sspservice.getSpeciesList());
+        request.setAttribute("ssplist", sspservice.getSpecialPropertyList());
         
         SpeciesService speciesservice = new SpeciesService();
         request.setAttribute("speciesList", speciesservice.getSpeciesList());

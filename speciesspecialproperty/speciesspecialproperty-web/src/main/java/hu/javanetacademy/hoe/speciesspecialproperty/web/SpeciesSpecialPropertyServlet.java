@@ -1,10 +1,12 @@
 package hu.javanetacademy.hoe.speciesspecialproperty.web;
 
+import hu.javanetacademy.hoe.species.model.Species;
 import hu.javanetacademy.hoe.speciesspecialproperty.dao.model.SpeciesSpecialProperty;
 import hu.javanetacademy.hoe.species.service.SpeciesService;
 import hu.javanetacademy.hoe.speciesspecialproperty.service.object.speciesspecialpropertyService;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -25,14 +27,12 @@ public class SpeciesSpecialPropertyServlet extends HttpServlet {
         //response.getWriter().print("Fajok spéci tulajdonságainál vagyok.");
         
         SpeciesService speciesservice = new SpeciesService();
-        speciesspecialpropertyService sspservice = new speciesspecialpropertyService();
-        
-        request.setAttribute("ssplist", sspservice.getSpeciesList());
         request.setAttribute("speciesList", speciesservice.getSpeciesList());
         
-        
+        //request.setAttribute("test", "valami");
         
         getServletContext().getRequestDispatcher("/speciesspecialproperty/adminindex.jsp").include(request, response);
+        
         
         /*
         
@@ -53,20 +53,20 @@ public class SpeciesSpecialPropertyServlet extends HttpServlet {
         */      
 	}
         
-    /**
-     *
-     * @param request
-     * @param response
-     * @throws ServletException
-     * @throws IOException
-     */
     @Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	
+        speciesspecialpropertyService sspservice = new speciesspecialpropertyService();
+        List<SpeciesSpecialProperty> actualPropertys = sspservice.getBySpecies(Long.parseLong(request.getParameter("selectedSpeciesId")));
+        
+        SpeciesService speciesservice = new SpeciesService();
+        Species selectedSpecies = speciesservice.get(Long.parseLong(request.getParameter("selectedSpeciesId")));
+        
+        request.setAttribute("actualPropertys", actualPropertys);
+        request.setAttribute("selectedSpecies", selectedSpecies);
+        
+        //request.setAttribute("test", request.getParameter("selectedSpeciesId"));
 
-        
-        
-        
+        doGet(request, response);
         }
-
 }
