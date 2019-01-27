@@ -21,7 +21,7 @@ public class speciesspecialpropertyService {
         }
         else {
             dao.create(pNewSsp); //különben létrehozza.
-            return pNewSsp;
+            return null;
         }
     }
     

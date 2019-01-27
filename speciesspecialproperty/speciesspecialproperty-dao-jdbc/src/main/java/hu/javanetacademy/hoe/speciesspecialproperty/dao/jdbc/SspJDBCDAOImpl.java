@@ -165,7 +165,7 @@ public class SspJDBCDAOImpl implements SpeciesSpecialPropertyDao {
     public List<SpeciesSpecialProperty> getSpeciesSpecialPropertyList(){
         List<SpeciesSpecialProperty> result = new ArrayList<>();
         try {
-            PreparedStatement ps = con.prepareStatement("SELECT id,name,description,speciesid,level,damage,defense FROM speciesspecialproperty WHERE speciesid=?");
+            PreparedStatement ps = con.prepareStatement("SELECT * FROM speciesspecialproperty");
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 SpeciesSpecialProperty res = new SpeciesSpecialProperty();
