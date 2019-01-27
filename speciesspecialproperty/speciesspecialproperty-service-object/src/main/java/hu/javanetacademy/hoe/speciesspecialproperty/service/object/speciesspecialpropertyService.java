@@ -33,6 +33,10 @@ public class speciesspecialpropertyService {
         return dao.getById(pSspId);
     }
 
+    public SpeciesSpecialProperty modify(long pSspId, SpeciesSpecialProperty pSsp){
+        return dao.modify(pSspId, pSsp);
+    }
+
     public List<SpeciesSpecialProperty> getSpeciesSpecialPropertyList() {
         return dao.getSpeciesSpecialPropertyList();
     }
@@ -40,11 +44,8 @@ public class speciesspecialpropertyService {
     public List<SpeciesSpecialProperty> getBySpecies(long pSpeciesId){
         return dao.getBySpecies(pSpeciesId);
     }
-    /*
-    public PropertyLevelAttribute modify(long pSspId){
-        return dao.modify(pSspId);
-    }
-    */
+    
+    
     
     
 }

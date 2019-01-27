@@ -112,30 +112,28 @@ public class SspJDBCDAOImpl implements SpeciesSpecialPropertyDao {
         return null;
     }
 
-/*
+
         @Override
-    public PropertyLevelAttribute modify(long pSspId) {
+    public SpeciesSpecialProperty modify(long pSspId, SpeciesSpecialProperty pSsp) {
         try {
-            PreparedStatement ps = con.prepareStatement("UPDATE speciesspecialproperty set name,description,speciesid,level,damage,defense WHERE id=?");
-            ps.setLong(1, pSspId);
-            ResultSet rs = ps.executeQuery();
-            if (rs.next()) {
-                PropertyLevelAttribute res = new PropertyLevelAttribute();
-                res.setName(rs.getString(1));
-                res.setDescription(rs.getString(2));
-                res.setSpeciesid(rs.getLong(3));
-                res.setLevel(rs.getInt(4));
-                res.setDamage(rs.getInt(5));
-                res.setDefense(rs.getInt(6));
-                return res;
-            }
-        } catch (SQLException ex) {
+            PreparedStatement ps = con.prepareStatement("UPDATE speciesspecialproperty set name=?,description=?,speciesid=?,level=?,damage=?,defense=? WHERE id=?", Statement.RETURN_GENERATED_KEYS);
+            ps.setString(1, pSsp.getName());
+            ps.setString(2, pSsp.getDescription());
+            ps.setLong(3, pSsp.getSpeciesid());
+            ps.setInt(4, pSsp.getLevel());
+            ps.setInt(5, pSsp.getDamage());
+            ps.setInt(6, pSsp.getDefense());
+            ps.executeUpdate();
+            ResultSet rs = ps.getGeneratedKeys();
+            return pSsp;
+        }
+        catch (SQLException ex) {
             Logger.getLogger(SspJDBCDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return null;
+        return null;   
     }
 
-    */
+
     
     @Override
     public List<SpeciesSpecialProperty> getBySpecies(long pSpeciesId){
