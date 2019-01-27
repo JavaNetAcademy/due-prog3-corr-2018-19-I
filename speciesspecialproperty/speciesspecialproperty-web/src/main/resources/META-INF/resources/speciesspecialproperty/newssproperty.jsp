@@ -46,26 +46,27 @@
                                 <td>
                                     <select name="species" class="form-control">
                                         <c:forEach items="${speciesList}" var="sp">
-                                            <option value="${sp.id}"><c:out value="${sp.name}" /></option>
+                                            <option value="${sp.id}">${sp.name}</option>
                                         </c:forEach>
                                     </select>
                                 </td>
                             </tr>
                             <tr>
                                 <td><label>Level</label></td>
-                                <td><input type="textarea" name="ssplevel" class="form-control" /></td>
+                                <td><input name="ssplevel" class="form-control" /></td>
                             </tr>
                             <tr>
                                 <td><label>Defense</label></td>
-                                <td><input type="textarea" name="sspdefense" class="form-control" /></td>
+                                <td><input name="sspdefense" class="form-control" /></td>
                             </tr>
                             <tr>
                                 <td><label>Damage</label></td>
-                                <td><input type="textarea" name="sspdamage" class="form-control" /></td>
+                                <td><input name="sspdamage" class="form-control" /></td>
                             </tr>
                         </tbody>
                     </table>
-                    <div><input type="submit" value="Létrehoz" class="btn btn-primary"></div>            
+                    <div><input type="submit" value="Létrehoz" class="btn btn-primary"></div>
+                </fieldset>
             </form>
         </div>
     </body>

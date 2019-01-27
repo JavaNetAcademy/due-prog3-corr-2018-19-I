@@ -21,41 +21,41 @@
             <a class="nav-link" href="<c:url value="/delssproperty"></c:url>">Faj speciális képességének törlése</a>
         </nav>
         <div class="container">
-            <form class="form-inline" action="/speciesspecialproperty" method="post">
-                <div class="form-group mb-2">
-                    <h3>Faj választása: </h3>
-                </div>
-                <div class="form-group mx-sm-3 mb-2">
-                    <select class="form-control" name="selectedSpeciesId">
-                        <c:forEach items="${speciesList}" var="species">
-                            <option value="${species.id}">${species.name}</option>
-                        </c:forEach>
-                    </select>
-                </div>
-                <div><input type="submit" value="Választ" class="btn btn-primary mb-2"></div>
-            </form>
+            <fieldset>
+                <form class="form-inline" action="/speciesspecialproperty" method="post">
+                    <div class="form-group mb-2">
+                        <h3>Faj választása: </h3>
+                    </div>
+                    <div class="form-group mx-sm-3 mb-2">
+                        <select class="form-control" name="selectedSpeciesId">
+                            <c:forEach items="${speciesList}" var="species">
+                                <option value="${species.id}">${species.name}</option>
+                            </c:forEach>
+                        </select>
+                    </div>
+                    <div><input type="submit" value="Választ" class="btn btn-primary mb-2"></div>
+                </form>
 
-            <label name="test">${test}<label>
+            <%--<label name="test">${test}<label>--%>
 
-            <c:if test="${not empty actualPropertys}">
-            <h4> A ${selectedSpecies.name} faj speciális képessegei</h4>    
-            <table class="table-striped">
-                <thead class="text-center">
-                    <tr>
-                        <th>Elnevezés</th><th>Leíras</th><th>Level</th><th>Véderő</th><th>Támadási érték</th>
-                    </tr>
-                </thead>
-                <tbody class="text-center">
-                    <c:forEach items="${actualPropertys}" var="ssp">
+                <c:if test="${not empty actualPropertys}">
+                <h4> A(z) ${selectedSpecies.name} faj speciális képessegei</h4>    
+                <table class="table-striped">
+                    <thead class="text-center">
                         <tr>
-                            <td>${ssp.name}</td><td>${ssp.description}</td><td>${ssp.level}</td><td>${ssp.defense}</td><td>${ssp.damage}</td>
+                            <th>Elnevezés</th><th>Leíras</th><th>Level</th><th>Véderő</th><th>Támadási érték</th>
                         </tr>
-                    </c:forEach>
-                </tbody>
-            </table>
-            </c:if>
-
-
+                    </thead>
+                    <tbody class="text-center">
+                        <c:forEach items="${actualPropertys}" var="ssp">
+                            <tr>
+                                <td>${ssp.name}</td><td>${ssp.description}</td><td>${ssp.level}</td><td>${ssp.defense}</td><td>${ssp.damage}</td>
+                            </tr>
+                        </c:forEach>
+                    </tbody>
+                </table>
+                </c:if>
+            </fieldset>
         </div>
     </body>
 </html>
