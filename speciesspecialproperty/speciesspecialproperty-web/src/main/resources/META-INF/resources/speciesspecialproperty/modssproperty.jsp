@@ -33,37 +33,39 @@
                             </c:forEach>
                         </select>
                     </div>
-                    <div><input type="submit" value="Választ" class="btn btn-primary mb-2"></div>
+                    <div><input type="submit" name="selectSsp" value="Választ" class="btn btn-primary mb-2"></div>
                 </form>
                 
-                <c:if test="${not empty actualProperty}">
-                <h4> A(z) ${actualProperty.name} adatai</h4>    
-                <table class="table-striped">
-                    <thead class="text-center">
-                        <tr>
-                            <th>Elnevezés</th><th>Leíras</th><th>Fajhoz rendelés</th><th>Level</th><th>Véderő</th><th>Támadási érték</th>
-                        </tr>
-                    </thead>
-                    <tbody class="text-center">
-                        <tr>
-                            <td><input name="sspname" value="${actualProperty.name}" disabled /></td>
-                            <td><input name="sspdesc" value="${actualProperty.description}" /></td>
-                            <td>
-                                <select class="form-control" name="selectedSpeciesId">
-                                    <c:forEach items="${speciesList}" var="species">
-                                        <option value="${species.id}">${species.name}</option>
-                                    </c:forEach>
-                                </select>
-                            </td>
-                            <td><input name="ssplevel" value="${actualProperty.level}" /></td>
-                            <td><input name="sspdefese" value="${actualProperty.defense}" /></td>
-                            <td><input name="sspdamage" value="${actualProperty.damage}" /></td>
-                        </tr>
-                    </tbody>
-                </table>
-                <div><input type="submit" value="Módosít" class="btn btn-primary"></div>
-                </c:if>
-                
+                <form class="form-inline" action="/modssproperty" method="post">
+                    <c:if test="${not empty actualProperty}">
+                    <h4> A(z) ${actualProperty.name} adatai</h4>    
+                    <table class="table-striped">
+                        <thead class="text-center">
+                            <tr>
+                                <th>Elnevezés</th><th>Leíras</th><th>Fajhoz rendelés</th><th>Level</th><th>Véderő</th><th>Támadási érték</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-center">
+                            <tr>
+                                <input type="hidden" value="${actualProperty.id}" name="modSspId" />
+                                <td><input name="sspname" value="${actualProperty.name}" disabled /></td>
+                                <td><input name="sspdesc" value="${actualProperty.description}" /></td>
+                                <td>
+                                    <select class="form-control" name="selectedSpeciesId">
+                                        <c:forEach items="${speciesList}" var="species">
+                                            <option value="${species.id}">${species.name}</option>
+                                        </c:forEach>
+                                    </select>
+                                </td>
+                                <td><input name="ssplevel" value="${actualProperty.level}" /></td>
+                                <td><input name="sspdefense" value="${actualProperty.defense}" /></td>
+                                <td><input name="sspdamage" value="${actualProperty.damage}" /></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div><input type="submit" name="modifySsp" value="Módosít" class="btn btn-primary"></div>
+                    </c:if>
+                </form>
             </fieldset>
         </div>
     </body>

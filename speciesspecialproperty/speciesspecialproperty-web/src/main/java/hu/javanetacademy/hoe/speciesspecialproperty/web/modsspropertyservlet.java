@@ -52,18 +52,35 @@ public class modsspropertyservlet extends HttpServlet {
      */
     @Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-            speciesspecialpropertyService sspservice = new speciesspecialpropertyService();
-            SpeciesSpecialProperty actualProperty = sspservice.getById(Long.parseLong(request.getParameter("selectedSspId")));
+            
+            if (request.getParameter("selectSsp") != null){
+                
+                speciesspecialpropertyService sspservice1 = new speciesspecialpropertyService();
+                SpeciesSpecialProperty actualProperty = sspservice1.getById(Long.parseLong(request.getParameter("selectedSspId")));
 
-            request.setAttribute("actualProperty", actualProperty);
+                request.setAttribute("actualProperty", actualProperty);
 
-            SpeciesService speciesservice = new SpeciesService();
-            List<Species> speciesList = speciesservice.getSpeciesList();
+                SpeciesService speciesservice = new SpeciesService();
+                List<Species> speciesList = speciesservice.getSpeciesList();
 
-            request.setAttribute("speciesList", speciesList);
-        
-        
+                request.setAttribute("speciesList", speciesList);
+                
+            } else if (request.getParameter("modifySsp") != null){
+                
+                SpeciesSpecialProperty modSsp = new SpeciesSpecialProperty();
+                modSsp.setName(request.getParameter("sspname"));
+                modSsp.setDescription(request.getParameter("sspdesc"));
+                modSsp.setSpeciesid(Long.parseLong(request.getParameter("selectedSpeciesId")));
+                modSsp.setLevel(Integer.parseInt(request.getParameter("ssplevel")));
+                modSsp.setDefense(Integer.parseInt(request.getParameter("sspdefense")));
+                modSsp.setDamage(Integer.parseInt(request.getParameter("sspdamage")));   
+
+                speciesspecialpropertyService sspservice2 = new speciesspecialpropertyService();
+                sspservice2.modify(Long.parseLong(request.getParameter("modSspId")), modSsp);
+                
+                request.setAttribute("actualProperty", null);
+            }
+            
             doGet(request, response);
         }
 }
