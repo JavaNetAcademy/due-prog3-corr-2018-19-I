@@ -57,8 +57,8 @@ public class modsspropertyservlet extends HttpServlet {
                 
                 long selectedSspId = Long.parseLong(request.getParameter("selectedSspId"));
                 
-                speciesspecialpropertyService sspservice1 = new speciesspecialpropertyService();
-                SpeciesSpecialProperty actualProperty = sspservice1.getById(selectedSspId);
+                speciesspecialpropertyService sspservice = new speciesspecialpropertyService();
+                SpeciesSpecialProperty actualProperty = sspservice.getById(selectedSspId);
 
                 request.setAttribute("actualProperty", actualProperty);
 
@@ -78,8 +78,8 @@ public class modsspropertyservlet extends HttpServlet {
                 modSsp.setDefense(Integer.parseInt(request.getParameter("sspdefense")));
                 modSsp.setDamage(Integer.parseInt(request.getParameter("sspdamage")));   
 
-                speciesspecialpropertyService sspservice2 = new speciesspecialpropertyService();
-                sspservice2.modify(Long.parseLong(request.getParameter("modSspId")), modSsp);
+                speciesspecialpropertyService sspservice = new speciesspecialpropertyService();
+                sspservice.modify(Long.parseLong(request.getParameter("modSspId")), modSsp);
                 
                 request.setAttribute("actualProperty", null);
             }

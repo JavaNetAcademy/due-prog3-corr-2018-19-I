@@ -30,6 +30,8 @@ public class SspJDBCDAOImpl implements SpeciesSpecialPropertyDao {
         }
     }
 
+    
+    
     @Override
     public SpeciesSpecialProperty create (SpeciesSpecialProperty pSsp){
            try {
@@ -51,6 +53,8 @@ public class SspJDBCDAOImpl implements SpeciesSpecialPropertyDao {
         }
         return null;   
     }
+    
+    
     
     @Override
     public SpeciesSpecialProperty getById(long pSspId){
@@ -74,6 +78,8 @@ public class SspJDBCDAOImpl implements SpeciesSpecialPropertyDao {
         }
         return null;   
     }
+    
+    
     
     @Override
     public SpeciesSpecialProperty getByName(String pSspName){
@@ -116,15 +122,16 @@ public class SspJDBCDAOImpl implements SpeciesSpecialPropertyDao {
         @Override
     public SpeciesSpecialProperty modify(long pSspId, SpeciesSpecialProperty pSsp) {
         try {
-            PreparedStatement ps = con.prepareStatement("UPDATE speciesspecialproperty set name=?,description=?,speciesid=?,level=?,damage=?,defense=? WHERE id=?", Statement.RETURN_GENERATED_KEYS);
+            PreparedStatement ps = con.prepareStatement("UPDATE speciesspecialproperty SET name=?,description=?,speciesid=?,level=?,damage=?,defense=? WHERE id=?", Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, pSsp.getName());
             ps.setString(2, pSsp.getDescription());
             ps.setLong(3, pSsp.getSpeciesid());
             ps.setInt(4, pSsp.getLevel());
             ps.setInt(5, pSsp.getDamage());
             ps.setInt(6, pSsp.getDefense());
+            ps.setLong(7, pSspId);
             ps.executeUpdate();
-            ResultSet rs = ps.getGeneratedKeys();
+            //ResultSet rs = ps.getGeneratedKeys();
             return pSsp;
         }
         catch (SQLException ex) {
@@ -158,6 +165,8 @@ public class SspJDBCDAOImpl implements SpeciesSpecialPropertyDao {
         }
         return result;
     }
+    
+    
     
     @Override
     public List<SpeciesSpecialProperty> getSpeciesSpecialPropertyList(){
