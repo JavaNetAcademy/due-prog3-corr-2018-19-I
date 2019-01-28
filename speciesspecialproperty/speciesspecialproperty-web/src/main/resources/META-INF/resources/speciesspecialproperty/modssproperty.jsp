@@ -21,59 +21,90 @@
             <a class="nav-link" href="<c:url value="/delssproperty"></c:url>">Faj speciális képességének törlése</a>
         </nav>
         <div class="container">
-            <fieldset>
-                <form class="form-inline" action="/modssproperty" method="post">
-                    <div class="form-group mb-2">
-                        <h3>Fajok speciális képességének választása: </h3>
-                    </div>
-                    <div class="form-group mx-sm-3 mb-2">
-                        <select class="form-control" name="selectedSspId">
-                            <c:forEach items="${sspropertyList}" var="ssproperty">
-                                <c:choose>
-                                    <c:when test="${preSelectedSspropertyId == ssproperty.id}">
-                                        <option value="${ssproperty.id}" selected>${ssproperty.name}</option>
-                                    </c:when>
-                                    <c:otherwise>
-                                        <option value="${ssproperty.id}">${ssproperty.name}</option>
-                                    </c:otherwise>
-                                </c:choose>    
-                            </c:forEach>
-                        </select>
-                    </div>
-                    <div><input type="submit" name="selectSsp" value="Választ" class="btn btn-primary mb-2"></div>
-                </form>
-                
-                <form class="form-inline" action="/modssproperty" method="post">
-                    <c:if test="${not empty actualProperty}">
-                    <h4> A(z) ${actualProperty.name} adatai</h4>    
-                    <table class="table-striped">
-                        <thead class="text-center">
+            <form class="form-inline" action="/modssproperty" method="post">
+                <fieldset>
+                    <table class="table">
+                        <tbody>
+                            <table class="table-striped">
                             <tr>
-                                <th>Elnevezés</th><th>Leíras</th><th>Fajhoz rendelés</th><th>Level</th><th>Véderő</th><th>Támadási érték</th>
+                                <th><h3>Fajok speciális képességének választása: </h3></th>
+                                <th>
+                                <select class="form-control" name="selectedSspId">
+                                    <c:forEach items="${sspropertyList}" var="ssproperty">
+                                        <c:choose>
+                                            <c:when test="${preSelectedSspropertyId == ssproperty.id}">
+                                                <option value="${ssproperty.id}" selected>${ssproperty.name}</option>
+                                            </c:when>
+                                            <c:otherwise>
+                                                <option value="${ssproperty.id}">${ssproperty.name}</option>
+                                            </c:otherwise>
+                                        </c:choose>    
+                                    </c:forEach>
+                                </select>
+                                </th>
+                                <th>
+                                <input type="submit" name="selectSsp" value="Választ" class="btn btn-primary mb-2">
+                                </th>
                             </tr>
-                        </thead>
-                        <tbody class="text-center">
-                            <tr>
-                                <input type="hidden" value="${actualProperty.id}" name="modSspId" />
-                                <td><input name="sspname" value="${actualProperty.name}" disabled /></td>
-                                <td><input name="sspdesc" value="${actualProperty.description}" /></td>
-                                <td>
-                                    <select class="form-control" name="selectedSpeciesId">
-                                        <c:forEach items="${speciesList}" var="species">
-                                            <option value="${species.id}">${species.name}</option>
-                                        </c:forEach>
-                                    </select>
-                                </td>
-                                <td><input name="ssplevel" value="${actualProperty.level}" /></td>
-                                <td><input name="sspdefense" value="${actualProperty.defense}" /></td>
-                                <td><input name="sspdamage" value="${actualProperty.damage}" /></td>
+                            </table>
+                        <%--      <tr>
+                                <table>
+                                    <tr>
+                                    <td><label name="s1">Id: ${siker1}</label></td>
+                                    <td><label name="s2">Name: ${siker2}</label></td>
+                                    <td><label name="s3">Desc: ${siker3}</label></td>
+                                    <td><label name="s4">SpId: ${siker4}</label></td>
+                                    <td><label name="s5">Level: ${siker5}</label></td>
+                                    <td><label name="s6">Def: ${siker6}</label></td>
+                                    <td><label name="s7">Dam: ${siker7}</label></td>
+                                    </tr>
+                                </table>
+                            </tr> --%>
+                            <tr>            
+                                <c:if test="${not empty actualProperty}">
+                                <table class="table-striped">
+                                    <thead class="text-center">
+                                        <tr><h4> A(z) ${actualProperty.name} speciális képesség adatai</h4></tr>    
+                                    </thead>
+                                </table>
+                                <table class="table-striped">
+                                    <thead class="text-center">
+                                        <tr>
+                                            <th>Id</th><th>Elnevezés</th><th>Leíras</th><th>Fajhoz rendelés</th><th>Level</th><th>Véderő</th><th>Támadási érték</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="text-center">
+                                        <tr>
+                                            <td><input name="speed" value="${actualProperty.id}" disabled /></td>
+                                            <td><input name="sspname" value="${actualProperty.name}" /></td>
+                                            <td><input name="sspdesc" value="${actualProperty.description}" /></td>
+                                            <td>
+                                                <select class="form-control" name="selectedSpeciesId">
+                                                    <c:forEach items="${speciesList}" var="species">
+                                                        <c:choose>
+                                                            <c:when test="${preSelectedSpeciesId == species.id}">
+                                                                <option value="${species.id}" selected>${species.name}</option>
+                                                            </c:when>
+                                                            <c:otherwise>
+                                                                <option value="${species.id}">${species.name}</option>
+                                                            </c:otherwise>
+                                                        </c:choose>        
+                                                    </c:forEach>
+                                                </select>
+                                            </td>
+                                            <td><input name="ssplevel" value="${actualProperty.level}" /></td>
+                                            <td><input name="sspdefense" value="${actualProperty.defense}" /></td>
+                                            <td><input name="sspdamage" value="${actualProperty.damage}" /></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <div><input type="submit" name="modifySsp" value="Módosít" class="btn btn-primary"></div>
+                                </c:if>
                             </tr>
                         </tbody>
                     </table>
-                    <div><input type="submit" name="modifySsp" value="Módosít" class="btn btn-primary"></div>
-                    </c:if>
-                </form>
-            </fieldset>
+                </fieldset>
+            </form>
         </div>
     </body>
 </html>

@@ -119,10 +119,10 @@ public class SspJDBCDAOImpl implements SpeciesSpecialPropertyDao {
     }
 
 
-        @Override
+    @Override
     public SpeciesSpecialProperty modify(long pSspId, SpeciesSpecialProperty pSsp) {
         try {
-            PreparedStatement ps = con.prepareStatement("UPDATE speciesspecialproperty SET name=?,description=?,speciesid=?,level=?,damage=?,defense=? WHERE id=?", Statement.RETURN_GENERATED_KEYS);
+            PreparedStatement ps = con.prepareStatement("UPDATE speciesspecialproperty SET name=?,description=?,speciesid=?,level=?,damage=?,defense=? WHERE id=?");
             ps.setString(1, pSsp.getName());
             ps.setString(2, pSsp.getDescription());
             ps.setLong(3, pSsp.getSpeciesid());
@@ -131,7 +131,6 @@ public class SspJDBCDAOImpl implements SpeciesSpecialPropertyDao {
             ps.setInt(6, pSsp.getDefense());
             ps.setLong(7, pSspId);
             ps.executeUpdate();
-            //ResultSet rs = ps.getGeneratedKeys();
             return pSsp;
         }
         catch (SQLException ex) {

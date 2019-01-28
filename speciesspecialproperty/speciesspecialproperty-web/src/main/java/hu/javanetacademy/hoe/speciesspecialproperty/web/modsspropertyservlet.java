@@ -28,20 +28,20 @@ public class modsspropertyservlet extends HttpServlet {
      * @throws IOException
      */
     @Override
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-            response.setContentType("text/html;charset=UTF-8");
-                
-            speciesspecialpropertyService sspservice = new speciesspecialpropertyService();
-            List<SpeciesSpecialProperty> sspropertyList = sspservice.getSpeciesSpecialPropertyList();
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
 
-            if (sspropertyList == null || sspropertyList.isEmpty()){
-                getServletContext().getRequestDispatcher("/speciesspecialproperty/error.jsp").include(request, response);
-            }
-            else{
-                request.setAttribute("sspropertyList", sspropertyList);
-                getServletContext().getRequestDispatcher("/speciesspecialproperty/modssproperty.jsp").include(request, response);
-            }
-	}
+        speciesspecialpropertyService sspservice1 = new speciesspecialpropertyService();
+        List<SpeciesSpecialProperty> sspropertyList = sspservice1.getSpeciesSpecialPropertyList();
+
+        if (sspropertyList == null || sspropertyList.isEmpty()){
+            getServletContext().getRequestDispatcher("/speciesspecialproperty/error.jsp").include(request, response);
+        }
+        else{
+            request.setAttribute("sspropertyList", sspropertyList);
+            getServletContext().getRequestDispatcher("/speciesspecialproperty/modssproperty.jsp").include(request, response);
+        }
+    }
         
     /**
      *
@@ -51,39 +51,49 @@ public class modsspropertyservlet extends HttpServlet {
      * @throws IOException
      */
     @Override
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        if (request.getParameter("selectSsp") != null){
+
+            long selectedSspId = Long.parseLong(request.getParameter("selectedSspId"));
+
+            speciesspecialpropertyService sspservice2 = new speciesspecialpropertyService();
+            SpeciesSpecialProperty actualProperty = sspservice2.getById(selectedSspId);
+
+            request.setAttribute("actualProperty", actualProperty);
+
+            SpeciesService speciesservice = new SpeciesService();
+            List<Species> speciesList = speciesservice.getSpeciesList();
+
+            request.setAttribute("speciesList", speciesList);
+            request.setAttribute("preSelectedSspropertyId", selectedSspId);
+            request.setAttribute("preSelectedSpeciesId", actualProperty.getSpeciesid());
             
-            if (request.getParameter("selectSsp") != null){
-                
-                long selectedSspId = Long.parseLong(request.getParameter("selectedSspId"));
-                
-                speciesspecialpropertyService sspservice = new speciesspecialpropertyService();
-                SpeciesSpecialProperty actualProperty = sspservice.getById(selectedSspId);
+        } else if (request.getParameter("modifySsp") != null){
 
-                request.setAttribute("actualProperty", actualProperty);
-
-                SpeciesService speciesservice = new SpeciesService();
-                List<Species> speciesList = speciesservice.getSpeciesList();
-
-                request.setAttribute("speciesList", speciesList);
-                request.setAttribute("preSelectedSspropertyId", selectedSspId);
-                
-            } else if (request.getParameter("modifySsp") != null){
-                
-                SpeciesSpecialProperty modSsp = new SpeciesSpecialProperty();
-                modSsp.setName(request.getParameter("sspname"));
-                modSsp.setDescription(request.getParameter("sspdesc"));
-                modSsp.setSpeciesid(Long.parseLong(request.getParameter("selectedSpeciesId")));
-                modSsp.setLevel(Integer.parseInt(request.getParameter("ssplevel")));
-                modSsp.setDefense(Integer.parseInt(request.getParameter("sspdefense")));
-                modSsp.setDamage(Integer.parseInt(request.getParameter("sspdamage")));   
-
-                speciesspecialpropertyService sspservice = new speciesspecialpropertyService();
-                sspservice.modify(Long.parseLong(request.getParameter("modSspId")), modSsp);
-                
-                request.setAttribute("actualProperty", null);
-            }
+            SpeciesSpecialProperty modSsp = new SpeciesSpecialProperty();
+            modSsp.setName(request.getParameter("sspname"));
+            modSsp.setDescription(request.getParameter("sspdesc"));
+            modSsp.setSpeciesid(Long.parseLong(request.getParameter("selectedSpeciesId")));
+            modSsp.setLevel(Integer.parseInt(request.getParameter("ssplevel")));
+            modSsp.setDefense(Integer.parseInt(request.getParameter("sspdefense")));
+            modSsp.setDamage(Integer.parseInt(request.getParameter("sspdamage")));   
             
-            doGet(request, response);
+            long spricc = Long.parseLong(request.getParameter("selectedSspId"));
+/*            
+            request.setAttribute("siker1", spricc);
+            request.setAttribute("siker2", request.getParameter("sspname"));
+            request.setAttribute("siker3", request.getParameter("sspdesc"));
+            request.setAttribute("siker4", request.getParameter("selectedSpeciesId"));
+            request.setAttribute("siker5", request.getParameter("ssplevel"));
+            request.setAttribute("siker6", request.getParameter("sspdefense"));
+            request.setAttribute("siker7", request.getParameter("sspdamage"));
+*/
+            speciesspecialpropertyService sspservice3 = new speciesspecialpropertyService();
+            sspservice3.modify(spricc, modSsp);
+
+            request.setAttribute("actualProperty", null);
         }
+        doGet(request, response);
+    }
 }
