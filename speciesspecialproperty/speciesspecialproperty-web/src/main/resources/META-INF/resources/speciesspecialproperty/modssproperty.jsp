@@ -29,7 +29,14 @@
                     <div class="form-group mx-sm-3 mb-2">
                         <select class="form-control" name="selectedSspId">
                             <c:forEach items="${sspropertyList}" var="ssproperty">
-                                <option value="${ssproperty.id}">${ssproperty.name}</option>
+                                <c:choose>
+                                    <c:when test="${preSelectedSspropertyId == ssproperty.id}">
+                                        <option value="${ssproperty.id}" selected>${ssproperty.name}</option>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <option value="${ssproperty.id}">${ssproperty.name}</option>
+                                    </c:otherwise>
+                                </c:choose>    
                             </c:forEach>
                         </select>
                     </div>

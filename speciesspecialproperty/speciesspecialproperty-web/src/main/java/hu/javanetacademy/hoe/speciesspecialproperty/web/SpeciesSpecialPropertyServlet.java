@@ -44,23 +44,22 @@ public class SpeciesSpecialPropertyServlet extends HttpServlet {
     @Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	
-        speciesspecialpropertyService sspservice = new speciesspecialpropertyService();
-        List<SpeciesSpecialProperty> actualPropertys = sspservice.getBySpecies(Long.parseLong(request.getParameter("selectedSpeciesId")));
-        
-        request.setAttribute("actualPropertys", actualPropertys);
-        
-        SpeciesService speciesservice = new SpeciesService();
-        Species selectedSpecies = speciesservice.get(Long.parseLong(request.getParameter("selectedSpeciesId")));
-        
-        request.setAttribute("selectedSpecies", selectedSpecies);
-        
-        
-        
-        request.setAttribute("preSelectedSpeciesId", Long.parseLong(request.getParameter("selectedSpeciesId")));
-        
-        request.setAttribute("valami", Long.parseLong(request.getParameter("selectedSpeciesId")));
-//        request.setAttribute("nempre", request.getParameter("selectedSpeciesId"));
+            long selectedSpeciesId = Long.parseLong(request.getParameter("selectedSpeciesId"));
 
-        doGet(request, response);
+            speciesspecialpropertyService sspservice = new speciesspecialpropertyService();
+            List<SpeciesSpecialProperty> actualPropertys = sspservice.getBySpecies(selectedSpeciesId);
+
+            request.setAttribute("actualPropertys", actualPropertys);
+
+            SpeciesService speciesservice = new SpeciesService();
+            Species selectedSpecies = speciesservice.get(selectedSpeciesId);
+
+            request.setAttribute("selectedSpecies", selectedSpecies);
+            request.setAttribute("preSelectedSpeciesId", selectedSpeciesId);
+        
+//            request.setAttribute("valami", Long.parseLong(request.getParameter("selectedSpeciesId")));
+//            request.setAttribute("nempre", request.getParameter("selectedSpeciesId"));
+
+            doGet(request, response);
         }
 }
