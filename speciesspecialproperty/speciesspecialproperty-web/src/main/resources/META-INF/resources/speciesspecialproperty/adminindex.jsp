@@ -29,14 +29,25 @@
                     <div class="form-group mx-sm-3 mb-2">
                         <select class="form-control" name="selectedSpeciesId">
                             <c:forEach items="${speciesList}" var="species">
-                                <option value="${species.id}">${species.name}</option>
+                                <c:choose>
+                                    <c:when test="${preSelectedSpeciesId == species.id}">
+                                        <option value="${species.id}" selected>${species.name}</option>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <option value="${species.id}">${species.name}</option>
+                                    </c:otherwise>
+                                </c:choose>
                             </c:forEach>
                         </select>
                     </div>
                     <div><input type="submit" value="Választ" class="btn btn-primary mb-2"></div>
                 </form>
 
-            <%--<label name="test">${test}<label>--%>
+            <%--   <label name="siker">-siker- </label>
+                <label name="pre">-${preSelectedSpeciesId}-</label>
+                <label name="nempre"> -${valami}-</label>
+            --%>
+                
 
                 <c:if test="${not empty actualPropertys}">
                 <h4> A(z) ${selectedSpecies.name} faj speciális képessegei</h4>    

@@ -47,13 +47,19 @@ public class SpeciesSpecialPropertyServlet extends HttpServlet {
         speciesspecialpropertyService sspservice = new speciesspecialpropertyService();
         List<SpeciesSpecialProperty> actualPropertys = sspservice.getBySpecies(Long.parseLong(request.getParameter("selectedSpeciesId")));
         
+        request.setAttribute("actualPropertys", actualPropertys);
+        
         SpeciesService speciesservice = new SpeciesService();
         Species selectedSpecies = speciesservice.get(Long.parseLong(request.getParameter("selectedSpeciesId")));
         
-        request.setAttribute("actualPropertys", actualPropertys);
         request.setAttribute("selectedSpecies", selectedSpecies);
         
-        //request.setAttribute("test", request.getParameter("selectedSpeciesId"));
+        
+        
+        request.setAttribute("preSelectedSpeciesId", Long.parseLong(request.getParameter("selectedSpeciesId")));
+        
+        request.setAttribute("valami", Long.parseLong(request.getParameter("selectedSpeciesId")));
+//        request.setAttribute("nempre", request.getParameter("selectedSpeciesId"));
 
         doGet(request, response);
         }
