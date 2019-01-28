@@ -13,5 +13,6 @@
         <module>naturaldisaster-dao-model</module>
         <module>naturaldisaster-dao-jdbc</module>
         <module>naturaldisaster-service</module>
+        <module>naturaldisaster-web</module>
     </modules>
 </project>

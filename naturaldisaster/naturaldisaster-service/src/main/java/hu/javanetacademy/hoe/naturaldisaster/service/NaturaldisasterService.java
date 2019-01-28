@@ -31,4 +31,9 @@ public class NaturaldisasterService {
     public List<Naturaldisaster> getAll() {
         return dao.getAll();
     }
+    
+     public Naturaldisaster getbyId(String name){
+         return dao.getByName(name);
+       }
+    
 }
