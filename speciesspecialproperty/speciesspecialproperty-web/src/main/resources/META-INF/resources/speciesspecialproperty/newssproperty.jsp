@@ -23,7 +23,7 @@
         <div class="container">
             <form action="/newssproperty" method="post">
                 <fieldset>
-                    <legend>Új speciális képesség létrehozása</legend>
+                    <h3>Új speciális képesség létrehozása</h3>
 
                     <table class="table">
                         <thead>
