@@ -1,13 +1,21 @@
 package hu.javanetacademy.hoe.armor.service.imp;
 
 import java.util.List;
+import java.util.logging.Logger;
 
 import hu.javanetacademy.hoe.armor.dao.ArmorPropertiesCodebookXreDAO;
 import hu.javanetacademy.hoe.armor.dao.dto.ArmorPropertiesCodebookXrefDTO;
 import hu.javanetacademy.hoe.armor.dao.impl.ArmorPropertiesCodebookXreDAOImpl;
 import hu.javanetacademy.hoe.armor.service.ArmorPropertiesCodebookXreService;
 
+/**
+ *
+ * @author Gonda Gergely
+ *
+ */
 public class ArmorPropertiesCodebookXreServiceImpl implements ArmorPropertiesCodebookXreService {
+
+	private static final Logger LOG = Logger.getLogger(ArmorPropertiesCodebookXreServiceImpl.class.getName());
 
 	@SuppressWarnings("unused")
 	private final ArmorPropertiesCodebookXreDAO dao;

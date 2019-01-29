@@ -1,13 +1,21 @@
 package hu.javanetacademy.hoe.armor.service.imp;
 
 import java.util.List;
+import java.util.logging.Logger;
 
 import hu.javanetacademy.hoe.armor.dao.ArmorHeroXrefDAO;
 import hu.javanetacademy.hoe.armor.dao.dto.ArmorHeroXrefDTO;
 import hu.javanetacademy.hoe.armor.dao.impl.ArmorHeroXrefDAOImpl;
 import hu.javanetacademy.hoe.armor.service.ArmorHeroXrefService;
 
+/**
+ *
+ * @author Gonda Gergely
+ *
+ */
 public class ArmorHeroXrefServiceImpl implements ArmorHeroXrefService {
+
+	private static final Logger LOG = Logger.getLogger(ArmorHeroXrefService.class.getName());
 
 	@SuppressWarnings("unused")
 	private final ArmorHeroXrefDAO dao;
