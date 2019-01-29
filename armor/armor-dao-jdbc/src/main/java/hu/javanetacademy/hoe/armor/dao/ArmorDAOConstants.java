@@ -1,5 +1,10 @@
 package hu.javanetacademy.hoe.armor.dao;
 
+/**
+ *
+ * @author Gonda Gergely
+ *
+ */
 public final class ArmorDAOConstants {
 
 	public static final String TABLE_NAME_ARMOR = "armor";
