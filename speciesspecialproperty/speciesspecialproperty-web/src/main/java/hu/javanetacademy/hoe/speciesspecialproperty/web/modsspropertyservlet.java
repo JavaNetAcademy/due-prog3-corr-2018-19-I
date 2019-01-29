@@ -72,14 +72,14 @@ public class modsspropertyservlet extends HttpServlet {
         } else if (request.getParameter("modifySsp") != null){
 
             SpeciesSpecialProperty modSsp = new SpeciesSpecialProperty();
-            modSsp.setName(request.getParameter("sspname"));
+            modSsp.setName(request.getParameter("hsspname"));
             modSsp.setDescription(request.getParameter("sspdesc"));
             modSsp.setSpeciesid(Long.parseLong(request.getParameter("selectedSpeciesId")));
             modSsp.setLevel(Integer.parseInt(request.getParameter("ssplevel")));
             modSsp.setDefense(Integer.parseInt(request.getParameter("sspdefense")));
             modSsp.setDamage(Integer.parseInt(request.getParameter("sspdamage")));   
             
-            long spricc = Long.parseLong(request.getParameter("selectedSspId"));
+            //long spricc = Long.parseLong(request.getParameter("selectedSspId"));
 /*            
             request.setAttribute("siker1", spricc);
             request.setAttribute("siker2", request.getParameter("sspname"));
@@ -90,7 +90,7 @@ public class modsspropertyservlet extends HttpServlet {
             request.setAttribute("siker7", request.getParameter("sspdamage"));
 */
             speciesspecialpropertyService sspservice3 = new speciesspecialpropertyService();
-            sspservice3.modify(spricc, modSsp);
+            sspservice3.modify(Long.parseLong(request.getParameter("hsspid")), modSsp);
 
             request.setAttribute("actualProperty", null);
         }

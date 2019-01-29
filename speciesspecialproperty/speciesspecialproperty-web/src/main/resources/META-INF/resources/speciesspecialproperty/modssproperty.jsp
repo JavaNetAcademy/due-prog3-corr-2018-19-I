@@ -75,8 +75,10 @@
                                     </thead>
                                     <tbody class="text-center">
                                         <tr>
-                                            <td><input name="speed" value="${actualProperty.id}" disabled /></td>
-                                            <td><input name="sspname" value="${actualProperty.name}" /></td>
+                                            <td><input name="sspid" value="${actualProperty.id}" disabled />
+                                            <input name="hsspid" value="${actualProperty.id}" type="hidden" /></td>
+                                            <td><input name="sspname" value="${actualProperty.name}" disabled />
+                                            <input name="hsspname" value="${actualProperty.name}" type="hidden" /></td>
                                             <td><input name="sspdesc" value="${actualProperty.description}" /></td>
                                             <td>
                                                 <select class="form-control" name="selectedSpeciesId">

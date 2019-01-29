@@ -2,11 +2,9 @@ package hu.javanetacademy.hoe.speciesspecialproperty.service.object;
 
 import hu.javanetacademy.hoe.base.util.CustomException;
 import hu.javanetacademy.hoe.speciesspecialproperty.dao.jdbc.SspJDBCDAOImpl;
-
 import hu.javanetacademy.hoe.speciesspecialproperty.dao.model.SpeciesSpecialProperty;
-
-import java.util.List;
 import hu.javanetacademy.hoe.speciesspecialproperty.dao.model.SpeciesSpecialPropertyDao;
+import java.util.List;
 
 /**
  * @author sviktor75 / Szabó Viktor / vts4gv

@@ -80,11 +80,6 @@
 			<artifactId>speciesspecialproperty-web</artifactId>
 			<version>1.0-SNAPSHOT</version>
 		</dependency>
-                <dependency>
-			<groupId>hu.javanetacademy.hoe.naturaldisaster</groupId>
-			<artifactId>naturaldisaster-web</artifactId>
-			<version>1.0-SNAPSHOT</version>
-		</dependency>
 
 	 <dependency>
 	  <groupId>hu.javanetacademy.hoe.web</groupId>
