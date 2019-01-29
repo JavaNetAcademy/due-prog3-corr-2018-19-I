@@ -13,9 +13,6 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-/**
- * @author krisztian
- */
 public class GoodsOfEmpiresJDBCDAOImpl implements GoodsOfEmpiresDAOInterface{
 
     private  Connection con;
