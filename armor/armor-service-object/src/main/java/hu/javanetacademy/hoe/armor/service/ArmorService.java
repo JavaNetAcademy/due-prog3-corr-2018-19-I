@@ -2,7 +2,7 @@ package hu.javanetacademy.hoe.armor.service;
 
 import java.util.List;
 
-import hu.javanetacademy.hoe.armor.dao.entity.Armor;
+import hu.javanetacademy.hoe.armor.dao.dto.ArmorDTO;
 
 /**
  *
@@ -11,12 +11,14 @@ import hu.javanetacademy.hoe.armor.dao.entity.Armor;
  */
 public interface ArmorService {
 
-	public void create(Armor armor);
+	public void create(ArmorDTO armor);
 
-	public List<Armor> getAll();
+	public List<ArmorDTO> getAll();
 
-	public Armor getById(Long id);
+	public ArmorDTO getById(Long id);
 
-	public void update(Armor armor);
+	public void update(ArmorDTO armor);
+
+	public void delete(Long id);
 
 }

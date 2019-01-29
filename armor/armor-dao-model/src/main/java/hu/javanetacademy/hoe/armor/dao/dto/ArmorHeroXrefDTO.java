@@ -25,4 +25,9 @@ public class ArmorHeroXrefDTO extends BaseDTO {
 		this.hero = hero;
 	}
 
+	@Override
+	public String toString() {
+		return "ArmorHeroXrefDTO [armor=" + armor + ", hero=" + hero + "]";
+	}
+
 }

@@ -48,4 +48,10 @@ public class ArmorDTO extends BaseDTO {
 		this.armorPropertiesCodebookXrefs = armorPropertiesCodebookXrefs;
 	}
 
+	@Override
+	public String toString() {
+		return "ArmorDTO [name=" + name + ", description=" + description + ", armorPropertiesCodebookXrefs="
+				+ armorPropertiesCodebookXrefs + ", price=" + price + "]";
+	}
+
 }

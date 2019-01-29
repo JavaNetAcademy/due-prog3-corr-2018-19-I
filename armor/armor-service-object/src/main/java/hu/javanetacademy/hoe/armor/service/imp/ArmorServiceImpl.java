@@ -1,10 +1,9 @@
 package hu.javanetacademy.hoe.armor.service.imp;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import hu.javanetacademy.hoe.armor.dao.ArmorDAO;
-import hu.javanetacademy.hoe.armor.dao.entity.Armor;
+import hu.javanetacademy.hoe.armor.dao.dto.ArmorDTO;
 import hu.javanetacademy.hoe.armor.dao.impl.ArmorDAOImpl;
 import hu.javanetacademy.hoe.armor.service.ArmorService;
 
@@ -23,47 +22,33 @@ public class ArmorServiceImpl implements ArmorService {
 	}
 
 	@Override
-	public void create(Armor armor) {
-		try {
-			dao.create(armor);
-		} catch (Exception e) {
-			// TODO loglás
-			e.printStackTrace();// ideiglenes
-		}
+	public void create(ArmorDTO armor) {
+		// TODO Auto-generated method stub
+
 	}
 
 	@Override
-	public List<Armor> getAll() {
-		List<Armor> armors = new ArrayList<>();
-		try {
-			armors.addAll(dao.getAll());
-		} catch (Exception e) {
-			// TODO loglás
-			e.printStackTrace();// ideiglenes
-		}
-		return armors;
+	public List<ArmorDTO> getAll() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	@Override
-	public Armor getById(Long id) {
-		Armor armor = null;
-		try {
-			armor = dao.getById(id);
-		} catch (Exception e) {
-			// TODO loglás
-			e.printStackTrace();// ideiglenes
-		}
-		return armor;
+	public ArmorDTO getById(Long id) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	@Override
-	public void update(Armor armor) {
-		try {
-			dao.update(armor);
-		} catch (Exception e) {
-			// TODO loglás
-			e.printStackTrace();// ideiglenes
-		}
+	public void update(ArmorDTO armor) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void delete(Long id) {
+		// TODO Auto-generated method stub
+
 	}
 
 }
