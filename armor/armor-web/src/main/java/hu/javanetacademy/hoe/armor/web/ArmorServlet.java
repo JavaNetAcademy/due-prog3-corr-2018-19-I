@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import hu.javanetacademy.hoe.armor.dao.dto.ArmorDTO;
 import hu.javanetacademy.hoe.armor.service.ArmorHeroXrefService;
 import hu.javanetacademy.hoe.armor.service.ArmorPropertiesCodebookXreService;
 import hu.javanetacademy.hoe.armor.service.ArmorService;
@@ -105,6 +106,12 @@ public class ArmorServlet extends HttpServlet {
 			case ARMOR_PCX_GET_BY_A:
 				handleGetAllArmorPropertiesCodebookXrefByArmorId(req, resp);
 				break;
+			case ARMOR_DELETE:
+				handleGetDeleteArmor(req, resp);
+				break;
+			case ARMOR_UPDATE:
+				handleGetUpdateArmor(req, resp);
+				break;
 			default:
 				handleGetAllArmor(req, resp);
 			}
@@ -114,11 +121,30 @@ public class ArmorServlet extends HttpServlet {
 
 	}
 
+	private void handleGetUpdateArmor(HttpServletRequest req, HttpServletResponse resp)
+			throws ServletException, IOException {
+		if (isUserLoggedIn(req, resp)) {
+			resp.setContentType("text/html;charset=UTF-8");
+			req.setAttribute("armor", armorService.getById(Long.parseLong(req.getParameter("armorId"))));
+			getServletContext().getRequestDispatcher("/armor/armorEdit.jsp").include(req, resp);
+		}
+	}
+
+	private void handleGetDeleteArmor(HttpServletRequest req, HttpServletResponse resp)
+			throws ServletException, IOException {
+		if (isUserLoggedIn(req, resp)) {
+			resp.setContentType("text/html;charset=UTF-8");
+			req.setAttribute("armor", armorService.getById(Long.parseLong(req.getParameter("armorId"))));
+			getServletContext().getRequestDispatcher("/armor/armorDel.jsp").include(req, resp);
+		}
+	}
+
 	private boolean isUserLoggedIn(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
 		boolean result = true;
 		User user = (User) req.getSession().getAttribute("user");
 		if (user == null) {
+			resp.setContentType("text/html;charset=UTF-8");
 			getServletContext().getRequestDispatcher("/armor/errornotlogin.jsp").include(req, resp);
 			result = false;
 		}
@@ -129,7 +155,6 @@ public class ArmorServlet extends HttpServlet {
 			throws NumberFormatException, ServletException, IOException {
 		if (isUserLoggedIn(req, resp)) {
 			resp.setContentType("text/html;charset=UTF-8");
-
 			req.setAttribute("armorPropertiesCodebookXrefs",
 					armorPropertiesCodebookXreService.getAllByArmorId(Long.parseLong(req.getParameter("armorId"))));
 			getServletContext().getRequestDispatcher("/armor/armorPropertiesCodebookXrefList.jsp").include(req, resp);
@@ -140,7 +165,6 @@ public class ArmorServlet extends HttpServlet {
 			throws NumberFormatException, ServletException, IOException {
 		if (isUserLoggedIn(req, resp)) {
 			resp.setContentType("text/html;charset=UTF-8");
-
 			req.setAttribute("armorHeroXrefs",
 					armorHeroXrefService.getAllByHeroId(Long.parseLong(req.getParameter("heroId"))));
 			getServletContext().getRequestDispatcher("/armor/armorarmorHeroXrefList.jsp").include(req, resp);
@@ -165,14 +189,24 @@ public class ArmorServlet extends HttpServlet {
 		}
 	}
 
-	private void handleCreateArmor(HttpServletRequest req, HttpServletResponse resp) {
-		// TODO Auto-generated method stub
-
+	private void handleCreateArmor(HttpServletRequest req, HttpServletResponse resp)
+			throws ServletException, IOException {
+		if (isUserLoggedIn(req, resp)) {
+			ArmorDTO dto = new ArmorDTO();
+			dto.setName(req.getParameter("name"));
+			dto.setDescription(req.getParameter("description"));
+			dto.setPrice(Long.parseLong(req.getParameter("price")));
+			armorService.create(dto);
+			handleGetAllArmor(req, resp);
+		}
 	}
 
-	private void handleDeleteArmor(HttpServletRequest req, HttpServletResponse resp) {
-		// TODO Auto-generated method stub
-
+	private void handleDeleteArmor(HttpServletRequest req, HttpServletResponse resp)
+			throws ServletException, IOException {
+		if (isUserLoggedIn(req, resp)) {
+			armorService.delete(Long.parseLong(req.getParameter("armorId")));
+			handleGetAllArmor(req, resp);
+		}
 	}
 
 	private void handleCreateArmorHeroXref(HttpServletRequest req, HttpServletResponse resp) {
@@ -180,9 +214,17 @@ public class ArmorServlet extends HttpServlet {
 
 	}
 
-	private void handleUpdateArmor(HttpServletRequest req, HttpServletResponse resp) {
-		// TODO Auto-generated method stub
-
+	private void handleUpdateArmor(HttpServletRequest req, HttpServletResponse resp)
+			throws ServletException, IOException {
+		if (isUserLoggedIn(req, resp)) {
+			ArmorDTO dto = new ArmorDTO();
+			dto.setId(Long.parseLong(req.getParameter("armorId")));
+			dto.setName(req.getParameter("name"));
+			dto.setDescription(req.getParameter("description"));
+			dto.setPrice(Long.parseLong(req.getParameter("price")));
+			armorService.update(dto);
+			handleGetAllArmor(req, resp);
+		}
 	}
 
 	private void handleDeleteAllByPropertiesCodebookId(HttpServletRequest req, HttpServletResponse resp) {

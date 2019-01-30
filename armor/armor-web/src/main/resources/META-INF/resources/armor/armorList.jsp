@@ -15,7 +15,7 @@
 	<div class="container">
 
 		<div class="w-50 p-3" style="background-color: #eee;">
-			  <form action="armor?operation=aNew" method="post">
+			<form action="armor?operation=aNew" method="post">
 				<fieldset>
 
 					<legend>Páncél létrehozása</legend>
@@ -31,31 +31,28 @@
 							<th></th>
 							<tr>
 								<td><label>Páncél neve:</label></td>
-								<td><input type="textarea" name="name"
+								<td><input type="text" name="name" class="form-control" /></td>
+							</tr>
+							<th></th>
+							<th></th>
+							<tr>
+								<td><label>Páncél leírása:</label></td>
+								<td><input type="text" name="description"
 									class="form-control" /></td>
 							</tr>
 							<th></th>
 							<th></th>
 							<tr>
-								<td><label>Páncél leírása:</label>
-								<td>
-								<td><input type="textarea" name="description"
+								<td><label>Páncél értéke:</label></td>
+								<td><input type="text" name="price"
 									class="form-control" /></td>
 							</tr>
-							<th></th>
-							<th></th>
-							<tr>
-								<td><label>Páncél értéke:</label>
-								<td>
-								<td><input type="textarea" name="price"
-									class="form-control" /></td>
-							</tr> 
 						</tbody>
 					</table>
 					<div>
 						<input type="submit" value="Létrehoz" class="btn btn-primary">
 					</div>
-			</form>  
+			</form>
 		</div>
 		</br>
 
@@ -69,7 +66,7 @@
 							<tr>
 								<th>Név</th>
 								<th>Leírás</th>
-								<th>Ár</th>
+								<th>Érték</th>
 								<th></th>
 							</tr>
 						</thead>
@@ -80,14 +77,14 @@
 									<td><span>${onearmor.description}</span></td>
 									<td><span>${onearmor.price}</span></td>
 									<td><a class="btn btn-light"
-										href="<c:url value="/armor?operation=aAll"> 
-                                                   <c:param name="armorid" value="${onearmor.id}"/>
+										href="<c:url value="/armor?operation=aUp"> 
+                                                   <c:param name="armorId" value="${onearmor.id}"/>
                                                </c:url>">Szerkesztés</a>
 
 
 										<a class="btn btn-danger"
-										href="<c:url value="armor?operation=aAll">
-                                                   <c:param name="armorid" value="${onearmor.id}"/>
+										href="<c:url value="armor?operation=aDel">
+                                                   <c:param name="armorId" value="${onearmor.id}"/>
                                                </c:url>">Törlés</a>
 									</td>
 								</tr>
