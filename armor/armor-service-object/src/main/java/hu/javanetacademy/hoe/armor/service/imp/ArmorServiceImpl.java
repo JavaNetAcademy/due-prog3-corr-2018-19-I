@@ -89,12 +89,12 @@ public class ArmorServiceImpl implements ArmorService {
 	}
 
 	private Armor mapToDAO(ArmorDTO armor) {
-		Armor dto = new Armor();
-		dto.setId(armor.getId());
-		dto.setName(armor.getName());
-		dto.setPrice(armor.getPrice());
-		dto.setDescription(armor.getDescription());
-		return dto;
+		Armor dao = new Armor();
+		dao.setId(armor.getId());
+		dao.setName(armor.getName());
+		dao.setPrice(armor.getPrice());
+		dao.setDescription(armor.getDescription());
+		return dao;
 	}
 
 	private ArmorDTO mapToDTO(Armor armor) {
