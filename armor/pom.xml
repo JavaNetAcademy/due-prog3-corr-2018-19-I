@@ -34,6 +34,11 @@
 				<version>1.0-SNAPSHOT</version>
 			</dependency>
 			<dependency>
+				<groupId>${project.groupId}</groupId>
+				<artifactId>armor-service-object</artifactId>
+				<version>1.0-SNAPSHOT</version>
+			</dependency>
+			<dependency>
 				<groupId>mysql</groupId>
 				<artifactId>mysql-connector-java</artifactId>
 				<version>${mysql.version}</version>
@@ -54,15 +59,15 @@
 				<version>1.0-SNAPSHOT</version>
 			</dependency>
 			<dependency>
+				<groupId>hu.javanetacademy.hoe.user</groupId>
+				<artifactId>user-dao-model</artifactId>
+				<version>1.0-SNAPSHOT</version>
+			</dependency>
+			<dependency>
 				<groupId>javax</groupId>
 				<artifactId>javaee-web-api</artifactId>
 				<version>${javaee-web-api.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>${project.groupId}</groupId>
-				<artifactId>armor-service-object</artifactId>
-				<version>1.0-SNAPSHOT</version>
-			</dependency>
+			</dependency> 
 			<dependency>
 				<groupId>jstl</groupId>
 				<artifactId>jstl</artifactId>

@@ -68,8 +68,9 @@ public class ArmorPropertiesCodebookXreDAOImpl implements ArmorPropertiesCodeboo
 					.append(" WHERE ").append(ArmorDAOConstants.COLUMN_NAME_ARMOR_ID).append(" = ?")
 					.append(" ORDER BY ").append(ArmorDAOConstants.COLUMN_NAME_ID).append(" DESC");
 
-			Statement stmt = con.createStatement();
-			ResultSet rs = stmt.executeQuery(sb.toString());
+			PreparedStatement ps = con.prepareStatement(sb.toString());
+			ps.setLong(1, armorId);
+			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
 				ArmorPropertiesCodebookXref armorPropertiesCodebookXref = new ArmorPropertiesCodebookXref();
 				armorPropertiesCodebookXref.setId(rs.getLong(ArmorDAOConstants.COLUMN_NAME_ID));

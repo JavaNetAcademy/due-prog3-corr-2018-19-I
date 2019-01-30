@@ -66,6 +66,11 @@
 			<version>1.0-SNAPSHOT</version>
 		</dependency>
 		<dependency>
+			<groupId>hu.javanetacademy.hoe.armor</groupId>
+			<artifactId>armor-web</artifactId>
+			<version>1.0-SNAPSHOT</version>
+		</dependency>
+		<dependency>
 			<groupId>hu.javanetacademy.hoe.culturalbuilding</groupId>
 			<artifactId>culturalbuilding-web</artifactId>
 			<version>1.0-SNAPSHOT</version>
@@ -80,13 +85,12 @@
 			<artifactId>speciesspecialproperty-web</artifactId>
 			<version>1.0-SNAPSHOT</version>
 		</dependency>
-
-	 <dependency>
-	  <groupId>hu.javanetacademy.hoe.web</groupId>
-	  <artifactId>vehicles-web</artifactId>
-	  <version>1.0-SNAPSHOT</version>
-	 </dependency>
-	 <dependency>
+		<dependency>
+			<groupId>hu.javanetacademy.hoe.web</groupId>
+			<artifactId>vehicles-web</artifactId>
+			<version>1.0-SNAPSHOT</version>
+		</dependency>
+		<dependency>
 			<groupId>javax</groupId>
 			<artifactId>javaee-web-api</artifactId>
 			<version>7.0</version>
