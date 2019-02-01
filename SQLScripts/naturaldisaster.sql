@@ -7,7 +7,7 @@ CREATE TABLE naturaldisaster (
 	name VARCHAR(100) NOT NULL,
 	description VARCHAR(200) NOT NULL,
 	effect  VARCHAR(200) NOT NULL,
-	deadlyto VARCHAR(200) NOT NULL,	
+	deadlyto VARCHAR(200) NOT NULL	
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 
