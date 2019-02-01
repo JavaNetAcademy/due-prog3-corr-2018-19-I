@@ -79,7 +79,7 @@
                                             <input name="hsspid" value="${actualProperty.id}" type="hidden" /></td>
                                             <td><input name="sspname" value="${actualProperty.name}" disabled />
                                             <input name="hsspname" value="${actualProperty.name}" type="hidden" /></td>
-                                            <td><input name="sspdesc" value="${actualProperty.description}" /></td>
+                                            <td><input  name="sspdesc" value="${actualProperty.description}" /></td>
                                             <td>
                                                 <select class="form-control" name="selectedSpeciesId">
                                                     <c:forEach items="${speciesList}" var="species">
@@ -94,9 +94,9 @@
                                                     </c:forEach>
                                                 </select>
                                             </td>
-                                            <td><input name="ssplevel" value="${actualProperty.level}" /></td>
-                                            <td><input name="sspdefense" value="${actualProperty.defense}" /></td>
-                                            <td><input name="sspdamage" value="${actualProperty.damage}" /></td>
+                                            <td><input type="number" min="0" max="2147483647" name="ssplevel" value="${actualProperty.level}" /></td>
+                                            <td><input type="number" min="0" max="2147483647" name="sspdefense" value="${actualProperty.defense}" /></td>
+                                            <td><input type="number" min="0" max="2147483647" name="sspdamage" value="${actualProperty.damage}" /></td>
                                         </tr>
                                     </tbody>
                                 </table>

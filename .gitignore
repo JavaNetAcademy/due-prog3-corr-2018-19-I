@@ -73,3 +73,7 @@
 /speciesspecialproperty/speciesspecialproperty-dao-jdbc/target/
 /speciesspecialproperty/speciesspecialproperty-web/target/
 /speciesspecialproperty/speciesspecialproperty-service-object/target/
+/naturaldisaster/naturaldisaster-dao-model/target/
+/naturaldisaster/naturaldisaster-dao-jdbc/target/
+/naturaldisaster/naturaldisaster-service/target/
+/naturaldisaster/naturaldisaster-web/target/

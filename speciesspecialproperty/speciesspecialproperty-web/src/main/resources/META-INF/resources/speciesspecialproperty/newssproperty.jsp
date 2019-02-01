@@ -35,7 +35,7 @@
                         <tbody>
                             <tr>
                                 <td><label>Képesség neve</label></td>
-                                <td><input name="sspname" class="form-control" /></td>
+                                <td><input type="text" name="sspname" class="form-control" /></td>
                             </tr>
                             <tr>
                                 <td><label>Leírás</label></td>
@@ -53,15 +53,15 @@
                             </tr>
                             <tr>
                                 <td><label>Level</label></td>
-                                <td><input name="ssplevel" class="form-control" /></td>
+                                <td><input type="number" min="0" max="2147483647" name="ssplevel" class="form-control" /></td>
                             </tr>
                             <tr>
                                 <td><label>Defense</label></td>
-                                <td><input name="sspdefense" class="form-control" /></td>
+                                <td><input type="number" min="0" max="2147483647" name="sspdefense" class="form-control" /></td>
                             </tr>
                             <tr>
                                 <td><label>Damage</label></td>
-                                <td><input name="sspdamage" class="form-control" /></td>
+                                <td><input type="number" min="0" max="2147483647" name="sspdamage" class="form-control" /></td>
                             </tr>
                         </tbody>
                     </table>
