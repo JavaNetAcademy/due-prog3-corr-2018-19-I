@@ -14,7 +14,7 @@ public class ArmorDTO extends BaseDTO {
 	private String name;
 	private String description;
 	private List<ArmorPropertiesCodebookXrefDTO> armorPropertiesCodebookXrefs;
-	private String price;
+	private Long price;
 
 	public String getName() {
 		return name;
@@ -32,11 +32,11 @@ public class ArmorDTO extends BaseDTO {
 		this.description = description;
 	}
 
-	public String getPrice() {
+	public Long getPrice() {
 		return price;
 	}
 
-	public void setPrice(String price) {
+	public void setPrice(Long price) {
 		this.price = price;
 	}
 
@@ -46,6 +46,12 @@ public class ArmorDTO extends BaseDTO {
 
 	public void setArmorPropertiesCodebookXrefs(List<ArmorPropertiesCodebookXrefDTO> armorPropertiesCodebookXrefs) {
 		this.armorPropertiesCodebookXrefs = armorPropertiesCodebookXrefs;
+	}
+
+	@Override
+	public String toString() {
+		return "ArmorDTO [name=" + name + ", description=" + description + ", armorPropertiesCodebookXrefs="
+				+ armorPropertiesCodebookXrefs + ", price=" + price + "]";
 	}
 
 }

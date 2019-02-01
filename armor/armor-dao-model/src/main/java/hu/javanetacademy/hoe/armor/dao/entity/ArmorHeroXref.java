@@ -23,4 +23,9 @@ public class ArmorHeroXref extends BaseEntity {
 		this.heroId = heroId;
 	}
 
+	@Override
+	public String toString() {
+		return "ArmorHeroXref [armorId=" + armorId + ", heroId=" + heroId + "]";
+	}
+
 }

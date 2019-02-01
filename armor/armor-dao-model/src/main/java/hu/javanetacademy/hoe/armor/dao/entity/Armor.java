@@ -37,4 +37,9 @@ public class Armor extends BaseEntity {
 		this.price = price;
 	}
 
+	@Override
+	public String toString() {
+		return "Armor [name=" + name + ", description=" + description + ", price=" + price + "]";
+	}
+
 }

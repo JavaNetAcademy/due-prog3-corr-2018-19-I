@@ -23,4 +23,10 @@ public class ArmorPropertiesCodebookXref extends BaseEntity {
 		this.propertiesCodebookId = propertiesCodebookId;
 	}
 
+	@Override
+	public String toString() {
+		return "ArmorPropertiesCodebookXref [armorId=" + armorId + ", propertiesCodebookId=" + propertiesCodebookId
+				+ "]";
+	}
+
 }

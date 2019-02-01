@@ -26,6 +26,7 @@
                     <a class="dropdown-item" href="../factories">Factories</a>
                     <a class="dropdown-item" href="../vehicles">Vehicles</a>
                     <a class="dropdown-item" href="../skills">Skills</a>
+                    <a class="dropdown-item" href="../speciesspecialproperty">SpeciesSpecialProperty</a>
                 </div>
             </li>
         </ul>

@@ -2,11 +2,19 @@ package hu.javanetacademy.hoe.armor.service.imp;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import hu.javanetacademy.hoe.armor.dao.ArmorDAO;
+import hu.javanetacademy.hoe.armor.dao.ArmorPropertiesCodebookXreDAO;
+import hu.javanetacademy.hoe.armor.dao.dto.ArmorDTO;
+import hu.javanetacademy.hoe.armor.dao.dto.ArmorPropertiesCodebookXrefDTO;
 import hu.javanetacademy.hoe.armor.dao.entity.Armor;
+import hu.javanetacademy.hoe.armor.dao.entity.ArmorPropertiesCodebookXref;
 import hu.javanetacademy.hoe.armor.dao.impl.ArmorDAOImpl;
+import hu.javanetacademy.hoe.armor.dao.impl.ArmorPropertiesCodebookXreDAOImpl;
 import hu.javanetacademy.hoe.armor.service.ArmorService;
+import hu.javanetacademy.hoe.armor.service.exception.ArmorServiceException;
 
 /**
  *
@@ -15,55 +23,114 @@ import hu.javanetacademy.hoe.armor.service.ArmorService;
  */
 public class ArmorServiceImpl implements ArmorService {
 
-	@SuppressWarnings("unused")
-	private final ArmorDAO dao;
+	private static final Logger LOG = Logger.getLogger(ArmorServiceImpl.class.getName());
+
+	private final ArmorDAO armorDao;
+
+	private final ArmorPropertiesCodebookXreDAO armorPropertiesCodebookXreDao;
 
 	public ArmorServiceImpl() {
-		dao = new ArmorDAOImpl();
+		armorDao = new ArmorDAOImpl();
+		armorPropertiesCodebookXreDao = new ArmorPropertiesCodebookXreDAOImpl();
 	}
 
 	@Override
-	public void create(Armor armor) {
+	public void create(ArmorDTO armor) {
 		try {
-			dao.create(armor);
+			armorDao.create(mapToDAO(armor));
 		} catch (Exception e) {
-			// TODO loglás
-			e.printStackTrace();// ideiglenes
+			ArmorServiceImpl.LOG.log(Level.SEVERE, e.getMessage(), e);
+			throw new ArmorServiceException(e.getMessage(), e);
 		}
 	}
 
 	@Override
-	public List<Armor> getAll() {
-		List<Armor> armors = new ArrayList<>();
+	public List<ArmorDTO> getAll() {
+		List<ArmorDTO> result = new ArrayList<>();
 		try {
-			armors.addAll(dao.getAll());
+			armorDao.getAll().forEach(item -> result.add(mapToDTO(item)));
 		} catch (Exception e) {
-			// TODO loglás
-			e.printStackTrace();// ideiglenes
+			ArmorServiceImpl.LOG.log(Level.SEVERE, e.getMessage(), e);
+			throw new ArmorServiceException(e.getMessage(), e);
 		}
-		return armors;
+		return result;
 	}
 
 	@Override
-	public Armor getById(Long id) {
-		Armor armor = null;
+	public ArmorDTO getById(Long id) {
+		ArmorDTO result = null;
 		try {
-			armor = dao.getById(id);
+			result = mapToDTO(armorDao.getById(id));
 		} catch (Exception e) {
-			// TODO loglás
-			e.printStackTrace();// ideiglenes
+			ArmorServiceImpl.LOG.log(Level.SEVERE, e.getMessage(), e);
+			throw new ArmorServiceException(e.getMessage(), e);
 		}
-		return armor;
+		return result;
 	}
 
 	@Override
-	public void update(Armor armor) {
+	public void update(ArmorDTO armor) {
 		try {
-			dao.update(armor);
+			armorDao.update(mapToDAO(armor));
 		} catch (Exception e) {
-			// TODO loglás
-			e.printStackTrace();// ideiglenes
+			ArmorServiceImpl.LOG.log(Level.SEVERE, e.getMessage(), e);
+			throw new ArmorServiceException(e.getMessage(), e);
 		}
+	}
+
+	@Override
+	public void delete(Long id) {
+		try {
+			armorDao.delete(id);
+		} catch (Exception e) {
+			ArmorServiceImpl.LOG.log(Level.SEVERE, e.getMessage(), e);
+			throw new ArmorServiceException(e.getMessage(), e);
+		}
+	}
+
+	private Armor mapToDAO(ArmorDTO armor) {
+		Armor dao = new Armor();
+		dao.setId(armor.getId());
+		dao.setName(armor.getName());
+		dao.setPrice(armor.getPrice());
+		dao.setDescription(armor.getDescription());
+		return dao;
+	}
+
+	private ArmorDTO mapToDTO(Armor armor) {
+		ArmorDTO dto = new ArmorDTO();
+		dto.setId(armor.getId());
+		dto.setName(armor.getName());
+		dto.setPrice(armor.getPrice());
+		dto.setDescription(armor.getDescription());
+
+		List<ArmorPropertiesCodebookXrefDTO> armorPropList = new ArrayList<>();
+
+		armorPropertiesCodebookXreDao.getAllByArmorId(armor.getId()).forEach(item -> armorPropList.add(mapToDTO(item)));
+
+		dto.setArmorPropertiesCodebookXrefs(armorPropList);
+		return dto;
+	}
+
+	private ArmorPropertiesCodebookXrefDTO mapToDTO(ArmorPropertiesCodebookXref item) {
+		ArmorPropertiesCodebookXrefDTO dto = new ArmorPropertiesCodebookXrefDTO();
+
+		Armor armor = armorDao.getById(item.getArmorId());
+
+		ArmorDTO armorDto = new ArmorDTO();
+		armorDto.setId(armor.getId());
+		armorDto.setName(armor.getName());
+		armorDto.setPrice(armor.getPrice());
+		armorDto.setDescription(armor.getDescription());
+
+		dto.setId(item.getId());
+		dto.setArmor(armorDto);
+
+		// TODO teljes mapolás nem lehetséges mivel nincsen meg a modul akitől le tudnám
+		// kérni adapteren keresztül páncélhoz tartozó tulajdonságokat a 2 microservice
+		// között.
+		// dto.setPropertiesCodebook(propertiesCodebook);
+		return dto;
 	}
 
 }

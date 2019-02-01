@@ -1,0 +1,21 @@
+﻿
+create table basicResource (
+id bigint primary key,
+name varchar(255),
+materialToCreate bigint,
+materialQuantityToCreate decimal;
+lifetimeOfResource int,
+foreign key(materialToCreate) references material(resourceID) on update cascade on delete cascade);
+
+create table material(
+resourcePlaceID bigint primary key, 
+materialId bigint,
+quantity decimal
+);
+
+create table resource (
+id bigint,
+usability varchar (255),
+ownerId bigint,
+primary key (id, ownerId),
+foreign key(id) references basicResource(id) on delete cascade on update cascade);
