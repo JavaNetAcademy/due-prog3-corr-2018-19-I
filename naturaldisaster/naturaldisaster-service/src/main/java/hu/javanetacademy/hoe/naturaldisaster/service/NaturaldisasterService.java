@@ -32,8 +32,11 @@ public class NaturaldisasterService {
         return dao.getAll();
     }
     
-     public Naturaldisaster getbyId(String name){
+     public Naturaldisaster getbyName(String name){
          return dao.getByName(name);
        }
+     public void Delete(String name) {
+        dao.delete(name);
+    }
     
 }

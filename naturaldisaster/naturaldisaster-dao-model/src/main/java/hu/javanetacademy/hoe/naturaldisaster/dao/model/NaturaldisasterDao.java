@@ -13,5 +13,6 @@ public interface NaturaldisasterDao {
     public Naturaldisaster create(Naturaldisaster naturaldisaster);
     public Naturaldisaster getByName(String name);
     public List<Naturaldisaster> getAll();
+    public void delete(String name);
     
 }

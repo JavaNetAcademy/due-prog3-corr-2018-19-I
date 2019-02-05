@@ -4,19 +4,11 @@
  * and open the template in the editor.
  */
 package hu.javanetacademy.hoe.naturaldisaster.web;
-
-/**
- *
- * @author Barna
- */
-
-
 import hu.javanetacademy.hoe.naturaldisaster.dao.model.Naturaldisaster;
 import hu.javanetacademy.hoe.naturaldisaster.service.NaturaldisasterService;
 import hu.javanetacademy.hoe.naturaldisaster.dao.jdbc.NaturaldisasterDaoJDBC;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -27,8 +19,9 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Barna
  */
-@WebServlet(name = "NaturaldisasterServlet", urlPatterns = {"/naturaldisaster"})
-public class NaturaldisasterServlet extends HttpServlet {
+@WebServlet(name = "VehicleDeleteServlet", urlPatterns = {"/vehicledelete"})
+public class NaturaldisasterDeleteServlet extends HttpServlet {
+        
     /**
      * Handles the HTTP <code>GET</code> method.
      *
@@ -42,14 +35,14 @@ public class NaturaldisasterServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
 
-        NaturaldisasterService naturaldisasterService = new NaturaldisasterService();
-        List<Naturaldisaster> naturaldisasters = naturaldisasterService.getAll();
-        request.setAttribute("naturaldisasterList", naturaldisasters);
+        NaturaldisasterService naturalService = new NaturaldisasterService();
+        Naturaldisaster naturaldisaster = naturalService.getbyName("name");
 
-        getServletContext().getRequestDispatcher("/naturaldisaster/index.jsp").include(request, response);
+        request.setAttribute("naturaldisaster", naturaldisaster);
+        getServletContext().getRequestDispatcher("/naturaldisaster/delete.jsp").include(request, response);
     }
-    
-     /**
+
+    /**
      * Handles the HTTP <code>POST</code> method.
      *
      * @param request servlet request
@@ -60,15 +53,17 @@ public class NaturaldisasterServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        Naturaldisaster isnewnaturaldis = new Naturaldisaster();
-        isnewnaturaldis.setName(request.getParameter("xname"));
-        isnewnaturaldis.setDescription(request.getParameter("xdescription"));
-        isnewnaturaldis.setEffect((request.getParameter("xeffect")));
-        isnewnaturaldis.setDeadlyto((request.getParameter("xdeadlyto")));
+        String disasterName = request.getParameter("name");
 
         NaturaldisasterService naturalService = new NaturaldisasterService();
-        naturalService.create(isnewnaturaldis);
+        naturalService.Delete(disasterName);
 
-        doGet(request, response);
+        response.sendRedirect("/naturaldisaster");
+    }
+
+   
+    @Override
+    public String getServletInfo() {
+        return "Short description";
     }
 }

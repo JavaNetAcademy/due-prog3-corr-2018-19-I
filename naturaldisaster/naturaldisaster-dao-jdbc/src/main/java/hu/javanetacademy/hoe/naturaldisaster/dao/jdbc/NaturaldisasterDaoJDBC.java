@@ -111,4 +111,15 @@ public class NaturaldisasterDaoJDBC implements NaturaldisasterDao {
         return null;
     }
     
+    @Override
+    public void delete(String name) {
+        try {
+            PreparedStatement ps = con.prepareStatement("DELETE FROM vehicle WHERE name=?", Statement.RETURN_GENERATED_KEYS);
+            ps.setString(1, name);
+            ps.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(NaturaldisasterDaoJDBC.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
 }
