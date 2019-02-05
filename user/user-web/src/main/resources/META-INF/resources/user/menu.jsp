@@ -27,6 +27,7 @@
                     <a class="dropdown-item" href="../vehicles">Vehicles</a>
                     <a class="dropdown-item" href="../skills">Skills</a>
                     <a class="dropdown-item" href="../speciesspecialproperty">SpeciesSpecialProperty</a>
+                    <a class="dropdown-item" href="../naturaldisaster">Naturaldisasters</a>
                 </div>
             </li>
         </ul>
