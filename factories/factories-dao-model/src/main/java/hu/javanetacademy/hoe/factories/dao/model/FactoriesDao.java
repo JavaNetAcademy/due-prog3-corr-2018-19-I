@@ -1,5 +1,6 @@
 package hu.javanetacademy.hoe.factories.dao.model;
 
+import hu.javanetacademy.hoe.empires.dao.model.Empires;
 import java.util.List;
 
 /**
@@ -20,4 +21,6 @@ public interface FactoriesDao {
     public boolean existsByNameDescId(Factories pFactory);
 
     public Factories get(long pFactoryId);
+    
+    public Empires getByLevel(long pEmpireId);
 }

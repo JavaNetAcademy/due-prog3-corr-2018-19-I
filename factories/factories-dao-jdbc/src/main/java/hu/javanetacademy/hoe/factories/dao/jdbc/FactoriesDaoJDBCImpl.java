@@ -2,6 +2,7 @@ package hu.javanetacademy.hoe.factories.dao.jdbc;
 
 import hu.javanetacademy.hoe.factories.dao.model.Factories;
 import hu.javanetacademy.hoe.factories.dao.model.FactoriesDao;
+import hu.javanetacademy.hoe.empires.dao.model.Empires;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -145,6 +146,28 @@ public class FactoriesDaoJDBCImpl implements FactoriesDao {
                 factory.setUserid(rs.getLong(4));
                 factory.setEmpireid(rs.getLong(5));
                 return factory;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(FactoriesDaoJDBCImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+
+    @Override
+    public Empires getByLevel(long pEmpireId) {
+        try {
+            PreparedStatement ps = con.prepareStatement("SELECT id, name, description, userid, level, property FROM empires WHERE id=?");
+            ps.setLong(1, pEmpireId);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                Empires emp = new Empires();
+                emp.setId(rs.getLong(1));
+                emp.setName(rs.getString(2));
+                emp.setDescription(rs.getString(3));
+                emp.setUserid(rs.getLong(4));
+                emp.setLevel(rs.getLong(5));
+                emp.setProperty(rs.getLong(6));
+                return emp;
             }
         } catch (SQLException ex) {
             Logger.getLogger(FactoriesDaoJDBCImpl.class.getName()).log(Level.SEVERE, null, ex);
