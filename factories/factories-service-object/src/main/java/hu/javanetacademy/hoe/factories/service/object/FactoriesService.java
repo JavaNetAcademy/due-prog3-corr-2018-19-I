@@ -1,6 +1,7 @@
 package hu.javanetacademy.hoe.factories.service.object;
 
 import hu.javanetacademy.hoe.base.util.CustomException;
+import hu.javanetacademy.hoe.empires.dao.model.Empires;
 import hu.javanetacademy.hoe.factories.dao.jdbc.FactoriesDaoJDBCImpl;
 import hu.javanetacademy.hoe.factories.dao.model.Factories;
 import hu.javanetacademy.hoe.factories.dao.model.FactoriesDao;
@@ -41,5 +42,9 @@ public class FactoriesService {
 
     public Factories get(long pFactoryId) {
         return dao.get(pFactoryId);
+    }
+
+    public Empires getByLevel(long pEmpireId) {
+        return dao.getByLevel(pEmpireId);
     }
 }

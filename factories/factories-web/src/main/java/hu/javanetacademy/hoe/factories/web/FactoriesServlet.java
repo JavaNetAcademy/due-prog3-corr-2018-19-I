@@ -54,6 +54,7 @@ public class FactoriesServlet extends HttpServlet {
             getServletContext().getRequestDispatcher("/factories/errornoempire.jsp").include(request, response);
         } else {
             request.setAttribute("factories", fs.getByUser(loggedInUser.getId()));
+            //request.setAttribute("empirelevel", fs.getByLevel(1));
             getServletContext().getRequestDispatcher("/factories/index.jsp").include(request, response);
         }
     }
