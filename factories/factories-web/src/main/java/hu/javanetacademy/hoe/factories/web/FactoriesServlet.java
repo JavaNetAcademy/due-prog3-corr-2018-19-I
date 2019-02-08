@@ -70,8 +70,18 @@ public class FactoriesServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         Factories newFactory = new Factories();
-        newFactory.setName(request.getParameter("pname"));
-        newFactory.setDescription(request.getParameter("pdesc"));
+        //newFactory.setName(request.getParameter("pname"));
+        if (request.getParameter("pname") == null || request.getParameter("pname").isEmpty()) {
+            throw new RuntimeException("Nincs név!");
+        } else {
+            newFactory.setName(request.getParameter("pname"));
+        }
+        //newFactory.setDescription(request.getParameter("pdesc"));
+        if (request.getParameter("pdesc") == null || request.getParameter("pdesc").isEmpty()) {
+            throw new RuntimeException("Nincs leírás!");
+        } else {
+            newFactory.setDescription(request.getParameter("pdesc"));
+        }
         newFactory.setEmpireid(Long.parseLong(request.getParameter("pemp")));
         User loggedInUser = (User) request.getSession().getAttribute("user");
         newFactory.setUserid(loggedInUser.getId());

@@ -25,6 +25,7 @@
                         <tr>
                             <th>Név</th>
                             <th>Leírás</th>
+                            <th>Birodalom szint</th>
                         </tr>
                     </thead>
                     <c:forEach var="fact" items="${factories}">
@@ -32,6 +33,7 @@
                             <tr>
                                 <td>${fact.name}</td>
                                 <td>${fact.description}</td>
+                                <td></td>
                             </tr>
                         </tbody>
                     </c:forEach>
@@ -57,6 +59,10 @@
                                     <option value="${x.id}"><c:out value="${x.name}" /></option>
                                 </c:forEach>
                             </select>
+                        </div>
+                        <div class="text-left">
+                            <label>Birodalom szint:</label><br/>
+                            <input class="form-control" type="text" placeholder="1" readonly>
                         </div>
                         </br>
                         <div class="text-left">
